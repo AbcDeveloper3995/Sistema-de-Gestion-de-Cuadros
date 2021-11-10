@@ -18,10 +18,12 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     'apps.cuadro',
-    'apps.usuario',
+    'apps.usuario'
 ]
 
-THRID_APPS = []
+THRID_APPS = [
+    'widget_tweaks'
+]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THRID_APPS
 
@@ -76,6 +78,10 @@ LANGUAGE_CODE = 'es'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 AUTH_USER_MODEL = 'usuario.Usuario'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
