@@ -8,36 +8,84 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-
-
-    <link rel="stylesheet" href="{% static 'plugins/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'propios/img/logo.jpg' %}" type="image/x-icon"/>
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'plugins/bootstrap/dist/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
         <link rel="stylesheet" href="{% static 'plugins/icon-kit/dist/css/iconkit.min.css' %}">
         <link rel="stylesheet" href="{% static 'plugins/perfect-scrollbar/css/perfect-scrollbar.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/theme/css/theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'plugins/jquery-confirm-v3.3.4/jquery-confirm.min.css' %}">
+        <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+        <link rel="stylesheet" href="{% static 'plugins/theme/css/theme.min.css' %}">
+    {% endblock %}
 </head>
 
 <body>
-
 <div class="wrapper">
     {% include 'comun/header.html' %}
+    <div class="page-wrap">
+        {% include 'comun/menu.html' %}
+        <div class="main-content">
+            <div class="container-fluid">
+                {% block content %}
+                    <div class="col-12">
+                        <div class="card prod-p-card card-blue">
+                            <div class="card-body">
+                                <div class="row align-items-center mb-30">
 
-    {% include 'comun/menu.html' %}
-    <div class="main-content">
-        <div class="container-fluid">
-
+                                    <div class="col-auto">
+                                        <i class="fas fa-database text-blue f-18"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h3 class="mb-0 fw-700 text-white text-uppercase text-center">sistema de gestion
+                                            de plantillas de cuadros</h3>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-database text-blue f-18"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0 text-white text-uppercase text-center ">
+                                    Bienvenido {{ request.user.name }} {{ request.user.last_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
         </div>
+
+        {% include 'comun/footer.html' %}
     </div>
-
-    {% include 'comun/footer.html' %}
-
 </div>
 
+{% block js %}
     <script src="{% static 'plugins/jquery/jquery-3.3.1.min.js' %}"></script>
-        <script src="{% static 'plugins/popper.js/dist/umd/popper.min.js' %}"></script>
-        <script src="{% static 'plugins/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'plugins/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-confirm-v3.3.4/jquery-confirm.min.js' %}"></script>
+    <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
     <script src="{% static 'plugins/theme/js/theme.js' %}"></script>
+    <script src="{% static 'propios/js/global/utils.js' %}"></script>
+{% endblock %}
+
+{% block mensajes %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <script type="text/javascript">toastr.{{ message.tags }}('{{ message }}', 'Error', {
+                    progressBar: true,
+                    closeButton: true,
+                    "timeOut": "3000",
+                })</script>
+            {% else %}
+                <script type="text/javascript">toastr.{{ message.tags }}('{{ message }}', 'Exito', {
+                    progressBar: true,
+                    closeButton: true,
+                    "timeOut": "3000",
+                })</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
 </body>
 </html>

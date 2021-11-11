@@ -1,0 +1,206 @@
+{% extends 'comun/listar.html' %}
+
+{% block encabezado_tabla %}<i class="fa fa-table"></i> <strong>LISTADO DE CUADROS</strong>{% endblock %}
+
+{% block table %}
+    <table class="table table-hover table-striped table-bordered" id="tblEspecialidad">
+        <thead>
+        <tr>
+            <th rowspan="2">Acciones</th>
+            <th rowspan="2">Cargo</th>
+            <th rowspan="2">Categoria</th>
+            <th rowspan="2">CI</th>
+            <th rowspan="2">Nombre</th>
+            <th rowspan="2">Especialidad</th>
+            <th rowspan="2">Sexo</th>
+            <th rowspan="2">Edad</th>
+            <th rowspan="2">Color</th>
+            <th rowspan="2">Militancia</th>
+            <th colspan="2">Años Experiencia</th>
+        </tr>
+        <tr>
+            <th class="">Direccion</th>
+            <th class="">Rama</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cuadro in cuadros %}
+            <tr>
+
+                <td>
+                    <a class="miTippy Acciones" href="#importaciones" data-toggle="modal" type="button"
+                       type="button" title="Filtro Avanzado"><i
+                            class="fa fa-search-plus ml-15"></i></a>
+                    <a class="miTippy Acciones" href="{% url 'cuadro:modificarCuadro' cuadro.pk %}"
+                       type="button" title="Modificar"><i class="fa fa-edit"></i></a>
+                    <a class="miTippy Acciones" href="#"
+                       onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar este cuadro.', 'http://127.0.0.1:8000/cuadro/eliminarCuadro/'+{{ cuadro.pk }},{{ cuadro.pk }} )"
+                       type="button" title="Eliminar"><i class="fa fa-trash"></i></a></td>
+                <td class="text-center">{{ cuadro.fk_cargo.nombre }}</td>
+                <td class="text-center">{{ cuadro.categoria }}</td>
+                <td class="text-center">{{ cuadro.ci }}</td>
+                <td class="text-center">{{ cuadro.nombre }}</td>
+                <td class="text-center">{{ cuadro.fk_especialidad.nombre }}</td>
+                <td class="text-center">{{ cuadro.sexo }}</td>
+                <td class="text-center">{{ cuadro.edad }}</td>
+                <td class="text-center">{{ cuadro.color }}</td>
+                <td class="text-center">{{ cuadro.militancia }}</td>
+                <td class="text-center">{{ cuadro.anos_experiencia_direccion }}</td>
+                <td class="text-center">{{ cuadro.anos_experiencia_rama }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block buttonCrear %}
+    <a href="{% url 'cuadro:crearCuadro' %}" type="button" class="btn btn-primary buttonCrear"><i
+            class="fa fa-plus"></i>Nuevo Cuadro</a>
+
+{% endblock %}
+
+{% block contentExtra %}
+    {#Modal#}
+    <div id="importaciones" class="modal fade" data-model-name="modal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel2"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        <i class="fa fa-search"></i>
+                        Filtrado Avanzado
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Buscador de Cuadros</h3>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" id="formCuadroFilter" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-airplay"></i></label></span>
+                                                {{ form.fk_cargo }}
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-bar-chart-line"></i></label></span>
+                                                {{ form.fk_especialidad }}
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.categoria.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-cloud"></i></label></span>
+                                                {{ form.categoria }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.anos_experiencia_direccion.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-command"></i></label></span>
+                                                {{ form.anos_experiencia_direccion }}
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.anos_experiencia_rama.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-briefcase"></i></label></span>
+                                                {{ form.anos_experiencia_rama }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.militancia.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-copy"></i></label></span>
+                                                {{ form.militancia }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.sexo.label }}</h4>
+                                            <div class="input-group input-group-primary">
+                                                <span class="input-group-prepend"><label class="input-group-text"><i
+                                                        class="ik ik-code"></i></label></span>
+                                                {{ form.sexo }}
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h4 class="sub-title">Color de piel</h4>
+                                            <div class="input-group input-group-primary">
+                                             <span class="input-group-prepend"><label class="input-group-text"><i class="ik ik-film"></i></label></span>
+                                                {{ form.color }}
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h4 class="sub-title">{{ form.edad.label }}</h4>
+                                            <input id="range_1" type="text" name="range_1" value="" class="irs-ocultar" tabindex="-1" readonly="">
+                                        </div>
+                                    </div>
+                            <hr>
+                            <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i>
+                                Aceptar
+                            </button>
+                            <a href="{% url 'cuadro:listarCuadro' %}" class="btn btn-secondary mr-2"><i
+                                    class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0 table-border-style">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-bordered" id="tblCuadroFilter">
+                            <thead>
+                            <tr>
+                                <th rowspan="2">Acciones</th>
+                                <th rowspan="2">Cargo</th>
+                                <th rowspan="2">Categoria</th>
+                                <th rowspan="2">CI</th>
+                                <th rowspan="2">Nombre</th>
+                                <th rowspan="2">Especialidad</th>
+                                <th rowspan="2">Sexo</th>
+                                <th rowspan="2">Edad</th>
+                                <th rowspan="2">Color</th>
+                                <th rowspan="2">Militancia</th>
+                                <th colspan="2">Años Experiencia</th>
+                            </tr>
+                            <tr>
+                                <th class="">Direccion</th>
+                                <th class="">Rama</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

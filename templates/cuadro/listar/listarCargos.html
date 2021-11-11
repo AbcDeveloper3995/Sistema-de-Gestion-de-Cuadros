@@ -1,0 +1,38 @@
+{% extends 'comun/listar.html' %}
+
+{% block encabezado_tabla %}<i class="fa fa-table"></i> <strong>LISTADO DE CARGOS</strong>{% endblock %}
+{% block table %}
+    <table class="table table-hover table-striped table-bordered" id="tblCargos">
+        <thead>
+        <tr>
+            <th>Acciones</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cargo in cargos %}
+            <tr>
+                <td>
+                    <a class="miTippy Acciones" href="{% url 'cuadro:modificarCargo' cargo.pk %}"
+                       type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
+                    <a class="miTippy Acciones" href="#"  type="button" onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta cargo.', 'http://127.0.0.1:8000/cuadro/eliminarCargo/'+{{ cargo.pk }},{{ cargo.pk }} )"
+                       title="Eliminar"><i class="fa fa-trash"></i></a></td>
+                <td>{{ cargo.nombre }}</td>
+                {% if cargo.estado == True %}
+                    <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>
+                {% else %}
+                    <td><a href="#" type="button" title="{{ clasificadorInd.activo }}"><i class="fa fa-times-circle"
+                                                                                          style="color: red"></i></a>
+                    </td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block buttonCrear %}
+<a href="{% url 'cuadro:crearCargo' %}" type="button" class="btn btn-primary buttonCrear"><i class="fa fa-plus"></i>Nuevo Cargo</a>
+{% endblock %}

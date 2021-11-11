@@ -1,0 +1,38 @@
+{% extends 'comun/home.html' %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'plugins/datatables-1.10.20/css/jquery.dataTables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/ion-rangeslider/css/ion.rangeSlider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'propios/css/listar/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header d-block">
+                <h3>{% block encabezado_tabla %}{% endblock %}</h3>
+        </div>
+        <div class="card-body p-0 table-border-style">
+            <div class="table-responsive">
+                {% block table %}
+                {% endblock %}
+            </div>
+        <hr>
+              {% block buttonCrear %}
+                {% endblock %}
+        </div>
+    </div>
+    {% block contentExtra %}
+        {% endblock %}
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'plugins/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'plugins/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'plugins/ion-rangeslider/js/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'propios/js/cuadro/listar.js' %}"></script>
+{% endblock %}
+

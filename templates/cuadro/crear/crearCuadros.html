@@ -1,0 +1,108 @@
+{% extends 'comun/crear.html' %}
+
+{% block encabezadoForm %}{{ titulo }}{% endblock %}
+
+{% block formulario %}
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
+                 <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-airplay"></i></label></span>
+                    {{ form.fk_cargo }}
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
+                 <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-bar-chart-line"></i></label></span>
+                    {{ form.fk_especialidad }}
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.categoria.label }}</h4>
+                 <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-cloud"></i></label></span>
+                    {{ form.categoria }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+             <div class="col-3">
+                <h4 class="sub-title">{{ form.nombre.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-clipboard"></i></label></span>
+                    {{ form.nombre }}
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">{{ form.ci.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-chevron-up"></i></label></span>
+                    {{ form.ci }}
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">{{ form.anos_experiencia_direccion.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-command"></i></label></span>
+                    {{ form.anos_experiencia_direccion }}
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">{{ form.anos_experiencia_rama.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-briefcase"></i></label></span>
+                    {{ form.anos_experiencia_rama }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <h4 class="sub-title">{{ form.militancia.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-copy"></i></label></span>
+                    {{ form.militancia }}
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">{{ form.sexo.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-code"></i></label></span>
+                    {{ form.sexo }}
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">Color de piel</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-film"></i></label></span>
+                    {{ form.color }}
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">{{ form.edad.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-droplet"></i></label></span>
+                    {{ form.edad }}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
+        <a href="{% url 'cuadro:listarCuadro' %}" class="btn btn-secondary mr-2"><i
+                class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
+    </form>
+{% endblock %}
