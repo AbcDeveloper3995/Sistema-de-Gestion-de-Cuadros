@@ -7,6 +7,8 @@
         <tr>
             <th>Acciones</th>
             <th>Nombre</th>
+            <th>Nivel de Subordinacion</th>
+            <th>Vacante</th>
             <th>Estado</th>
         </tr>
         </thead>
@@ -19,6 +21,14 @@
                     <a class="miTippy Acciones" href="#"  type="button" onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta cargo.', 'http://127.0.0.1:8000/cuadro/eliminarCargo/'+{{ cargo.pk }},{{ cargo.pk }} )"
                        title="Eliminar"><i class="fa fa-trash"></i></a></td>
                 <td>{{ cargo.nombre }}</td>
+                <td>{{ cargo.nivel_subordinacion }}</td>
+                {% if cargo.vacante == True %}
+                    <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>
+                {% else %}
+                    <td><a href="#" type="button" title="{{ clasificadorInd.activo }}"><i class="fa fa-times-circle"
+                                                                                          style="color: red"></i></a>
+                    </td>
+                {% endif %}
                 {% if cargo.estado == True %}
                     <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>
                 {% else %}

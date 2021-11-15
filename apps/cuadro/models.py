@@ -2,28 +2,56 @@ from django.db import models
 from django.forms import model_to_dict
 
 CHOICE_CATEGORIA = (
+    ('', '--------'),
     ('DS', 'Directivo Superior'),
     ('DI', 'Directivo Intermedio'),
     ('E', 'Ejecutivo')
 )
 
 CHOICE_MILITANCIA = (
+    ('', '--------'),
     ('PCC', 'PCC'),
     ('UJC', 'UJC')
 )
 CHOICE_SEXO = (
+    ('', '--------'),
     ('F', 'Femenino'),
     ('M', 'Masculino')
 )
 
 CHOICE_COLOR = (
+    ('', '--------'),
     ('B', 'Blanca'),
     ('M', 'Mulata'),
     ('N', 'Negra')
 )
 
+CHOICE_NIVEL_SUBORDINACION = (
+    ('', '--------'),
+    ('OC', 'Oficina Central'),
+    ('P', 'Provincial'),
+    ('M', 'Municipal')
+)
+
+class clasificadorDPA(models.Model):
+    codigo = models.IntegerField(verbose_name='Codigo', unique=True,  blank=False, null=False)
+    descripcion = models.CharField(verbose_name='Descripcion', max_length=200, blank=True, null=True)
+
+    class Meta:
+        db_table = 'Clasificador_DPA'
+        verbose_name = 'Clasificador_DPA'
+        verbose_name_plural = 'Clasificador_DPA'
+        ordering = ['codigo']
+
+    def __str__(self):
+        return str(self.codigo)
+
 class Cargo(models.Model):
-    nombre = models.CharField(verbose_name='Nombre del cargo', max_length=255, unique=True, blank=False, null=False)
+    nombre = models.CharField(verbose_name='Nombre del cargo', max_length=255, blank=False, null=False)
+    nivel_subordinacion = models.CharField(verbose_name='Nivel de subordinacion', max_length=50, choices=CHOICE_NIVEL_SUBORDINACION)
+    provincia = models.ForeignKey(clasificadorDPA, verbose_name='Provincia', blank=True, null=True, related_name='provincia', on_delete=models.CASCADE)
+    municipio = models.ForeignKey(clasificadorDPA, verbose_name='Municipio', blank=True, null=True, related_name='municipio', on_delete=models.CASCADE)
+    vacante = models.BooleanField(default=True)
     estado = models.BooleanField(default=True)
 
     class Meta:
@@ -58,11 +86,12 @@ class Cuadro(models.Model):
     fk_cargo = models.OneToOneField(Cargo, verbose_name='Cargo', blank=True, null=True, on_delete=models.CASCADE)
     fk_especialidad = models.ForeignKey(Especialidad, verbose_name='Especialidad', blank=True, null=True, on_delete=models.CASCADE)
     categoria = models.CharField(verbose_name='Categoria', max_length=200, choices=CHOICE_CATEGORIA)
-    nombre = models.CharField(verbose_name='Nombre', max_length=255, blank=True, null=True)
-    ci = models.PositiveIntegerField(verbose_name='Carnet de Identidad', unique=True)
-    anos_experiencia_direccion = models.PositiveIntegerField(verbose_name='Años de experiencia Direccion')
-    anos_experiencia_rama = models.PositiveIntegerField(verbose_name='Años de experiencia Rama')
-    militancia = models.CharField(verbose_name='Militancia', max_length=50, choices=CHOICE_MILITANCIA)
+    nombre = models.CharField(verbose_name='Nombre', max_length=255, blank=False, null=False)
+    apellidos = models.CharField(verbose_name='Apellidos', max_length=255, blank=False, null=False)
+    ci = models.IntegerField(verbose_name='Carnet de Identidad', unique=True, blank=False, null=False)
+    anos_experiencia_direccion = models.PositiveIntegerField(verbose_name='Años de experiencia Direccion', blank=True, null=True)
+    anos_experiencia_rama = models.PositiveIntegerField(verbose_name='Años de experiencia Rama', blank=True, null=True)
+    militancia = models.CharField(verbose_name='Militancia', max_length=50, choices=CHOICE_MILITANCIA, blank=True, null=True)
     sexo = models.CharField(verbose_name='Sexo', max_length=50, choices=CHOICE_SEXO)
     color = models.CharField(verbose_name='Color', max_length=50, choices=CHOICE_COLOR)
     edad = models.PositiveIntegerField(verbose_name='Edad')

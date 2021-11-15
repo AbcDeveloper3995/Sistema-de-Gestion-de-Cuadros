@@ -1,8 +1,10 @@
 {% load static %}
+{% load filters %}
+
 <div class="page-wrap">
     <div class="app-sidebar colored">
         <div class="sidebar-header">
-            <a class="header-brand" href="index.html">
+            <a class="header-brand" href="{% url 'usuario:home' %}">
                 <div class="logo-img">
                     <span class="brand-text font-weight-light badge header-brand-img "><img src="{% static 'propios/img/logo.jpg' %}"
              alt="AdminLTE Logo"
@@ -18,22 +20,16 @@
                 <nav id="main-menu-navigation" class="navigation-main">
                     <div class="nav-lavel">DEPARTAMENTO DE CUADRO</div>
                     <div class="nav-item active">
-                        <a href="{% url 'cuadro:listarCargo' %}"><i class="ik ik-bar-chart-2"></i><span>Cargos</span> <span
-                                class="badge badge-primary">New</span></a>
+                        <a href="{% url 'cuadro:listarCuadro' %}"><i class="ik ik-users"></i><span>Cuadros</span> <span
+                                class="badge badge-primary">{{ request.user|totalCuadro }}</span></a>
                     </div>
                     <div class="nav-item">
-                        <a href="{% url 'cuadro:listarEspecialidad' %}"><i class="ik ik-menu"></i><span>Especialidad</span> <span
-                                class="badge badge-primary">New</span></a>
+                        <a href="{% url 'cuadro:listarEspecialidad' %}"><i class="ik ik-database"></i><span>Especialidad</span> <span
+                                class="badge badge-primary">{{ request.user|totalEspecialidad }}</span></a>
                     </div>
                     <div class="nav-item">
-                        <a href="{% url 'cuadro:listarCuadro' %}"><i class="ik ik-menu"></i><span>Cuadros</span> <span
-                                class="badge badge-primary">New</span></a>
-                    </div>
-                    <div class="nav-item has-sub">
-                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Reportes</span></a>
-                        <div class="submenu-content">
-                            <a href="#" class="menu-item">Prueba</a>
-                        </div>
+                        <a href="{% url 'cuadro:listarCargo' %}"><i class="ik ik-archive"></i><span>Cargos</span> <span
+                                class="badge badge-primary">{{ request.user|totalCargo }}</span></a>
                     </div>
                 </nav>
             </div>

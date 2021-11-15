@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 import SGPC.settings as setting
 
@@ -7,6 +9,8 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+
+from apps.cuadro.models import Cuadro
 
 
 class Login(LoginView):
@@ -27,9 +31,55 @@ class Login(LoginView):
 class homeView(LoginRequiredMixin, TemplateView):
     template_name = 'comun/home.html'
 
-    @method_decorator(login_required)
+    @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        print(request.POST['action'])
+        try:
+            action = request.POST['action']
+            if action == 'getGraficoColumn':
+                data = {
+                    'name':'Porcentaje de ventas',
+                    'showInLegend': False,
+                    'colorByPoint':True,
+                    'data':self.getGraficoColumn()
+                }
+            elif action == 'getGraficoPie':
+                data = {
+                    'name': 'Porcentaje',
+                    'colorByPoint': True,
+                    'data': self.getGraficoPie()
+                }
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+    def getGraficoColumn(self):
+        data = []
+        try:
+            for n in range(1, 13):
+                total = n+1
+                data.append(int(total))
+        except:
+            pass
+        return data
+
+    def getGraficoPie(self):
+        data = []
+        try:
+            for p in Cuadro.objects.all():
+                if p.anos_experiencia_rama>0:
+                    data.append({'name':p.nombre,
+                                 'y':float(p.anos_experiencia_rama)
+                                 })
+        except:
+            pass
+        return data
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

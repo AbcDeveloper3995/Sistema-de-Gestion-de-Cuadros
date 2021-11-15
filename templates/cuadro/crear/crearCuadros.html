@@ -4,11 +4,11 @@
 
 {% block formulario %}
     <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+        {% csrf_token %}
         <div class="row">
             <div class="col-4">
                 <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
-                 <div class="input-group input-group-primary">
+                <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-airplay"></i></label></span>
                     {{ form.fk_cargo }}
@@ -16,7 +16,7 @@
             </div>
             <div class="col-4">
                 <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
-                 <div class="input-group input-group-primary">
+                <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-bar-chart-line"></i></label></span>
                     {{ form.fk_especialidad }}
@@ -24,7 +24,7 @@
             </div>
             <div class="col-4">
                 <h4 class="sub-title">{{ form.categoria.label }}</h4>
-                 <div class="input-group input-group-primary">
+                <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-cloud"></i></label></span>
                     {{ form.categoria }}
@@ -33,7 +33,7 @@
         </div>
         <br>
         <div class="row">
-             <div class="col-3">
+            <div class="col-4">
                 <h4 class="sub-title">{{ form.nombre.label }}</h4>
                 <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
@@ -41,7 +41,15 @@
                     {{ form.nombre }}
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.apellidos.label }}</h4>
+                <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-clipboard"></i></label></span>
+                    {{ form.apellidos }}
+                </div>
+            </div>
+            <div class="col-4">
                 <h4 class="sub-title">{{ form.ci.label }}</h4>
                 <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
@@ -49,33 +57,37 @@
                     {{ form.ci }}
                 </div>
             </div>
-            <div class="col-3">
-                <h4 class="sub-title">{{ form.anos_experiencia_direccion.label }}</h4>
-                <div class="input-group input-group-primary">
+        </div>
+        <br>
+            <div class="row">
+                <div class="col-4">
+                    <h4 class="sub-title">{{ form.anos_experiencia_direccion.label }}</h4>
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-command"></i></label></span>
-                    {{ form.anos_experiencia_direccion }}
+                        {{ form.anos_experiencia_direccion }}
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <h4 class="sub-title">{{ form.anos_experiencia_rama.label }}</h4>
-                <div class="input-group input-group-primary">
+                <div class="col-4">
+                    <h4 class="sub-title">{{ form.anos_experiencia_rama.label }}</h4>
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-briefcase"></i></label></span>
-                    {{ form.anos_experiencia_rama }}
+                        {{ form.anos_experiencia_rama }}
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <h4 class="sub-title">{{ form.militancia.label }}</h4>
-                <div class="input-group input-group-primary">
+                <div class="col-4">
+                    <h4 class="sub-title">{{ form.militancia.label }}</h4>
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-copy"></i></label></span>
-                    {{ form.militancia }}
+                        {{ form.militancia }}
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
+        <br>
+        <div class="row">
+            <div class="col-4">
                 <h4 class="sub-title">{{ form.sexo.label }}</h4>
                 <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
@@ -83,7 +95,7 @@
                     {{ form.sexo }}
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <h4 class="sub-title">Color de piel</h4>
                 <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
@@ -91,7 +103,7 @@
                     {{ form.color }}
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <h4 class="sub-title">{{ form.edad.label }}</h4>
                 <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i

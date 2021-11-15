@@ -1,9 +1,11 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, TemplateView
+from django.db.models import Q
 
 from apps.cuadro.forms import *
 from apps.cuadro.models import *
@@ -18,7 +20,6 @@ class listarCuadroView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Listado de Cuadros'
-        context['form'] = cuadroForm()
         context['tituloPestaña'] = 'SGPC | Cuadros'
         return context
 
@@ -176,3 +177,4 @@ class eliminarEspecialidadView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+

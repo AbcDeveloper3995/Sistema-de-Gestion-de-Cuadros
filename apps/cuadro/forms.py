@@ -5,6 +5,8 @@ from apps.cuadro.models import *
 class cargoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['provincia'].queryset = clasificadorDPA.objects.filter(codigo__range=(21, 40))
+        self.fields['municipio'].queryset = clasificadorDPA.objects.exclude(codigo__range=(21, 40))
 
     class Meta:
         model = Cargo
@@ -12,6 +14,10 @@ class cargoForm(ModelForm):
         widgets = {
             'nombre': TextInput(attrs={'class':'form-control styleInput',
                                        'placeholder':'Ingrese el nombre del cargo'}),
+            'nivel_subordinacion': Select(attrs={'class': 'form-control select2'}),
+            'provincia': Select(attrs={'class': 'form-control select2'}),
+            'municipio': Select(attrs={'class': 'form-control select2'}),
+            'vacante': CheckboxInput(attrs={'class':'border-checkbox', 'type': 'checkbox', 'id':'vacante'}),
             'estado': CheckboxInput(attrs={'class':'border-checkbox', 'type': 'checkbox', 'id':'estadoCargo'})
         }
 
@@ -32,7 +38,7 @@ class especialidadForm(ModelForm):
 class cuadroForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['fk_cargo'].queryset = Cargo.objects.filter(estado=True)
+        self.fields['fk_cargo'].queryset = Cargo.objects.filter(vacante=True, estado=True)
         self.fields['fk_especialidad'].queryset = Especialidad.objects.filter(estado=True)
 
     class Meta:
@@ -45,7 +51,9 @@ class cuadroForm(ModelForm):
                 attrs={'class': 'form-control select2', 'id': 'fk_especialidad'}),
             'categoria': Select(attrs={'class': 'form-control select2'}),
             'nombre': TextInput(attrs={'class':'form-control styleInput',
-                                       'placeholder':'Ingrese nombre completo'}),
+                                       'placeholder':'Ingrese un nombre'}),
+            'apellidos': TextInput(attrs={'class': 'form-control styleInput',
+                                       'placeholder': 'Ingrese apellidos'}),
             'ci': NumberInput(attrs={'class':'form-control styleInput','id':'ci',
                                        'placeholder':'Ingrese carnet de identidad'}),
             'anos_experiencia_direccion': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'ci',

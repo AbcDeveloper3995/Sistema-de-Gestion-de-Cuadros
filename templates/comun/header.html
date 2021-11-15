@@ -1,20 +1,30 @@
+{% load static %}
 <header class="header-top" header-theme="light">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
             <div class="top-menu d-flex align-items-center">
+                <div class="row align-items-center sos-st-card facebook">
+                    <div class="col">
+                        <h3 class="mb-0 text-primary"><i class="fa fa-user "></i>
+                            <span class="badge badge-primary mb-0  text-uppercase text-center ">Bienvenido {{ request.user.name }} {{ request.user.last_name }}</span>
+                        </h3>
+                    </div>
+                </div>
             </div>
             <div class="top-menu d-flex align-items-center">
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><img class="avatar" src="../../static/propios/img/avatar.jpg" alt=""></a>
+                       aria-haspopup="true" aria-expanded="false"><img class="avatar"
+                                                                       src="{% static 'propios/img/avatar.jpg' %}" alt="" style="width: 50px; height: 50px;"></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profile.html"><i class="ik ik-user dropdown-icon"></i>
                             Perfil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'usuario:logout' %}"><i class="ik ik-power dropdown-icon"></i> Salir</a>
+                        <a class="dropdown-item" href="{% url 'usuario:logout' %}"><i
+                                class="ik ik-power dropdown-icon"></i> Salir</a>
                     </div>
                 </div>
-                <p>{{ request.user.username }}</p>
+                <p class="badge badge-primary mt-5 ml-5">{{ request.user.username }}</p>
             </div>
         </div>
     </div>

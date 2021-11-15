@@ -15,10 +15,42 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-4">
+                <h4 class="sub-title">Nivel de Subordinacion</h4>
+                 <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-airplay"></i></label></span>
+                    {{ form.nivel_subordinacion }}
+                </div>
+            </div>
+             <div class="col-4">
+                <h4 class="sub-title">Provincia</h4>
+                 <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-hard-drive"></i></label></span>
+                    {{ form.provincia }}
+                </div>
+            </div>
+             <div class="col-4">
+                <h4 class="sub-title">Municipio</h4>
+                 <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-fast-forward"></i></label></span>
+                    {{ form.municipio }}
+                </div>
+            </div>
+        </div>
+        <div class="border-checkbox-section">
+            <div class="border-checkbox-group border-checkbox-group-primary">
+                {{ form.vacante }}
+                <label class="border-checkbox-label text-uppercase" for="vacante"><strong>VACANTE</strong></label>
+            </div>
+        </div>
         <div class="border-checkbox-section">
             <div class="border-checkbox-group border-checkbox-group-primary">
                 {{ form.estado }}
-                <label class="border-checkbox-label text-uppercase" for="estadoCargo">Activo</label>
+                <label class="border-checkbox-label text-uppercase" for="estadoCargo"><strong>ACTIVO</strong></label>
             </div>
         </div>
         <hr>

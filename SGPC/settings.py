@@ -22,7 +22,8 @@ LOCAL_APPS = [
 ]
 
 THRID_APPS = [
-    'widget_tweaks'
+    'widget_tweaks',
+    'import_export'
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THRID_APPS
