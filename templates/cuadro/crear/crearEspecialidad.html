@@ -3,15 +3,17 @@
 {% block encabezadoForm %}{{ titulo }}{% endblock %}
 
 {% block formulario %}
-    <form method="post">
-    {% csrf_token %}
+    <form method="post" name="especialidadForm">
+        {% csrf_token %}
         <h4 class="sub-title">{{ form.nombre.label }}</h4>
         <div class="row">
             <div class="col-sm-12">
-                <div class="input-group input-group-primary">
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-bold"></i></label></span>
-                    {{ form.nombre }}
+                        {{ form.nombre }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,6 +25,7 @@
         </div>
         <hr>
         <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
-        <a href="{% url 'cuadro:listarEspecialidad' %}" class="btn btn-secondary mr-2"><i class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
+        <a href="{% url 'cuadro:listarEspecialidad' %}" class="btn btn-secondary mr-2"><i
+                class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
     </form>
 {% endblock %}

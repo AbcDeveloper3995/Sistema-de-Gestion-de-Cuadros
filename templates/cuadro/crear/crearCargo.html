@@ -1,60 +1,75 @@
 {% extends 'comun/crear.html' %}
+{% load static %}
 
 {% block encabezadoForm %}{{ titulo }}{% endblock %}
 
 {% block formulario %}
-    <form method="post">
-    {% csrf_token %}
+    <form method="post" name="cargoForm" id="cargoForm">
+        {% csrf_token %}
         <h4 class="sub-title">{{ form.nombre.label }}</h4>
         <div class="row">
             <div class="col-sm-12">
-                <div class="input-group input-group-primary">
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-bold"></i></label></span>
-                    {{ form.nombre }}
+                        {{ form.nombre }}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-4">
                 <h4 class="sub-title">Nivel de Subordinacion</h4>
-                 <div class="input-group input-group-primary">
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-airplay"></i></label></span>
-                    {{ form.nivel_subordinacion }}
+                        {{ form.nivel_subordinacion }}
+                    </div>
                 </div>
             </div>
-             <div class="col-4">
+            <div class="col-4">
                 <h4 class="sub-title">Provincia</h4>
-                 <div class="input-group input-group-primary">
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-hard-drive"></i></label></span>
-                    {{ form.provincia }}
+                        {{ form.provincia }}
+                    </div>
                 </div>
             </div>
-             <div class="col-4">
+            <div class="col-4">
                 <h4 class="sub-title">Municipio</h4>
-                 <div class="input-group input-group-primary">
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-fast-forward"></i></label></span>
-                    {{ form.municipio }}
+                        {{ form.municipio }}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="border-checkbox-section">
-            <div class="border-checkbox-group border-checkbox-group-primary">
-                {{ form.vacante }}
-                <label class="border-checkbox-label text-uppercase" for="vacante"><strong>VACANTE</strong></label>
+        <div class="form-group">
+            <div class="border-checkbox-section">
+                <div class="border-checkbox-group border-checkbox-group-primary">
+                    {{ form.vacante }}
+                    <label class="border-checkbox-label text-uppercase" for="vacante"><strong>VACANTE</strong></label>
+                </div>
             </div>
         </div>
-        <div class="border-checkbox-section">
-            <div class="border-checkbox-group border-checkbox-group-primary">
-                {{ form.estado }}
-                <label class="border-checkbox-label text-uppercase" for="estadoCargo"><strong>ACTIVO</strong></label>
+        <div class="form-group">
+            <div class="border-checkbox-section">
+                <div class="border-checkbox-group border-checkbox-group-primary">
+                    {{ form.estado }}
+                    <label class="border-checkbox-label text-uppercase"
+                           for="estadoCargo"><strong>ACTIVO</strong></label>
+                </div>
             </div>
         </div>
         <hr>
         <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
-        <a href="{% url 'cuadro:listarCargo' %}" class="btn btn-secondary mr-2"><i class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
+        <a href="{% url 'cuadro:listarCargo' %}" class="btn btn-secondary mr-2"><i
+                class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
     </form>
 {% endblock %}

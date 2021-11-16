@@ -15,7 +15,10 @@
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"><img class="avatar"
-                                                                       src="{% static 'propios/img/avatar.jpg' %}" alt="" style="width: 50px; height: 50px;"></a>
+                                                                       src="{% static 'propios/img/avatar.jpg' %}"
+                                                                       alt="" style="width: 50px; height: 50px;"><span class="badge badge-primary mb-10 ml-5"><i class="fa fa-arrow-alt-circle-down"></i> {{ request.user.username }}</span></a>
+
+
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profile.html"><i class="ik ik-user dropdown-icon"></i>
                             Perfil</a>
@@ -24,7 +27,6 @@
                                 class="ik ik-power dropdown-icon"></i> Salir</a>
                     </div>
                 </div>
-                <p class="badge badge-primary mt-5 ml-5">{{ request.user.username }}</p>
             </div>
         </div>
     </div>

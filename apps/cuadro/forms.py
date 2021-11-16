@@ -14,9 +14,9 @@ class cargoForm(ModelForm):
         widgets = {
             'nombre': TextInput(attrs={'class':'form-control styleInput',
                                        'placeholder':'Ingrese el nombre del cargo'}),
-            'nivel_subordinacion': Select(attrs={'class': 'form-control select2'}),
-            'provincia': Select(attrs={'class': 'form-control select2'}),
-            'municipio': Select(attrs={'class': 'form-control select2'}),
+            'nivel_subordinacion': Select(attrs={'class': 'form-control styleInput select2', 'id':'campoNivelSubordinacion'}),
+            'provincia': Select(attrs={'class': 'form-control styleInput select2', 'id':'campoProvincia'}),
+            'municipio': Select(attrs={'class': 'form-control select2', 'id':'campoMunicipio'}),
             'vacante': CheckboxInput(attrs={'class':'border-checkbox', 'type': 'checkbox', 'id':'vacante'}),
             'estado': CheckboxInput(attrs={'class':'border-checkbox', 'type': 'checkbox', 'id':'estadoCargo'})
         }
@@ -54,7 +54,7 @@ class cuadroForm(ModelForm):
                                        'placeholder':'Ingrese un nombre'}),
             'apellidos': TextInput(attrs={'class': 'form-control styleInput',
                                        'placeholder': 'Ingrese apellidos'}),
-            'ci': NumberInput(attrs={'class':'form-control styleInput','id':'ci',
+            'ci': NumberInput(attrs={'class':'form-control styleInput','id':'campoCI',
                                        'placeholder':'Ingrese carnet de identidad'}),
             'anos_experiencia_direccion': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'ci',
                                      'placeholder': 'Ingrese cantidad de años en direccion'}),
@@ -63,7 +63,7 @@ class cuadroForm(ModelForm):
             'militancia': Select(attrs={'class': 'form-control select2'}),
             'sexo': Select(attrs={'class': 'form-control select2'}),
             'color': Select(attrs={'class': 'form-control select2'}),
-            'edad': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'ci',
+            'edad': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'campoEdad', 'readonly':True,
                                                         'placeholder': 'Ingrese la edad'}),
 
         }

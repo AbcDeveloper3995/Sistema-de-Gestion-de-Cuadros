@@ -1,0 +1,9 @@
+.help-block,
+.fa-times-circle{
+    color: red;
+    font-size: 17px;
+}
+.fa-check-circle{
+    color: #11c15b;
+    font-size: 17px;
+}

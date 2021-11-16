@@ -44,7 +44,7 @@ class clasificadorDPA(models.Model):
         ordering = ['codigo']
 
     def __str__(self):
-        return str(self.codigo)
+        return '{0}--{1}'.format(str(self.codigo), self.descripcion)
 
 class Cargo(models.Model):
     nombre = models.CharField(verbose_name='Nombre del cargo', max_length=255, blank=False, null=False)

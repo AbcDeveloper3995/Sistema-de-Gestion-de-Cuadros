@@ -4,6 +4,7 @@
 
 {% block css %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'plugins/bootstrapValidator/bootstrapValidator.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/select2-4.0.13/css/select2.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/select2-4.0.13/css/select2-bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'propios/css/crear/styles.css' %}">
@@ -23,7 +24,11 @@
 
 {% block js %}
     {{ block.super }}
+    <script src="{% static 'plugins/bootstrapValidator/bootstrapValidator.min.js' %}"></script>
     <script src="{% static 'plugins/select2-4.0.13/js/select2.min.js' %}"></script>
     <script src="{% static 'plugins/select2-4.0.13/js/i18n/es.js' %}"></script>
     <script src="{% static 'propios/js/cuadro/form.js' %}"></script>
+{% endblock %}
+
+{% block grafico_js %}
 {% endblock %}

@@ -2,29 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7636f653-3601-4b08-9ca0-e102424fc2a5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/cuadro/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/cuadro/templatetags/filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/propios/js/global/graficos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SGPC/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SGPC/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/cuadro/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/cuadro/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/cuadro/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/cuadro/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/cuadro/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/usuario/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/usuario/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/usuario/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/usuario/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/plugins/perfect-scrollbar/css/perfect-scrollbar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/plugins/theme/js/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/plugins/theme/js/theme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/propios/css/crear/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/css/crear/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/propios/js/cuadro/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/js/cuadro/form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/propios/js/global/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/js/global/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/comun/crear.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/crear.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/comun/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/comun/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/comun/listar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/listar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comun/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/usuario/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usuario/login.html" afterDir="false" />
     </list>
@@ -43,40 +35,38 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html">
+        <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/form.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/comun/header.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="14" selection-start-column="14" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/usuario/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="35" column="42" lean-forward="true" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="77" />
+            <state relative-caret-position="119">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#588#5189#0" />
+                <element signature="e#5300#5888#0" />
+                <element signature="e#5993#6788#0" />
+                <element signature="e#6821#7478#0" />
+                <element signature="e#7531#8027#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/form.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/comun/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="68">
+              <caret line="67" column="85" selection-start-line="67" selection-start-column="85" selection-end-line="67" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/cuadro/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1088">
+              <caret line="65" column="110" selection-start-line="65" selection-start-column="110" selection-end-line="65" selection-end-column="110" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -93,6 +83,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tipo</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -108,39 +103,43 @@
         <option value="$PROJECT_DIR$/templates/cuadro/listarCuadros.html" />
         <option value="$PROJECT_DIR$/templates/cuadro/crearCuadros.html" />
         <option value="$PROJECT_DIR$/SGPC/urls.py" />
-        <option value="$PROJECT_DIR$/static/propios/css/crear/styles.css" />
-        <option value="$PROJECT_DIR$/static/propios/js/cuadro/form.js" />
-        <option value="$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html" />
         <option value="$PROJECT_DIR$/templates/cuadro/listar/listarEspecialidad.html" />
         <option value="$PROJECT_DIR$/static/propios/css/listar/styles.css" />
         <option value="$PROJECT_DIR$/apps/cuadro/apps.py" />
         <option value="$PROJECT_DIR$/apps/cuadro/admin.py" />
         <option value="$PROJECT_DIR$/SGPC/settings.py" />
-        <option value="$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html" />
-        <option value="$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html" />
         <option value="$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html" />
-        <option value="$PROJECT_DIR$/apps/cuadro/models.py" />
-        <option value="$PROJECT_DIR$/apps/cuadro/forms.py" />
         <option value="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" />
-        <option value="$PROJECT_DIR$/templates/comun/listar.html" />
-        <option value="$PROJECT_DIR$/templates/comun/crear.html" />
         <option value="$PROJECT_DIR$/apps/cuadro/templatetags/filters.py" />
         <option value="$PROJECT_DIR$/templates/comun/menu.html" />
         <option value="$PROJECT_DIR$/apps/cuadro/views.py" />
         <option value="$PROJECT_DIR$/apps/cuadro/urls.py" />
-        <option value="$PROJECT_DIR$/templates/usuario/login.html" />
         <option value="$PROJECT_DIR$/apps/usuario/views.py" />
-        <option value="$PROJECT_DIR$/templates/comun/home.html" />
+        <option value="$PROJECT_DIR$/static/propios/js/cuadro/validaciones.js" />
+        <option value="$PROJECT_DIR$/static/plugins/theme/js/theme.js" />
+        <option value="$PROJECT_DIR$/static/plugins/highcharts-8.1.2/highcharts.src.js" />
         <option value="$PROJECT_DIR$/static/propios/js/global/utils.js" />
-        <option value="$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html" />
+        <option value="$PROJECT_DIR$/static/propios/js/global/graficos.js" />
+        <option value="$PROJECT_DIR$/templates/comun/home.html" />
+        <option value="$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html" />
+        <option value="$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html" />
+        <option value="$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html" />
+        <option value="$PROJECT_DIR$/static/propios/css/crear/styles.css" />
+        <option value="$PROJECT_DIR$/templates/comun/crear.html" />
+        <option value="$PROJECT_DIR$/apps/cuadro/models.py" />
+        <option value="$PROJECT_DIR$/templates/usuario/login.html" />
         <option value="$PROJECT_DIR$/templates/comun/header.html" />
+        <option value="$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html" />
+        <option value="$PROJECT_DIR$/apps/cuadro/forms.py" />
+        <option value="$PROJECT_DIR$/static/propios/js/cuadro/form.js" />
+        <option value="$PROJECT_DIR$/templates/comun/listar.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-139" />
-    <option name="y" value="2" />
-    <option name="width" value="1104" />
+    <option name="x" value="19" />
+    <option name="y" value="7" />
+    <option name="width" value="914" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -149,12 +148,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="SGPC" type="b2602c69:ProjectViewProjectNode" />
               <item name="SGPC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SGPC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SGPC" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SGPC" type="b2602c69:ProjectViewProjectNode" />
@@ -170,13 +175,12 @@
               <item name="SGPC" type="b2602c69:ProjectViewProjectNode" />
               <item name="SGPC" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="usuario" type="462c0819:PsiDirectoryNode" />
+              <item name="comun" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -266,7 +270,9 @@
       <workItem from="1636859077961" duration="7475000" />
       <workItem from="1636932130897" duration="4489000" />
       <workItem from="1636947915286" duration="4233000" />
-      <workItem from="1636993609370" duration="1569000" />
+      <workItem from="1636993609370" duration="8309000" />
+      <workItem from="1637033570794" duration="9448000" />
+      <workItem from="1637080292688" duration="588000" />
     </task>
     <task id="LOCAL-00001" summary="Se implemento el CRUD para Cuadros, Cargo y Especialidad; asi como las respectivas template de listar y crear.">
       <created>1636671502728</created>
@@ -275,11 +281,18 @@
       <option name="project" value="LOCAL" />
       <updated>1636671502728</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Se implemento el proceso filtrado para la tabla de cuadros; este segmento se encuentra en el apartado correspondiente en el listar.js de cuadro">
+      <created>1636995803049</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1636995803049</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117877000" />
+    <option name="totallyTimeSpent" value="134653000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -294,7 +307,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991453" visible="true" weight="0.18381241" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991453" visible="true" weight="0.18986385" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50085473" side_tool="true" weight="0.17019667" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -363,7 +376,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Se implemento el CRUD para Cuadros, Cargo y Especialidad; asi como las respectivas template de listar y crear." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se implemento el CRUD para Cuadros, Cargo y Especialidad; asi como las respectivas template de listar y crear." />
+    <MESSAGE value="Se implemento el proceso filtrado para la tabla de cuadros; este segmento se encuentra en el apartado correspondiente en el listar.js de cuadro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se implemento el proceso filtrado para la tabla de cuadros; este segmento se encuentra en el apartado correspondiente en el listar.js de cuadro" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/apps/usuario/admin.py">
@@ -438,9 +452,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/propios/css/crear/styles.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarEspecialidad.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -490,57 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="119" column="14" lean-forward="true" selection-start-line="119" selection-start-column="14" selection-end-line="119" selection-end-column="14" />
-          <folding>
-            <element signature="e#195#1487#0#HTML" />
-            <element signature="e#225#625#0#HTML" />
-            <element signature="e#638#1059#0#HTML" />
-            <element signature="e#1072#1472#0#HTML" />
-            <element signature="e#1509#3729#0#HTML" />
-            <element signature="e#1540#1937#0#HTML" />
-            <element signature="e#1950#2353#0#HTML" />
-            <element signature="e#2366#2756#0#HTML" />
-            <element signature="e#2797#4206#0#HTML" />
-            <element signature="e#3668#5312#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="31" column="16" lean-forward="true" selection-start-line="31" selection-start-column="16" selection-end-line="37" selection-end-column="27" />
-          <folding>
-            <element signature="e#1525#1543#0#HTML" expanded="true" />
-            <element signature="e#1525#1543#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/listar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/crear.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/cuadro/templatetags/filters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
@@ -555,16 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/cuadro/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="92" column="118" selection-start-line="92" selection-start-column="118" selection-end-line="92" selection-end-column="118" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -585,23 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/cuadro/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/listar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
@@ -619,62 +552,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/home.html">
+    <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        <state relative-caret-position="294">
+          <caret line="27" column="100" lean-forward="true" selection-start-line="27" selection-start-column="100" selection-end-line="27" selection-end-column="115" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/propios/js/global/utils.js">
+    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/validaciones.js" />
+    <entry file="file://$PROJECT_DIR$/static/plugins/highcharts-8.1.2/highcharts.src.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="224" column="16" lean-forward="true" selection-start-line="224" selection-start-column="16" selection-end-line="224" selection-end-column="16" />
+        <state relative-caret-position="217">
+          <caret line="474" column="86" lean-forward="true" selection-start-line="474" selection-start-column="86" selection-end-line="474" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/plugins/theme/js/theme.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="135" column="8" selection-start-line="135" selection-start-column="11" selection-end-line="144" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/propios/js/global/graficos.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2397">
+          <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
           <folding>
-            <element signature="e#30#456#0" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="e#488#916#0" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="e#987#2403#0" />
-            <element signature="e#2457#4359#0" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
-            <element signature="e#4422#5754#0" />
-            <element signature="e#5798#6362#0" />
-            <element signature="e#6402#6960#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/form.js">
+    <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="31">
+          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html">
+    <entry file="file://$PROJECT_DIR$/static/propios/css/crear/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state relative-caret-position="136">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/crear.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="28" column="79" selection-start-line="28" selection-start-column="79" selection-end-line="28" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/cuadro/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/usuario/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="35" column="42" lean-forward="true" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="77" />
+        <state relative-caret-position="149">
+          <caret line="25" column="104" selection-start-line="25" selection-start-column="104" selection-end-line="25" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/propios/js/global/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#30#457#0" />
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+            <element signature="e#489#918#0" />
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+            <element signature="e#989#2403#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/comun/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        <state relative-caret-position="289">
+          <caret line="18" column="197" selection-start-line="18" selection-start-column="197" selection-end-line="18" selection-end-column="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="71" column="84" selection-start-line="71" selection-start-column="84" selection-end-line="71" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#588#5189#0" />
+            <element signature="e#5300#5888#0" />
+            <element signature="e#5993#6788#0" />
+            <element signature="e#6821#7478#0" />
+            <element signature="e#7531#8027#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/cuadro/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="65" column="110" selection-start-line="65" selection-start-column="110" selection-end-line="65" selection-end-column="110" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/listar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="60" column="11" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="67" column="85" selection-start-line="67" selection-start-column="85" selection-end-line="67" selection-end-column="85" />
         </state>
       </provider>
     </entry>

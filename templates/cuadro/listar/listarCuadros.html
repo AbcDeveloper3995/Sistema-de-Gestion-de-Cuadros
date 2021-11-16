@@ -64,12 +64,12 @@
                 {% if cuadro.fk_cargo.provincia == None %}
                     <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
                 {% else %}
-                    <td class="text-center">{{ cuadro.fk_cargo.provincia }}</td>
+                    <td class="text-center">{{ cuadro.fk_cargo.provincia.descripcion }}</td>
                 {% endif %}
                 {% if cuadro.fk_cargo.municipio == None %}
                     <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
                 {% else %}
-                    <td class="text-center">{{ cuadro.fk_cargo.municipio }}</td>
+                    <td class="text-center">{{ cuadro.fk_cargo.municipio.descripcion }}</td>
                 {% endif %}
                 <td class="text-center">{{ cuadro.categoria }}</td>
                 <td class="text-center">{{ cuadro.ci }}</td>
