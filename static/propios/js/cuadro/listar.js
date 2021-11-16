@@ -1,14 +1,13 @@
 //--------------------------------------------------------INICIALIZACIONES------------------------------------------------------//
 $('#tblCargos').dataTable({});
 $('#tblEspecialidad').dataTable({});
-let tblCuadro = $('#tblCuadro').DataTable({});
 
-let tblCuadroFilter = $('#tblCuadroFilter').dataTable({});
+let tblCuadro = $('#tblCuadro').DataTable({});
 let rangoEdad = $('#rangoEdad');
-let formCuadroFilter = $('#formCuadroFilter');
+let eliminarTodos = $('#eliminarTodos')
 
 //---------------------------------------------NOTIFICACION PARA ELIMINAR-----------------------------------------------------//
-const notificacionDelete = (title, content, url, pk) => {
+const notificacionDelete = (title, content, url, pk=0) => {
     $.confirm({
         theme: 'material',
         title: title,
@@ -30,8 +29,15 @@ const notificacionDelete = (title, content, url, pk) => {
                         data: {'id': pk},
                         dataType: 'json'
                     }).done(function (response) {
-                        messageExito(response.message)
+                        if (!response.hasOwnProperty('error')) {
+                            window.location.reload()
+                            return false;
+                        }
+                        messageError(response.error);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        alert(textStatus + ': ' + errorThrown);
                     })
+
                 }
             },
             danger: {
@@ -104,3 +110,7 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+//--------------------------------------------PROCEDIMENTO PARA ELIMINAR TODOS---------------------------------------//
+eliminarTodos.on('click', function () {
+     notificacionDelete('Notificacion', 'Estas seguro de querer eliminar todos los cuadros ?', 'http://127.0.0.1:8000/cuadro/eliminarTodos/')
+})

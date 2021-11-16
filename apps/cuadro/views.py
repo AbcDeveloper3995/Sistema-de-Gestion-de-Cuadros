@@ -1,17 +1,18 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, TemplateView
-from django.db.models import Q
 
 from apps.cuadro.forms import *
 from apps.cuadro.models import *
 
 
 # PROCEDIMIENTO PARA LISTAR CUADROS.
+from apps.utils import disabledCargoComoVacante, enableCargoComoVacante
+
+
 class listarCuadroView(LoginRequiredMixin, ListView):
     template_name = 'cuadro/listar/listarCuadros.html'
     model = Cuadro
@@ -30,6 +31,16 @@ class crearCuadroView(LoginRequiredMixin, CreateView):
     model = Cuadro
     form_class = cuadroForm
     success_url = reverse_lazy('cuadro:listarCuadro')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            messages.success(self.request, 'Cuadro creado correctamente.')
+            form.save()
+            disabledCargoComoVacante()
+        else:
+            messages.error(self.request, form.errors)
+        return redirect('cuadro:listarCuadro')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -58,7 +69,23 @@ class eliminarCuadroView(LoginRequiredMixin, TemplateView):
         try:
             data['message'] = 'El cuadro se ha eliminado correctamente.'
             query = get_object_or_404(Cuadro, id=request.GET['id'])
+            enableCargoComoVacante(query)
             query.delete()
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA ELIMINAR CUADROS.
+class eliminarCuadroAllView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            data['message'] = 'Los cuadros se ha eliminado correctamente.'
+            query = Cuadro.objects.all()
+            for i in query:
+                enableCargoComoVacante(i)
+                i.delete()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

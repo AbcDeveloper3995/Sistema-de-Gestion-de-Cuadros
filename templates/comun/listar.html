@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="{% static 'plugins/datatables-1.10.20/css/jquery.dataTables.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}">
     <link rel="stylesheet"
-              href="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/css/fixedHeader.dataTables.min.css' %}">
-        <link rel="stylesheet"
-              href="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/css/fixedHeader.bootstrap4.min.css' %}">
-        <link rel="stylesheet"
-              href="{% static 'plugins/datatables-1.10.20/plugins/Select-1.3.1/css/select.dataTables.min.css' %}">
-        <link rel="stylesheet"
-              href="{% static 'plugins/datatables-1.10.20/plugins/buttons-1.6.1/css/buttons.dataTables.min.css' %}">
+          href="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/css/fixedHeader.dataTables.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/css/fixedHeader.bootstrap4.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'plugins/datatables-1.10.20/plugins/Select-1.3.1/css/select.dataTables.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'plugins/datatables-1.10.20/plugins/buttons-1.6.1/css/buttons.dataTables.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/ion-rangeslider/css/ion.rangeSlider.min.css' %}">
     <link rel="stylesheet" href="{% static 'propios/css/listar/styles.css' %}">
 {% endblock %}
@@ -20,29 +20,29 @@
 {% block content %}
     <div class="card mt-30">
         <div class="card-header d-block">
-                <h3>{% block encabezadoTabla %}{% endblock %}</h3>
-                {% block subEncabezadoTabla %}
-                    {% endblock %}
+            <h3>{% block encabezadoTabla %}{% endblock %}</h3>
+            {% block subEncabezadoTabla %}
+            {% endblock %}
         </div>
         <div class="card-body p-0 table-border-style">
             <div class="table-responsive">
                 {% block table %}
                 {% endblock %}
             </div>
-        <hr>
-              {% block buttonCrear %}
-                {% endblock %}
+            <hr>
+            {% block buttons %}
+            {% endblock %}
         </div>
     </div>
     {% block contentExtra %}
-        {% endblock %}
+    {% endblock %}
 {% endblock %}
 
 {% block js %}
     {{ block.super }}
     <script src="{% static 'plugins/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
     <script src="{% static 'plugins/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
-     <script src="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script src="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/js/dataTables.fixedHeader.min.js' %}"></script>
     <script src="{% static 'plugins/datatables-1.10.20/plugins/FixedHeader-3.1.7/js/fixedHeader.bootstrap4.js' %}"></script>
     <script src="{% static 'plugins/datatables-1.10.20/plugins/Select-1.3.1/js/dataTables.select.min.js' %}"></script>
     <script src="{% static 'plugins/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>

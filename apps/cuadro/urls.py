@@ -9,6 +9,7 @@ urlpatterns = [
     path('crearCuadro/', crearCuadroView.as_view(), name='crearCuadro'),
     path('modificarCuadro/<int:pk>/', modificarCuadroView.as_view(), name='modificarCuadro'),
     path('eliminarCuadro/<int:pk>/', eliminarCuadroView.as_view(), name='eliminarCuadro'),
+    path('eliminarTodos/', eliminarCuadroAllView.as_view(), name='eliminarTodos'),
 
 # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),

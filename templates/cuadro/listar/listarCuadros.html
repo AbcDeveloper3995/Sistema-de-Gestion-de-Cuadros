@@ -40,6 +40,7 @@
             <th rowspan="">Categoria</th>
             <th rowspan="">CI</th>
             <th rowspan="">Nombre</th>
+            <th rowspan="">Apellidos</th>
             <th rowspan="">Especialidad</th>
             <th rowspan="">Sexo</th>
             <th rowspan="">Edad</th>
@@ -74,6 +75,7 @@
                 <td class="text-center">{{ cuadro.categoria }}</td>
                 <td class="text-center">{{ cuadro.ci }}</td>
                 <td class="text-center">{{ cuadro.nombre }}</td>
+                <td class="text-center">{{ cuadro.apellidos }}</td>
                 <td class="text-center">{{ cuadro.fk_especialidad.nombre }}</td>
                 <td class="text-center">{{ cuadro.sexo }}</td>
                 <td class="text-center">{{ cuadro.edad }}</td>
@@ -99,7 +101,9 @@
     </table>
 {% endblock %}
 
-{% block buttonCrear %}
+{% block buttons %}
     <a href="{% url 'cuadro:crearCuadro' %}" type="button" class="btn btn-primary buttonCrear"><i
             class="fa fa-plus"></i>Nuevo Cuadro</a>
+    <a href="#" type="button" class="btn btn-primary buttonCrear" id="eliminarTodos"><i
+            class="fa fa-minus-circle"></i>Eliminar todos</a>
 {% endblock %}

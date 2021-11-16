@@ -88,7 +88,7 @@ class Cuadro(models.Model):
     categoria = models.CharField(verbose_name='Categoria', max_length=200, choices=CHOICE_CATEGORIA)
     nombre = models.CharField(verbose_name='Nombre', max_length=255, blank=False, null=False)
     apellidos = models.CharField(verbose_name='Apellidos', max_length=255, blank=False, null=False)
-    ci = models.IntegerField(verbose_name='Carnet de Identidad', unique=True, blank=False, null=False)
+    ci = models.BigIntegerField(verbose_name='Carnet de Identidad', unique=True, blank=False, null=False)
     anos_experiencia_direccion = models.PositiveIntegerField(verbose_name='Años de experiencia Direccion', blank=True, null=True)
     anos_experiencia_rama = models.PositiveIntegerField(verbose_name='Años de experiencia Rama', blank=True, null=True)
     militancia = models.CharField(verbose_name='Militancia', max_length=50, choices=CHOICE_MILITANCIA, blank=True, null=True)

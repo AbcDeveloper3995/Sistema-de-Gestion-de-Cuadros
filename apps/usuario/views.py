@@ -37,7 +37,6 @@ class homeView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         data = {}
-        print(request.POST['action'])
         try:
             action = request.POST['action']
             if action == 'getGraficoColumn':
@@ -62,8 +61,8 @@ class homeView(LoginRequiredMixin, TemplateView):
     def getGraficoColumn(self):
         data = []
         try:
-            for n in range(1, 13):
-                total = n+1
+            for i in range(1, 13):
+                total = i+1
                 data.append(int(total))
         except:
             pass
@@ -72,10 +71,10 @@ class homeView(LoginRequiredMixin, TemplateView):
     def getGraficoPie(self):
         data = []
         try:
-            for p in Cuadro.objects.all():
-                if p.anos_experiencia_rama>0:
-                    data.append({'name':p.nombre,
-                                 'y':float(p.anos_experiencia_rama)
+            for i in Cuadro.objects.all():
+                if i.anos_experiencia_rama>0:
+                    data.append({'name':i.nombre,
+                                 'y':float(i.anos_experiencia_rama)
                                  })
         except:
             pass

@@ -99,7 +99,7 @@ $('form[name="cuadroForm"]').bootstrapValidator({
                     message: 'Años de esperiencia en direccion debe ser menor de 2 digitos'
                 },
                 regexp: {
-                    regexp: /^[1-9]+$/,
+                    regexp: /^[0-9]+$/,
                     message: 'Solo se admiten digitos.'
                 },
                 callback: {
@@ -140,14 +140,6 @@ $('form[name="cuadroForm"]').bootstrapValidator({
                         return true;
                     }
                 }
-
-            }
-        },
-        militancia: {
-            validators: {
-                notEmpty: {
-                    message: 'Campo requerido. Debe seleccionar una opcion'
-                },
 
             }
         },
