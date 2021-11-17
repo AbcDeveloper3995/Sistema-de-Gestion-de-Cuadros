@@ -4,10 +4,11 @@ $('#tblEspecialidad').dataTable({});
 
 let tblCuadro = $('#tblCuadro').DataTable({});
 let rangoEdad = $('#rangoEdad');
-let eliminarTodos = $('#eliminarTodos')
+let eliminarTodos = $('#eliminarTodos');
+let actualizarEdad = $('#actualizarEdad');
 
 //---------------------------------------------NOTIFICACION PARA ELIMINAR-----------------------------------------------------//
-const notificacionDelete = (title, content, url, pk=0) => {
+const notificacionDelete = (title, content, url, pk = 0) => {
     $.confirm({
         theme: 'material',
         title: title,
@@ -98,7 +99,7 @@ $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
         var min = parseInt($('#min').val(), 10);
         var max = parseInt($('#max').val(), 10);
-        var age = parseFloat(data[10]) || 0;
+        var age = parseFloat(data[11]) || 0;
 
         if ((isNaN(min) && isNaN(max)) ||
             (isNaN(min) && age <= max) ||
@@ -112,5 +113,6 @@ $.fn.dataTable.ext.search.push(
 
 //--------------------------------------------PROCEDIMENTO PARA ELIMINAR TODOS---------------------------------------//
 eliminarTodos.on('click', function () {
-     notificacionDelete('Notificacion', 'Estas seguro de querer eliminar todos los cuadros ?', 'http://127.0.0.1:8000/cuadro/eliminarTodos/')
-})
+    notificacionDelete('Notificacion', 'Estas seguro de querer eliminar todos los cuadros ?', 'http://127.0.0.1:8000/cuadro/eliminarTodos/')
+});
+

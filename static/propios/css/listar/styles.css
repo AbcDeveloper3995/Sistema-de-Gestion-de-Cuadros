@@ -6,6 +6,10 @@
     margin-left: 20px;
     margin-bottom: 20px;
 }
+.iconMenu{
+    margin-right: 10px;
+    color: #005cbf;
+}
 
 .irs-ocultar {
     position: absolute !important;

@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
@@ -7,16 +9,34 @@ from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 
 from apps.cuadro.forms import *
 from apps.cuadro.models import *
-
-
-# PROCEDIMIENTO PARA LISTAR CUADROS.
 from apps.utils import disabledCargoComoVacante, enableCargoComoVacante
 
 
+# PROCEDIMIENTO PARA LISTAR CUADROS.
 class listarCuadroView(LoginRequiredMixin, ListView):
     template_name = 'cuadro/listar/listarCuadros.html'
     model = Cuadro
     context_object_name = 'cuadros'
+
+    def get_queryset(self):
+        query = Cuadro.objects.all()
+        hora = datetime.datetime.today().hour
+        minutos = datetime.datetime.today().minute
+        if int(hora) == 8 and int(minutos) == 30:
+            self.actualizarEdad(query)
+        else:
+            print('No es la hora fijada para la actualizacion de la edad')
+        return query
+
+    def actualizarEdad(self, listadoCuadros):
+        diaActual = datetime.datetime.today().day
+        mesActual = datetime.datetime.today().month
+        for i in listadoCuadros:
+            diaCI = str(i.ci)[4:6]
+            mesCI = str(i.ci)[2:4]
+            if int(diaCI) == int(diaActual) and int(mesCI) == int(mesActual):
+                i.edad += 1
+                i.save()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,6 +68,7 @@ class crearCuadroView(LoginRequiredMixin, CreateView):
         context['tituloPestaña'] = 'SGPC | Cuadro'
         return context
 
+
 # PROCEDIMIENTO PARA MODIFICAR CUADROS.
 class modificarCuadroView(LoginRequiredMixin, UpdateView):
     model = Cuadro
@@ -61,21 +82,23 @@ class modificarCuadroView(LoginRequiredMixin, UpdateView):
         context['tituloPestaña'] = 'SGPC | Cuadro'
         return context
 
+
 # PROCEDIMIENTO PARA ELIMINAR CUADROS.
 class eliminarCuadroView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         data = {}
         try:
-            data['message'] = 'El cuadro se ha eliminado correctamente.'
             query = get_object_or_404(Cuadro, id=request.GET['id'])
             enableCargoComoVacante(query)
+            messages.success(self.request, 'El cuadro ' + query.nombre + ' se ha eliminado correctamente.')
             query.delete()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
-# PROCEDIMIENTO PARA ELIMINAR CUADROS.
+
+# PROCEDIMIENTO PARA ELIMINAR TODOS LOS CUADROS.
 class eliminarCuadroAllView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -86,6 +109,7 @@ class eliminarCuadroAllView(LoginRequiredMixin, TemplateView):
             for i in query:
                 enableCargoComoVacante(i)
                 i.delete()
+            messages.success(self.request, 'Todos los cuadros han sido eliminados correctamente.')
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -114,12 +138,12 @@ class crearCargoView(LoginRequiredMixin, CreateView):
     form_class = cargoForm
     success_url = reverse_lazy('cuadro:listarCargo')
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Creacion de Cargo'
         context['tituloPestaña'] = 'SGPC | Cuadros'
         return context
+
 
 # PROCEDIMIENTO PARA MODIFICAR CARGOS.
 class modificarCargoView(LoginRequiredMixin, UpdateView):
@@ -134,15 +158,16 @@ class modificarCargoView(LoginRequiredMixin, UpdateView):
         context['tituloPestaña'] = 'SGPC | Cuadros'
         return context
 
+
 # PROCEDIMIENTO PARA ELIMINAR CARGOS.
 class eliminarCargoView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         data = {}
         try:
-            data['message'] = 'El cargo se ha eliminado correctamente.'
             query = get_object_or_404(Cargo, id=request.GET['id'])
             query.estado = False
+            messages.success(self.request, 'El cargo de ' + query.nombre + ' se ha eliminado correctamente.')
             query.save()
         except Exception as e:
             data['error'] = str(e)
@@ -178,6 +203,7 @@ class crearEspecialidadView(LoginRequiredMixin, CreateView):
         context['tituloPestaña'] = 'SGPC | Cuadros'
         return context
 
+
 # PROCEDIMIENTO PARA MODIFICAR ESPECIALIDAD.
 class modificarEspecialidadView(LoginRequiredMixin, UpdateView):
     model = Especialidad
@@ -191,15 +217,16 @@ class modificarEspecialidadView(LoginRequiredMixin, UpdateView):
         context['tituloPestaña'] = 'SGPC | Cuadros'
         return context
 
+
 # PROCEDIMIENTO PARA ELIMINAR ESPECIALIDAD.
 class eliminarEspecialidadView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         data = {}
         try:
-            data['message'] = 'El cargo se ha eliminado correctamente.'
             query = get_object_or_404(Especialidad, id=request.GET['id'])
             query.estado = False
+            messages.success(self.request, 'La especialidad ' + query.nombre + ' se ha eliminado correctamente.')
             query.save()
         except Exception as e:
             data['error'] = str(e)
