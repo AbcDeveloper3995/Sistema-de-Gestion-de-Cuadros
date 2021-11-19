@@ -10,6 +10,7 @@ urlpatterns = [
     path('modificarCuadro/<int:pk>/', modificarCuadroView.as_view(), name='modificarCuadro'),
     path('eliminarCuadro/<int:pk>/', eliminarCuadroView.as_view(), name='eliminarCuadro'),
     path('eliminarTodos/', eliminarCuadroAllView.as_view(), name='eliminarTodos'),
+    path('isVacante/', isVacanteView.as_view(), name='isVacante'),
 
 # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),

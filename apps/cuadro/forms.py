@@ -38,7 +38,7 @@ class especialidadForm(ModelForm):
 class cuadroForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['fk_cargo'].queryset = Cargo.objects.filter(vacante=True, estado=True)
+        self.fields['fk_cargo'].queryset = Cargo.objects.filter(estado=True)
         self.fields['fk_especialidad'].queryset = Especialidad.objects.filter(estado=True)
 
     class Meta:
@@ -63,7 +63,7 @@ class cuadroForm(ModelForm):
             'militancia': Select(attrs={'class': 'form-control select2'}),
             'sexo': Select(attrs={'class': 'form-control select2'}),
             'color': Select(attrs={'class': 'form-control select2'}),
-            'edad': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'campoEdad', 'readonly':True,
-                                                        'placeholder': 'Ingrese la edad'}),
+            'edad': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'campoEdad', 'readonly':True,}),
+            'estado': CheckboxInput(attrs={'class': 'border-checkbox', 'type': 'checkbox', 'id': 'estadoCuadro'})
 
         }

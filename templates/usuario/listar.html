@@ -1,0 +1,60 @@
+{% extends 'comun/listar.html' %}
+
+{% block encabezadoTabla %}
+    <i class="fa fa-table"></i> <strong>Listado de Usuarios</strong>
+{% endblock %}
+
+{% block table %}
+    <table class="table table-hover table-striped table-bordered" id="tblUsuario">
+        <thead>
+        <tr>
+            <th rowspan="">Acciones</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Activo</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>
+                    <a class="miTippy Acciones ml-15" href="{% url 'usuario:modificarUsuario'  usuario.pk %}"
+                       type="button" title="Modificar"><i class="fa fa-edit"></i></a>
+                    <a class="miTippy Acciones" href="#"
+                       onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar este usuario.', 'http://127.0.0.1:8000/usuario/eliminarUsuario/'+{{ usuario.pk }},{{ usuario.pk }} )"
+                       type="button" title="Eliminar"><i class="fa fa-trash"></i></a></td>
+                <td>
+                    <img src="{{ usuario.get_img }}" class="img-fluid d-block mx-auto" style="width: 50px; height: 50px">
+                </td>
+                <td>{{ usuario.name }}</td>
+                <td>{{ usuario.last_name }}</td>
+                <td><span class="badge bg-gradient-navy">{{ usuario.username }}</span></td>
+                <td>{{ usuario.email }}</td>
+                {% if usuario.groups.all %}
+                    <td>
+                        {% for grupo in usuario.groups.all %}
+                            <span class="badge bg-gradient-navy" style="margin-bottom: 2px">{{ grupo }}</span>
+                        {% endfor %}
+                    </td>
+                {% else %}
+                    <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>
+                {% endif %}
+                {% if usuario.is_active == True %}
+                    <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>
+                {% else %}
+                    <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block buttons %}
+    <a href="{% url 'usuario:crearUsuario' %}" type="button" class="btn btn-primary buttonCrear"><i
+            class="ik ik-user-plus"></i>Nuevo Usuario</a>
+{% endblock %}

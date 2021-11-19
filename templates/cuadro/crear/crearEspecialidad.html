@@ -1,4 +1,5 @@
 {% extends 'comun/crear.html' %}
+{% load static %}
 
 {% block encabezadoForm %}{{ titulo }}{% endblock %}
 
@@ -28,4 +29,9 @@
         <a href="{% url 'cuadro:listarEspecialidad' %}" class="btn btn-secondary mr-2"><i
                 class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
     </form>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/form.js' %}"></script>
 {% endblock %}

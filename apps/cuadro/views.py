@@ -121,7 +121,7 @@ class listarCargoView(LoginRequiredMixin, ListView):
     model = Cargo
 
     def get_queryset(self):
-        return Cargo.objects.filter(estado=True)
+        return Cargo.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -228,6 +228,20 @@ class eliminarEspecialidadView(LoginRequiredMixin, TemplateView):
             query.estado = False
             messages.success(self.request, 'La especialidad ' + query.nombre + ' se ha eliminado correctamente.')
             query.save()
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA ELIMINAR ESPECIALIDAD.
+class isVacanteView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            query = get_object_or_404(Cargo, id=request.GET['cargo'])
+            if query.vacante == False:
+                data['message'] = 'Este cargo no esta vacante.'
+                data['vacante'] = False
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

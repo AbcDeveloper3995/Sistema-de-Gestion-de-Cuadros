@@ -1,6 +1,6 @@
 {% extends 'comun/listar.html' %}
 
-{% block encabezado_tabla %}<i class="fa fa-table"></i> <strong>LISTADO DE CARGOS</strong>{% endblock %}
+{% block encabezadoTabla %}<i class="fa fa-table"></i> <strong>LISTADO DE CARGOS</strong>{% endblock %}
 {% block table %}
     <table class="table table-hover table-striped table-bordered" id="tblCargos">
         <thead>
@@ -8,6 +8,8 @@
             <th>Acciones</th>
             <th>Nombre</th>
             <th>Nivel de Subordinacion</th>
+            <th>Provincia</th>
+            <th>Municipio</th>
             <th>Vacante</th>
             <th>Activo</th>
         </tr>
@@ -18,10 +20,21 @@
                 <td>
                     <a class="miTippy Acciones" href="{% url 'cuadro:modificarCargo' cargo.pk %}"
                        type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
-                    <a class="miTippy Acciones" href="#"  type="button" onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta cargo.', 'http://127.0.0.1:8000/cuadro/eliminarCargo/'+{{ cargo.pk }},{{ cargo.pk }} )"
+                    <a class="miTippy Acciones" href="#" type="button"
+                       onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta cargo.', 'http://127.0.0.1:8000/cuadro/eliminarCargo/'+{{ cargo.pk }},{{ cargo.pk }} )"
                        title="Eliminar"><i class="fa fa-trash"></i></a></td>
                 <td>{{ cargo.nombre }}</td>
                 <td>{{ cargo.nivel_subordinacion }}</td>
+                {% if cargo.provincia.descripcion == None %}
+                    <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>
+                {% else %}
+                    <td class="">{{ cargo.provincia.descripcion }}</td>
+                {% endif %}
+                {% if cargo.municipio.descripcion == None %}
+                    <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>
+                {% else %}
+                    <td class="">{{ cargo.municipio.descripcion }}</td>
+                {% endif %}
                 {% if cargo.vacante == True %}
                     <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>
                 {% else %}
@@ -43,6 +56,7 @@
     </table>
 {% endblock %}
 
-{% block buttonCrear %}
-<a href="{% url 'cuadro:crearCargo' %}" type="button" class="btn btn-primary buttonCrear"><i class="fa fa-plus"></i>Nuevo Cargo</a>
+{% block buttons %}
+    <a href="{% url 'cuadro:crearCargo' %}" type="button" class="btn btn-primary buttonCrear"><i class="fa fa-plus"></i>Nuevo
+        Cargo</a>
 {% endblock %}

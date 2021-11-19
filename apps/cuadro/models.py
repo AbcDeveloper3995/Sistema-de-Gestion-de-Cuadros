@@ -64,7 +64,12 @@ class Cargo(models.Model):
         return item
 
     def __str__(self):
-        return str(self.nombre)
+        if self.nivel_subordinacion == 'OC':
+            return '{0}--{1}'.format(str(self.nombre), 'OFICINA CENTRAL')
+        elif self.provincia != None and self.municipio == None:
+            return '{0}--{1}'.format(str(self.nombre), self.provincia.descripcion)
+        else:
+            return '{0}--{1}--{2}'.format(str(self.nombre), self.provincia.descripcion, self.municipio.descripcion)
 
 class Especialidad(models.Model):
     nombre = models.CharField(verbose_name='Nombre de la especialidad', max_length=255, unique=True, blank=False, null=False)
@@ -88,13 +93,14 @@ class Cuadro(models.Model):
     categoria = models.CharField(verbose_name='Categoria', max_length=200, choices=CHOICE_CATEGORIA)
     nombre = models.CharField(verbose_name='Nombre', max_length=255, blank=False, null=False)
     apellidos = models.CharField(verbose_name='Apellidos', max_length=255, blank=False, null=False)
-    ci = models.BigIntegerField(verbose_name='Carnet de Identidad', unique=True, blank=False, null=False)
+    ci = models.BigIntegerField(verbose_name='Carnet de Identidad', blank=False, null=False)
     anos_experiencia_direccion = models.PositiveIntegerField(verbose_name='Años de experiencia Direccion', blank=True, null=True)
     anos_experiencia_rama = models.PositiveIntegerField(verbose_name='Años de experiencia Rama', blank=True, null=True)
     militancia = models.CharField(verbose_name='Militancia', max_length=50, choices=CHOICE_MILITANCIA, blank=True, null=True)
     sexo = models.CharField(verbose_name='Sexo', max_length=50, choices=CHOICE_SEXO)
     color = models.CharField(verbose_name='Color', max_length=50, choices=CHOICE_COLOR)
     edad = models.PositiveIntegerField(verbose_name='Edad')
+    estado = models.BooleanField(default=True)
 
 
     class Meta:

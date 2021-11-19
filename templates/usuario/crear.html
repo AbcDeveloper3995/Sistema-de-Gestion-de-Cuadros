@@ -4,77 +4,85 @@
 {% block encabezadoForm %}{{ titulo }}{% endblock %}
 
 {% block formulario %}
-    <form method="post" name="cargoForm" id="cargoForm">
+    <form method="post" name="usuarioForm" id="usuarioForm">
         {% csrf_token %}
-        <h4 class="sub-title">{{ form.nombre.label }}</h4>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <div class="input-group input-group-primary">
-                        <span class="input-group-prepend"><label class="input-group-text"><i
-                                class="ik ik-bold"></i></label></span>
-                        {{ form.nombre }}
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-4">
-                <h4 class="sub-title">Nivel de Subordinacion</h4>
+                <h4 class="sub-title">Nombre</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-airplay"></i></label></span>
-                        {{ form.nivel_subordinacion }}
+                        {{ form.name }}
                     </div>
                 </div>
             </div>
             <div class="col-4">
-                <h4 class="sub-title">Provincia</h4>
+                <h4 class="sub-title">Apellidos</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-airplay"></i></label></span>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="sub-title">Nombre de Usuario</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-hard-drive"></i></label></span>
-                        {{ form.provincia }}
+                        {{ form.username }}
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-4">
-                <h4 class="sub-title">Municipio</h4>
+                <h4 class="sub-title">Contraseña</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-fast-forward"></i></label></span>
-                        {{ form.municipio }}
+                        {{ form.password }}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="border-checkbox-section">
-                <div class="border-checkbox-group border-checkbox-group-primary">
-                    {{ form.vacante }}
-                    <label class="border-checkbox-label text-uppercase" for="vacante"><strong>VACANTE</strong></label>
+            <div class="col-4">
+                <h4 class="sub-title">Email</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-fast-forward"></i></label></span>
+                        {{ form.email }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="sub-title">Roles</h4>
+                <div class="form-group">
+                        {{ form.groups }}
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="border-checkbox-section">
-                <div class="border-checkbox-group border-checkbox-group-primary">
-                    {{ form.estado }}
-                    <label class="border-checkbox-label text-uppercase"
-                           for="estadoCargo"><strong>ACTIVO</strong></label>
+        <div class="row">
+            <div class="col-2">
+                <h4 class="sub-title">Imagen</h4>
+                <div class="form-group">
+                        {{ form.image }}
                 </div>
             </div>
         </div>
         <hr>
         <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
-        <a href="{% url 'cuadro:listarCargo' %}" class="btn btn-secondary mr-2"><i
+        <a href="{% url 'usuario:listarUsuario' %}" class="btn btn-secondary mr-2"><i
                 class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
     </form>
 {% endblock %}
 
 {% block js %}
     {{ block.super }}
-    <script src="{% static 'propios/js/cuadro/form.js' %}"></script>
+    <script src="{% static 'propios/js/usuario/form.js' %}"></script>
 {% endblock %}

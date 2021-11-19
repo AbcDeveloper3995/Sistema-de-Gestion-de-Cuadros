@@ -9,11 +9,34 @@ $('.select2').select2({
 let campoNivelSubordinacion = $('#campoNivelSubordinacion');
 let campoEdad = $('#campoEdad');
 let campoCarnet = $('#campoCI');
+let submitCuadroForm = $('#submitCuadroForm');
+let cargo = $('#fk_cargo');
+
 
 //----------------------------------------------VALIDACIONES-------------------------------------------------------------//
 
 
 //-------------------FORMULARIO DE CUADROS--------//
+cargo.on('change', function () {
+    let idCargo = $(this).val();
+    $.ajax({
+        url: '/cuadro/isVacante/',
+        type: 'GET',
+        data: {'cargo': idCargo},
+        dataType: 'json'
+    }).done(function (response) {
+        if (response.vacante === false) {
+            submitCuadroForm.prop('disabled', true);
+            messageError(response.message);
+            return false;
+        } else {
+            submitCuadroForm.prop('disabled', false)
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ': ' + errorThrown);
+    })
+})
+
 $('form[name="cuadroForm"]').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
@@ -110,6 +133,7 @@ $('form[name="cuadroForm"]').bootstrapValidator({
                                 message: 'Los años de experiencia en direccion deben ser menor que 50'
                             }
                         }
+
                         return true;
                     }
                 }
@@ -227,17 +251,17 @@ $('form[name="cargoForm"]').bootstrapValidator({
 campoCarnet.keyup(function () {
     let edad = 0
     let anoCarnetLength = $(this).val().split('');
-    let fragmentoAnoActual = new Date().getFullYear().toString().slice(0,2);
+    let fragmentoAnoActual = new Date().getFullYear().toString().slice(0, 2);
     let anoCarnet = $(this).val();
     let anoActual = new Date().getFullYear().toString();
     if (anoCarnetLength.length === 2) {
-        if(parseInt(anoCarnet) > parseInt(fragmentoAnoActual)){
-            anoCarnet = parseInt('19'+anoCarnet);
+        if (parseInt(anoCarnet) > parseInt(fragmentoAnoActual)) {
+            anoCarnet = parseInt('19' + anoCarnet);
             edad = parseInt(anoActual) - anoCarnet;
             campoEdad[0].value = edad
 
-        }else {
-            anoCarnet = parseInt('20'+anoCarnet);
+        } else {
+            anoCarnet = parseInt('20' + anoCarnet);
             edad = parseInt(anoActual) - anoCarnet;
             campoEdad[0].value = edad
         }

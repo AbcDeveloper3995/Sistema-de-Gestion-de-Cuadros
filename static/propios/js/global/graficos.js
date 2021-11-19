@@ -16,25 +16,12 @@ let graficoColumn = Highcharts.chart('container', {
         }
     },
     title: {
-        text: 'Ventas del año 2020'
-    },
-    subtitle: {
-        text: 'Porcentaje de ventas de prodructos'
+        text: 'Cantidad de cuadros segun el sexo'
     },
     xAxis: {
         categories: [
-            'Enero',
-            'Febrero',
-            'Marzo',
-            'Abril',
-            'Mayo',
-            'Junio',
-            'Julio',
-            'Agosto',
-            'Septiembre',
-            'Octubre',
-            'Noviembre',
-            'Diciembre'
+            'Masculino',
+            'Femenino'
         ],
         crosshair: true
     },
@@ -47,7 +34,7 @@ let graficoColumn = Highcharts.chart('container', {
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -81,7 +68,7 @@ let graficoPie = Highcharts.chart('container-pie', {
         }
     },
     title: {
-        text: 'Procentaje de ventas para el mes de Mayo, 2021'
+        text: 'Porcentaje de cuadros segun la militancia'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

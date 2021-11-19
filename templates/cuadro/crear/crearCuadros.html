@@ -1,4 +1,5 @@
 {% extends 'comun/crear.html' %}
+{% load static %}
 
 {% block encabezadoForm %}{{ titulo }}{% endblock %}
 
@@ -148,9 +149,23 @@
 
             </div>
         </div>
+        <div class="form-group">
+            <div class="border-checkbox-section">
+                <div class="border-checkbox-group border-checkbox-group-primary">
+                    {{ form.estado }}
+                    <label class="border-checkbox-label text-uppercase"
+                           for="estadoCuadro"><strong>ACTIVO</strong></label>
+                </div>
+            </div>
+        </div>
         <hr>
-        <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
+        <button type="submit" id="submitCuadroForm" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
         <a href="{% url 'cuadro:listarCuadro' %}" class="btn btn-secondary mr-2"><i
                 class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
     </form>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/form.js' %}"></script>
 {% endblock %}

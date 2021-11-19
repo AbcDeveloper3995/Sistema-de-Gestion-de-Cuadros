@@ -1,6 +1,6 @@
 {% extends 'comun/listar.html' %}
 
-{% block encabezado_tabla %}
+{% block encabezadoTabla %}
     <i class="fa fa-table"></i> <strong>LISTADO DE ESPECIALIDADES</strong>
 {% endblock %}
 {% block table %}
@@ -35,6 +35,6 @@
     </table>
 {% endblock %}
 
-{% block buttonCrear %}
+{% block buttons %}
 <a href="{% url 'cuadro:crearEspecialidad' %}" type="button" class="btn btn-primary buttonCrear"><i class="fa fa-plus"></i>Nueva Especialidad</a>
 {% endblock %}
