@@ -1,7 +1,13 @@
 {% extends 'comun/crear.html' %}
 {% load static %}
 
-{% block encabezadoForm %}{{ titulo }}{% endblock %}
+{% block encabezadoForm %}
+    {% if action == 'crear' %}
+    <i class="ik ik-user-plus"> {{ titulo }}</i>
+    {% else %}
+        <i class="ik ik-edit "> {{ titulo }}</i>
+    {% endif %}
+{% endblock %}
 
 {% block formulario %}
     <form method="post" enctype="multipart/form-data" name="cuadroForm">
@@ -10,11 +16,14 @@
             <div class="col-4">
                 <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
                 <div class="form-group">
-
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-airplay"></i></label></span>
+                        {% if action == 'crear' %}
                         {{ form.fk_cargo }}
+                        {% else %}
+                        <input class="form-control" readonly>
+                        {% endif %}
                     </div>
                 </div>
             </div>

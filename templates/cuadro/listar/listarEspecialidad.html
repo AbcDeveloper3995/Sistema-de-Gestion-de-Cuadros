@@ -18,14 +18,17 @@
                 <td>
                     <a class="miTippy Acciones" href="{% url 'cuadro:modificarEspecialidad' especialidad.pk %}"
                        type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
-                    <a class="miTippy Acciones" href="#" type="button" onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta especialidad.', 'http://127.0.0.1:8000/cuadro/eliminarEspecialidad/'+{{ especialidad.pk }},{{ especialidad.pk }} )"
-                       title="Eliminar"><i class="fa fa-trash"></i></a></td>
+                    {% if perms.usuario.administrador  or perms.usuario.oficinaCentral %}
+                        <a class="miTippy Acciones" href="#" type="button"
+                           onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta especialidad.', 'http://127.0.0.1:8000/cuadro/eliminarEspecialidad/'+{{ especialidad.pk }},{{ especialidad.pk }} )"
+                           title="Eliminar"><i class="fa fa-trash"></i></a>
+                    {% endif %}
+                </td>
                 <td>{{ especialidad.nombre }}</td>
                 {% if especialidad.estado == True %}
                     <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>
                 {% else %}
-                    <td><a href="#" type="button" title="{{ clasificadorInd.activo }}"><i class="fa fa-times-circle"
-                                                                                          style="color: red"></i></a>
+                    <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a>
                     </td>
                 {% endif %}
 
@@ -36,5 +39,6 @@
 {% endblock %}
 
 {% block buttons %}
-<a href="{% url 'cuadro:crearEspecialidad' %}" type="button" class="btn btn-primary buttonCrear"><i class="fa fa-plus"></i>Nueva Especialidad</a>
+    <a href="{% url 'cuadro:crearEspecialidad' %}" type="button" class="btn btn-primary buttonCrear"><i
+            class="fa fa-plus"></i>Nueva Especialidad</a>
 {% endblock %}

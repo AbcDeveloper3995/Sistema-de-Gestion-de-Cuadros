@@ -9,7 +9,7 @@ from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 
 from apps.cuadro.forms import *
 from apps.cuadro.models import *
-from apps.utils import disabledCargoComoVacante, enableCargoComoVacante
+from apps.utils import disabledCargoComoVacante, enableCargoComoVacante, getCuadros
 
 
 # PROCEDIMIENTO PARA LISTAR CUADROS.
@@ -19,7 +19,7 @@ class listarCuadroView(LoginRequiredMixin, ListView):
     context_object_name = 'cuadros'
 
     def get_queryset(self):
-        query = Cuadro.objects.all()
+        query = getCuadros(self.request.user)
         hora = datetime.datetime.today().hour
         minutos = datetime.datetime.today().minute
         if int(hora) == 8 and int(minutos) == 30:
@@ -52,6 +52,11 @@ class crearCuadroView(LoginRequiredMixin, CreateView):
     form_class = cuadroForm
     success_url = reverse_lazy('cuadro:listarCuadro')
 
+    def get_form_kwargs(self):
+        kwargs = super(crearCuadroView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
@@ -66,6 +71,7 @@ class crearCuadroView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Creacion de Cuadro'
         context['tituloPestaña'] = 'SGPC | Cuadro'
+        context['action'] = 'crear'
         return context
 
 
@@ -75,6 +81,11 @@ class modificarCuadroView(LoginRequiredMixin, UpdateView):
     form_class = cuadroForm
     template_name = 'cuadro/crear/crearCuadros.html'
     success_url = reverse_lazy('cuadro:listarCuadro')
+
+    def get_form_kwargs(self):
+        kwargs = super(modificarCuadroView, self).get_form_kwargs()
+        kwargs.update({'request':self.request})
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -137,6 +148,16 @@ class crearCargoView(LoginRequiredMixin, CreateView):
     model = Cargo
     form_class = cargoForm
     success_url = reverse_lazy('cuadro:listarCargo')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            messages.success(self.request, 'Cargo creado correctamente.')
+            form.save()
+            disabledCargoComoVacante()
+        else:
+            messages.error(self.request, form.errors)
+        return redirect('cuadro:listarCargo')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

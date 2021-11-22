@@ -1,6 +1,7 @@
 from django import template
 
 from apps.cuadro.models import *
+from apps.usuario.models import Usuario
 
 register = template.Library()
 
@@ -33,3 +34,10 @@ def existenVacantes(user):
     if query == 0:
         return False
     return True
+
+# FILTRO PARA OBTENER EL TOTAL DE USUARIOS.
+@register.filter(name='totalUsuarios')
+def totalUsuarios(user):
+    query = Usuario.objects.all().count()
+    return query
+

@@ -124,6 +124,7 @@ class crearUsuarioView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Creacion de usuario'
         context['tituloPestaña'] = 'SGPC | Usuarios'
+        context['action'] = 'crear'
         return context
 
 # PROCEDIMIENTO PARA MODIFICAR USUARIOS.
@@ -137,6 +138,14 @@ class updateUsuarioView(LoginRequiredMixin, UpdateView):
         self.object = self.get_object()
         return super().dispatch(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            messages.success(self.request, 'Usuario modificado correctamente.')
+            form.save()
+        else:
+            messages.error(self.request, form.errors)
+        return redirect('usuario:listarUsuario')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

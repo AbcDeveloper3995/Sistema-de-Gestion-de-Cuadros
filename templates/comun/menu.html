@@ -6,10 +6,11 @@
         <div class="sidebar-header">
             <a class="header-brand" href="{% url 'usuario:home' %}">
                 <div class="logo-img">
-                    <span class="brand-text font-weight-light badge header-brand-img "><img src="{% static 'propios/img/logo.jpg' %}"
-             alt="AdminLTE Logo"
-             class="brand-image  elevation-3"
-             style="width: 135px; border-radius: 10px"></span>
+                    <span class="brand-text font-weight-light badge header-brand-img "><img
+                            src="{% static 'propios/img/logo.jpg' %}"
+                            alt="AdminLTE Logo"
+                            class="brand-image  elevation-3"
+                            style="width: 135px; border-radius: 10px"></span>
                 </div>
             </a>
             <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
@@ -20,21 +21,29 @@
                 <nav id="main-menu-navigation" class="navigation-main">
                     <div class="nav-lavel">DEPARTAMENTO DE CUADRO</div>
                     <div class="nav-item active">
-                        <a href="{% url 'cuadro:listarCuadro' %}"><i class="ik ik-package"></i><span>Cuadros</span> <span
-                                class="badge badge-primary">{{ request.user|totalCuadro }}</span></a>
+                        <a href="{% url 'cuadro:listarCuadro' %}"><i class="ik ik-package"></i><span>Cuadros</span>
+                            <span
+                                    class="badge badge-primary">{{ request.user|totalCuadro }}</span></a>
                     </div>
                     <div class="nav-item">
-                        <a href="{% url 'cuadro:listarEspecialidad' %}"><i class="ik ik-database"></i><span>Especialidad</span> <span
+                        <a href="{% url 'cuadro:listarEspecialidad' %}"><i
+                                class="ik ik-database"></i><span>Especialidad</span> <span
                                 class="badge badge-primary">{{ request.user|totalEspecialidad }}</span></a>
                     </div>
-                    <div class="nav-item">
-                        <a href="{% url 'cuadro:listarCargo' %}"><i class="ik ik-archive"></i><span>Cargos</span> <span
-                                class="badge badge-primary">{{ request.user|totalCargo }}</span></a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="{% url 'usuario:listarUsuario' %}"><i class="ik ik-users"></i><span>Usuarios</span> <span
-                                class="badge badge-primary">0</span></a>
-                    </div>
+                    {% if perms.usuario.administrador  or perms.usuario.oficinaCentral%}
+                        <div class="nav-item">
+                            <a href="{% url 'cuadro:listarCargo' %}"><i class="ik ik-archive"></i><span>Cargos</span>
+                                <span class="badge badge-primary">{{ request.user|totalCargo }}</span></a>
+                        </div>
+
+                    {% endif %}
+                    {% if perms.usuario.administrador %}
+                        <div class="nav-item">
+                            <a href="{% url 'usuario:listarUsuario' %}"><i class="ik ik-users"></i><span>Usuarios</span>
+                                <span class="badge badge-primary">{{ request.user|totalUsuarios }}</span></a>
+                        </div>
+
+                    {% endif %}
                 </nav>
             </div>
         </div>

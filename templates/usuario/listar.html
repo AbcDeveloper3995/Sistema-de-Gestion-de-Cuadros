@@ -11,7 +11,7 @@
             <th rowspan="">Acciones</th>
             <th scope="col">Imagen</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
+            <th scope="col">Apellidos</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Roles</th>
@@ -37,7 +37,7 @@
                 {% if usuario.groups.all %}
                     <td>
                         {% for grupo in usuario.groups.all %}
-                            <span class="badge bg-gradient-navy" style="margin-bottom: 2px">{{ grupo }}</span>
+                            <span class="badge badge-primary" style="margin-bottom: 2px">{{ grupo }}</span>
                         {% endfor %}
                     </td>
                 {% else %}

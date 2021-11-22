@@ -98,10 +98,9 @@
                     <td class="text-center">{{ cuadro.militancia }}</td>
                 {% endif %}
                 {% if cuadro.estado == True %}
-                    <td>activo</td>
+                    <td><span class="badge badge-success">Activo</span> </td>
                 {% else %}
-                    <td>no activo
-                    </td>
+                    <td><span class="badge badge-danger">Inactivo</span></td>
                 {% endif %}
             </tr>
         {% endfor %}
@@ -118,8 +117,8 @@
                 class="ik ik-slash"></i>Nuevo cuadro
         </button>
     {% endif %}
+    {% if perms.usuario.administrador  or perms.usuario.oficinaCentral %}
     <a href="#" type="button" class="btn btn-primary buttonCrear" id="eliminarTodos"><i
             class="fa fa-minus-circle"></i>Eliminar todos</a>
-    <a href="#" type="button" class="btn btn-primary buttonCrear" id="actualizarEdad"><i
-            class="ik ik-refresh-cw"></i>Actualizar Edad</a>
+    {% endif %}
 {% endblock %}

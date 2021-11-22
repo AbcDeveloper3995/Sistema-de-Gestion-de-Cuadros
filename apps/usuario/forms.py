@@ -30,6 +30,30 @@ class usuarioForm(ModelForm):
             'groups': SelectMultiple(attrs={'class': 'form-control select2'}),
         }
 
+    def save(self, commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                grupos = self.cleaned_data['groups']
+                password = self.cleaned_data['password']
+                usuario = form.save(commit=False)
+                if usuario.pk == None:
+                    usuario.set_password(password)
+                else:
+                    usuario = Usuario.objects.get(pk=usuario.pk)
+                    if usuario.password != password:
+                        usuario.set_password(password)
+                usuario.save()
+                usuario.groups.clear()
+                for grupo in grupos:
+                    usuario.groups.add(grupo)
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data
+
 class usuarioProfileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

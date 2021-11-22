@@ -1,10 +1,19 @@
 {% extends 'comun/crear.html' %}
 {% load static %}
 
-{% block encabezadoForm %}{{ titulo }}{% endblock %}
+
+{% block encabezadoForm %}
+    {% if action == 'crear' %}
+    <i class="ik ik-user-plus"> {{ titulo }}</i>
+    {% else %}
+        <i class="ik ik-edit "> {{ titulo }}</i>
+    {% endif %}
+{% endblock %}
+
+
 
 {% block formulario %}
-    <form method="post" name="usuarioForm" id="usuarioForm">
+    <form method="post" name="usuarioForm" id="usuarioForm" enctype="multipart/form-data" >
         {% csrf_token %}
         <div class="row">
             <div class="col-4">
