@@ -18,10 +18,16 @@
         {% for cargo in cargos %}
             <tr>
                 <td>
+                    {% if cargo.estado == True %}
+                    <a class="miTippy Acciones" href="#" name="desactivarCargo" data-id="{{ cargo.pk }}"
+                       type="button" title="Desactivar Cargo"><i class="fa fa-exclamation-triangle ml-15"></i></a>
+                    {% else %}
+                    <a class="miTippy Acciones" href="#" name="activarCargo" data-id="{{ cargo.pk }}"
+                       type="button" title="Activar Cargo"><i class="fa fa-check-circle ml-15"></i></a>
+                    {% endif %}
                     <a class="miTippy Acciones" href="{% url 'cuadro:modificarCargo' cargo.pk %}"
-                       type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
-                    <a class="miTippy Acciones" href="#" type="button"
-                       onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta cargo.', 'http://127.0.0.1:8000/cuadro/eliminarCargo/'+{{ cargo.pk }},{{ cargo.pk }} )"
+                       type="button" title="Modificar"><i class="fa fa-edit"></i></a>
+                    <a class="miTippy Acciones" href="#" type="button" data-id="{{ cargo.id }}" name="eliminarCargo"
                        title="Eliminar"><i class="fa fa-trash"></i></a></td>
                 <td>{{ cargo.nombre }}</td>
                 <td>{{ cargo.nivel_subordinacion }}</td>
@@ -57,6 +63,6 @@
 {% endblock %}
 
 {% block buttons %}
-    <a href="{% url 'cuadro:crearCargo' %}" type="button" class="btn btn-primary buttonCrear"><i class="fa fa-plus"></i>Nuevo
-        Cargo</a>
+    <a href="{% url 'cuadro:crearCargo' %}" type="button" class="btn btn-primary buttonCrear">
+        <i class="fa fa-plus"></i>Nuevo Cargo</a>
 {% endblock %}

@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 
 from apps.cuadro.forms import *
@@ -187,9 +189,8 @@ class eliminarCargoView(LoginRequiredMixin, TemplateView):
         data = {}
         try:
             query = get_object_or_404(Cargo, id=request.GET['id'])
-            query.estado = False
             messages.success(self.request, 'El cargo de ' + query.nombre + ' se ha eliminado correctamente.')
-            query.save()
+            query.delete()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -267,3 +268,66 @@ class isVacanteView(LoginRequiredMixin, TemplateView):
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
+
+# PROCEDIMIENTO PARA DESACTIVAR CARGO.
+'''Si un cargo es desactivado, el cuadro que este ocupando dicho cargo se desactiva automaticamente'''
+class desactivarCargoView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        idCargo = request.GET['id']
+        try:
+            query = get_object_or_404(Cargo, id=idCargo)
+            cuadro = Cuadro.objects.get(fk_cargo__id=idCargo)
+            if query and cuadro:
+                messages.success(self.request, 'El cargo ' + query.nombre + ' y el cuadro ' + cuadro.getFullName() + ' pasaron a ser inactivos.')
+                query.estado = False
+                query.vacante = False
+                cuadro.estado = False
+                query.save()
+                cuadro.save()
+            else:
+                data['error'] = 'Ha ocurrido un error.'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA DESACTIVAR CARGO.
+'''Si un cuadro es desactivado, el cargo que este ocupando pasa a ser vacante'''
+class desactivarCuadroView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        idCuadro = request.GET['id']
+        try:
+            query = get_object_or_404(Cuadro, id=idCuadro)
+            if query and enableCargoComoVacante(query):
+                messages.success(self.request, 'El cuadro ' + query.getFullName() + ' quedo inactivo.')
+                query.estado = False
+                query.save()
+            else:
+                data['error'] = 'Ha ocurrido un error.'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+
+# PROCEDIMIENTO PARA OBTENER LAS COLUMNAS DE UNA SECCION.
+class getMunicipiosView(LoginRequiredMixin, TemplateView):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        codigoProvincia = clasificadorDPA.objects.get(id=request.POST['id']).codigo
+        action = request.POST['action']
+        try:
+            if action == 'getMunicipios':
+                data = [{'id':'', 'text':'------'}]
+                for i in clasificadorDPA.objects.filter(codigo__startswith=codigoProvincia).exclude(codigo__exact=codigoProvincia):
+                    data.append({'id':i.id, 'text':i.descripcion})
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)

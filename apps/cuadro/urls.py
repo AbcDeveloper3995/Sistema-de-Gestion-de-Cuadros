@@ -11,12 +11,15 @@ urlpatterns = [
     path('eliminarCuadro/<int:pk>/', eliminarCuadroView.as_view(), name='eliminarCuadro'),
     path('eliminarTodos/', eliminarCuadroAllView.as_view(), name='eliminarTodos'),
     path('isVacante/', isVacanteView.as_view(), name='isVacante'),
+    path('desactivarCuadro/<int:pk>/', desactivarCuadroView.as_view(), name='desactivarCuadro'),
+    path('getMunicipios/', getMunicipiosView.as_view(), name='getMunicipios'),
 
 # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),
     path('crearCargo/', crearCargoView.as_view(), name='crearCargo'),
     path('modificarCargo/<int:pk>/', modificarCargoView.as_view(), name='modificarCargo'),
     path('eliminarCargo/<int:pk>/', eliminarCargoView.as_view(), name='eliminarCargo'),
+    path('desactivarCargo/<int:pk>/', desactivarCargoView.as_view(), name='desactivarCargo'),
 
 # ESPECIALIDAD
     path('listarEspecialidad', listarEspecialidadView.as_view(), name='listarEspecialidad'),

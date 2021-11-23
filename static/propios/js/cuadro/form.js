@@ -6,12 +6,13 @@ $('.select2').select2({
     placeholder: 'Seleccione una opcion'
 });
 
-let campoNivelSubordinacion = $('#campoNivelSubordinacion');
+let campoNivelSubordinacion = $('select[id="campoNivelSubordinacion"]');
 let campoEdad = $('#campoEdad');
 let campoCarnet = $('#campoCI');
 let submitCuadroForm = $('#submitCuadroForm');
 let cargo = $('#fk_cargo');
-
+let selectpProvincia = $('select[id="campoProvincia"]');
+let selectpMunicipio = $('select[id="campoMunicipio"]');
 
 //----------------------------------------------VALIDACIONES-------------------------------------------------------------//
 
@@ -271,28 +272,49 @@ campoCarnet.keyup(function () {
 //---VALIDACION DE DEPENDENCIA DE LOS CAMPOS PROVINCIA Y MUNICIPIO SEGUN LO SELECCIONADO EN EL CAMPPO NIVEL DE SUBORDINACION
 campoNivelSubordinacion.on('change', function () {
     if (campoNivelSubordinacion[0].value == 'OC') {
-        $('#campoProvincia').prop('disabled', true);
-        $('#campoMunicipio').prop('disabled', true);
+        selectpProvincia.prop('disabled', true);
+        selectpMunicipio.prop('disabled', true);
     }
     if (campoNivelSubordinacion[0].value == 'P') {
-        $('#campoProvincia').prop('disabled', false);
-        $('#campoMunicipio').prop('disabled', true);
+        selectpProvincia.prop('disabled', false);
+        selectpMunicipio.prop('disabled', true);
     }
     if (campoNivelSubordinacion[0].value == 'M') {
-        $('#campoProvincia').prop('disabled', false);
-        $('#campoMunicipio').prop('disabled', false);
+        selectpProvincia.prop('disabled', false);
+        selectpMunicipio.prop('disabled', false);
     }
 })
 
+//---------------------------PROCEDIMIENTO PARA SELECT ENCADENADOS (PROVINCIA-MUNICIPIO)----------------------------//
 
-
-
-
-
-
-
-
-
+selectpProvincia.on('change', function (e) {
+    let id = $(this).val();
+    let options = '<option value="">--------</option>';
+    options += '<option value="">---------</option>';
+    if(id==''){
+        selectpMunicipio.html(options)
+    }
+    $.ajax({
+        url: '/cuadro/getMunicipios/',
+        type: 'POST',
+        data: {
+            'action': 'getMunicipios',
+            'id': id
+        },
+        dataType: 'json'
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            selectpMunicipio.html('').select2({
+                theme: "bootstrap4",
+                language: 'es',
+                data: data
+            });
+            return false
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ' : ' + errorThrown)
+    });
+});
 
 
 

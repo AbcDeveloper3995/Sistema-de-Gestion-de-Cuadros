@@ -2,15 +2,25 @@ from apps.cuadro.models import Cargo, Cuadro
 
 
 def disabledCargoComoVacante():
-    cuadro = Cuadro.objects.last()
-    cargo = Cargo.objects.get(id=cuadro.fk_cargo.id)
-    cargo.vacante = False
-    cargo.save()
+    try:
+        cuadro = Cuadro.objects.last()
+        cargo = Cargo.objects.get(id=cuadro.fk_cargo.id)
+        cargo.vacante = False
+        cargo.save()
+        return True
+    except:
+        return False
 
 def enableCargoComoVacante(cuadro):
-    cargo = Cargo.objects.get(id=cuadro.fk_cargo.id)
-    cargo.vacante = True
-    cargo.save()
+    try:
+        cargo = Cargo.objects.get(id=cuadro.fk_cargo.id)
+        if cargo.estado == True:
+            cargo.vacante = True
+            cargo.save()
+            return True
+    except:
+        return False
+
 
 
 # FUNCION PARA OBTENER LOS CUADROS TENIENDO EN CUENTA LOS PERMISOS DE USUARIOS.

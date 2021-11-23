@@ -19,8 +19,7 @@
                     <a class="miTippy Acciones" href="{% url 'cuadro:modificarEspecialidad' especialidad.pk %}"
                        type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
                     {% if perms.usuario.administrador  or perms.usuario.oficinaCentral %}
-                        <a class="miTippy Acciones" href="#" type="button"
-                           onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar esta especialidad.', 'http://127.0.0.1:8000/cuadro/eliminarEspecialidad/'+{{ especialidad.pk }},{{ especialidad.pk }} )"
+                        <a class="miTippy Acciones" href="#" type="button" data-id="{{ especialidad.id }}" name="especialidadCuadro"
                            title="Eliminar"><i class="fa fa-trash"></i></a>
                     {% endif %}
                 </td>

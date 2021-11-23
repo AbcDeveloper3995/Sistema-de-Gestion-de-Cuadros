@@ -60,12 +60,14 @@ class cuadroForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.showCargoSegunUsuario()
         self.fields['fk_especialidad'].queryset = Especialidad.objects.filter(estado=True)
+        if self.instance.pk and self.instance.fk_cargo:
+            del self.fields['fk_cargo']
 
     class Meta:
         model = Cuadro
         fields = '__all__'
         widgets = {
-            'fk_cargo': Select(attrs={'class': 'form-control select2', 'id': 'fk_cargo'}),
+            'fk_cargo': Select(attrs={'class': 'form-control select2', 'id':'fk_cargo'}),
             'fk_especialidad': Select(attrs={'class': 'form-control select2', 'id': 'fk_especialidad'}),
             'categoria': Select(attrs={'class': 'form-control select2'}),
             'nombre': TextInput(attrs={'class':'form-control','placeholder':'Ingrese un nombre'}),

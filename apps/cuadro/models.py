@@ -112,6 +112,9 @@ class Cuadro(models.Model):
         item = model_to_dict(self)
         return item
 
+    def getFullName(self):
+        return ' {0} {1}'.format(self.nombre, self.apellidos)
+
     def __str__(self):
         return 'Cuadro: {0}-{1}, {2}'.format(self.nombre, self.ci, self.fk_cargo)
 

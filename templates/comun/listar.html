@@ -26,12 +26,12 @@
         </div>
         <div class="card-body p-0 table-border-style">
             <div class="table-responsive">
-
-            {% block buttons %}
-            {% endblock %}
                 {% block table %}
                 {% endblock %}
             </div>
+            <hr>
+            {% block buttons %}
+            {% endblock %}
         </div>
     </div>
     {% block contentExtra %}

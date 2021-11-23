@@ -3,7 +3,7 @@
 
 {% block encabezadoForm %}
     {% if action == 'crear' %}
-    <i class="ik ik-user-plus"> {{ titulo }}</i>
+        <i class="ik ik-user-plus"> {{ titulo }}</i>
     {% else %}
         <i class="ik ik-edit "> {{ titulo }}</i>
     {% endif %}
@@ -12,22 +12,24 @@
 {% block formulario %}
     <form method="post" enctype="multipart/form-data" name="cuadroForm">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-4">
-                <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
-                <div class="form-group">
-                    <div class="input-group input-group-primary">
+        {% if action == 'crear' %}
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
+                    <div class="form-group">
+                        <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-airplay"></i></label></span>
-                        {% if action == 'crear' %}
-                        {{ form.fk_cargo }}
-                        {% else %}
-                        <input class="form-control" readonly>
-                        {% endif %}
+                            {{ form.fk_cargo }}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+        {% else %}
+            {{ form.fk_cargo }}
+        {% endif %}
+        <div class="row">
+            <div class="col-6">
                 <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
                 <div class="form-group">
 
@@ -38,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-6">
                 <h4 class="sub-title">{{ form.categoria.label }}</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
@@ -158,17 +160,9 @@
 
             </div>
         </div>
-        <div class="form-group">
-            <div class="border-checkbox-section">
-                <div class="border-checkbox-group border-checkbox-group-primary">
-                    {{ form.estado }}
-                    <label class="border-checkbox-label text-uppercase"
-                           for="estadoCuadro"><strong>ACTIVO</strong></label>
-                </div>
-            </div>
-        </div>
         <hr>
-        <button type="submit" id="submitCuadroForm" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
+        <button type="submit" id="submitCuadroForm" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar
+        </button>
         <a href="{% url 'cuadro:listarCuadro' %}" class="btn btn-secondary mr-2"><i
                 class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
     </form>
