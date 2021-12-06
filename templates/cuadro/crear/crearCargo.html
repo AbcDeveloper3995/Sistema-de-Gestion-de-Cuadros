@@ -12,14 +12,14 @@
 {% block formulario %}
     <form method="post" name="cargoForm" id="cargoForm">
         {% csrf_token %}
-        <h4 class="sub-title">{{ form.nombre.label }}</h4>
         <div class="row">
             <div class="col-sm-12">
+                 <h4 class="sub-title">Nombre</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
-                                class="ik ik-bold"></i></label></span>
-                        {{ form.nombre }}
+                                class="ik ik-fast-forward"></i></label></span>
+                        {{ form.fk_clasificador_cargo_cuadro }}
                     </div>
                 </div>
             </div>
@@ -61,6 +61,14 @@
                 <div class="border-checkbox-group border-checkbox-group-primary">
                     {{ form.vacante }}
                     <label class="border-checkbox-label text-uppercase" for="vacante"><strong>VACANTE</strong></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="border-checkbox-section">
+                <div class="border-checkbox-group border-checkbox-group-primary">
+                    {{ form.estado }}
+                    <label class="border-checkbox-label text-uppercase" for="estadoCargo"><strong>Activo</strong></label>
                 </div>
             </div>
         </div>

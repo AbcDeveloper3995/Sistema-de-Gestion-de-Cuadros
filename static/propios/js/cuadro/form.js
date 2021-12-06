@@ -222,16 +222,11 @@ $('form[name="cargoForm"]').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        nombre: {
-            message: 'El nombre no es valido',
+        fk_clasificador_cargo_cuadro: {
             validators: {
                 notEmpty: {
-                    message: 'El nombre es requerido'
+                    message: 'Campo requerido. Debe seleccionar una opcion'
                 },
-                regexp: {
-                    regexp: /^[a-zA-ZñÑáéíóú,.-_ ]+$/,
-                    message: 'El nombre no es valido'
-                }
 
             }
         },

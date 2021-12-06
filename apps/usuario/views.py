@@ -47,6 +47,13 @@ class homeView(LoginRequiredMixin, TemplateView):
                     'colorByPoint':True,
                     'data':self.getGraficoColumn(),
                 }
+            elif action == 'getGraficoCargoCuadro':
+                data = {
+                    'name':'Cantidad',
+                    'showInLegend': False,
+                    'colorByPoint':True,
+                    'data':self.getGraficoCargoCuadro(),
+                }
             elif action == 'getGraficoPie':
                 data = {
                     'name': 'Porcentaje',
@@ -68,7 +75,19 @@ class homeView(LoginRequiredMixin, TemplateView):
             data.append(cantFemeninos)
         except:
             pass
-        print(data)
+        return data
+
+    def getGraficoCargoCuadro(self):
+        data = []
+        try:
+            cantDirectivoSuerior = Cuadro.objects.filter(categoria__exact='DS').count()
+            cantDirectivoIntermedio = Cuadro.objects.filter(categoria__exact='DI').count()
+            cantEjecutivo = Cuadro.objects.filter(categoria__exact='E').count()
+            data.append(cantDirectivoSuerior)
+            data.append(cantDirectivoIntermedio)
+            data.append(cantEjecutivo)
+        except:
+            pass
         return data
 
     def getGraficoPie(self):

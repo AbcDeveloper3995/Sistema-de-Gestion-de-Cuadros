@@ -42,7 +42,9 @@
                             <a href="{% url 'usuario:listarUsuario' %}"><i class="ik ik-users"></i><span>Usuarios</span>
                                 <span class="badge badge-primary">{{ request.user|totalUsuarios }}</span></a>
                         </div>
-
+                        <div class="nav-item">
+                            <a href="{% url 'cuadro:listarNomencladorCargos' %}"><i class="fa fa-cogs"></i><span>Nomenclador Cargo</span></a>
+                        </div>
                     {% endif %}
                 </nav>
             </div>

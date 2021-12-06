@@ -13,7 +13,7 @@ class cargoForm(ModelForm):
         model = Cargo
         fields = '__all__'
         widgets = {
-            'nombre': TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el nombre del cargo'}),
+            'fk_clasificador_cargo_cuadro': Select(attrs={'class': 'form-control select2', 'id':'campoNombreCargo'}),
             'nivel_subordinacion': Select(attrs={'class': 'form-control select2', 'id':'campoNivelSubordinacion'}),
             'provincia': Select(attrs={'class': 'form-control select2', 'id':'campoProvincia'}),
             'municipio': Select(attrs={'class': 'form-control select2', 'id':'campoMunicipio'}),
@@ -23,19 +23,19 @@ class cargoForm(ModelForm):
 
     def clean(self):
         cleaned = super().clean()
-        nombre = cleaned['nombre']
+        nombre = cleaned['fk_clasificador_cargo_cuadro']
         nivelSubordinacion = cleaned['nivel_subordinacion']
         provincia = cleaned['provincia']
         municipio = cleaned['municipio']
-        if nivelSubordinacion == 'OC' and Cargo.objects.filter(nombre=nombre, nivel_subordinacion=nivelSubordinacion).exists():
+        if nivelSubordinacion == 'OC' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre).exists():
             self._errors['error'] = self._errors.get('error', self.error_class())
             self._errors['error'].append('El cargo a registrar ya existe a ese nivel.')
             return cleaned
-        elif nivelSubordinacion == 'P' and Cargo.objects.filter(nombre=nombre, nivel_subordinacion=nivelSubordinacion, provincia=provincia).exists():
+        elif nivelSubordinacion == 'P' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre, provincia=provincia).exists():
             self._errors['error'] = self._errors.get('error', self.error_class())
             self._errors['error'].append('En la provincia ya existe ese cargo.')
             return cleaned
-        elif nivelSubordinacion == 'P' and Cargo.objects.filter(nombre=nombre, nivel_subordinacion=nivelSubordinacion, provincia=provincia, municipio=municipio).exists():
+        elif nivelSubordinacion == 'M' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre, provincia=provincia, municipio=municipio).exists():
             self._errors['error'] = self._errors.get('error', self.error_class())
             self._errors['error'].append('Ya existe ese cargo en el municipio.')
             return cleaned
@@ -122,3 +122,16 @@ class cuadroForm(ModelForm):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(provincia__codigo__exact=35, estado=True)
         elif self.request.user.has_perm('usuario.40'):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(provincia__codigo__exact=40, estado=True)
+
+
+class nomencladorCargosForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = ClasificadorCargoCuadro
+        fields = '__all__'
+        widgets = {
+            'codigo': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un codigo'}),
+            'descripcion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese una descripcion'}),
+        }

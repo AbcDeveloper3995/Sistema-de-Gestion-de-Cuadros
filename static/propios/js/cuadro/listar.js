@@ -3,6 +3,7 @@ $('#tblCargos').dataTable({});
 $('#tblEspecialidad').dataTable({});
 
 let tblCuadro = $('#tblCuadro').DataTable({
+    ordering : false,
     dom: "Bfrtip",
     buttons: {
         dom: {
@@ -29,6 +30,7 @@ let eliminarCargo = $('a[name="eliminarCargo"]');
 let eliminarEspecialidad = $('a[name="eliminarEspecialidad"]');
 let eliminarTodos = $('a[name="eliminarTodos"]');
 let desactivarCargo = $('a[name="desactivarCargo"]');
+let activarCargo = $('a[name="activarCargo"]');
 let desactivarCuadro = $('a[name="desactivarCuadro"]');
 
 
@@ -116,11 +118,17 @@ eliminarTodos.on('click', function () {
 });
 
 
-//--------------------------------PROCEDIMIENTO PARA DESACTIVAR UN CARGO-------------------------------------------//
+//--------------------------------PROCEDIMIENTO PARA DESACTIVAR Y ACTIVAR UN CARGO-------------------------------------------//
 desactivarCargo.on('click', function () {
     let idCargo = $(this).data('id');
     let url = 'http://127.0.0.1:8000/cuadro/desactivarCargo/' + idCargo;
     notificacion('Notificacion', 'Estas seguro desea desactivar este cargo ?', url, idCargo)
+});
+
+activarCargo.on('click', function () {
+    let idCargo = $(this).data('id');
+    let url = 'http://127.0.0.1:8000/cuadro/activarCargo/' + idCargo;
+    notificacion('Notificacion', 'Estas seguro desea activar este cargo ?', url, idCargo)
 });
 
 
@@ -132,3 +140,48 @@ desactivarCuadro.on('click', function () {
 });
 
 
+//---------------------------------PROCEDIMIENTO PARA MANDAR A REALIZAR LAS IMPORTACIONES--------------------------------//
+
+
+                               //--------ALGUNAS VALIDACIONES----------//
+const habilitarImportacion = (campo, boton) => {
+    campo.on('change', function () {
+    boton.prop('disabled', this.files.length==0);
+})
+};
+
+habilitarImportacion($('input[name="datosNomencladorCargos"]'),$('button[id="datosNomencladorCargos"]'));
+
+const importar = (formulario, url) => {
+
+    formulario.on('submit', function (e) {
+        e.preventDefault();
+        let campos = new FormData(this);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: campos,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            if (data.hasOwnProperty('error')) {
+                toastr.error(data.error, 'Error', {
+                    progressBar: true,
+                    closeButton: true,
+                    "timeOut": "5000",
+                });
+            } else {
+                window.location.reload()
+
+            }
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            alert(textStatus + ' : ' + errorThrown)
+        })
+    })
+};
+
+                                 //-----------PARA ENTIDAD-----------//
+let formImportarCI = $('form[name="formImportarNomencladorCargos"]');
+importar(formImportarCI,'/cuadro/importarNomencladorCargos/');

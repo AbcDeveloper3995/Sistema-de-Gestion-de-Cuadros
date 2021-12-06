@@ -47,6 +47,56 @@ let graficoColumn = Highcharts.chart('container', {
     },
 });
 
+let graficoCargoCuadro = Highcharts.chart('graficoCargoCuadro', {
+    chart: {
+        type: 'column'
+    },
+    lang: {
+        downloadXLS: "Eportar como Excel",
+        downloadPDF: "Exportar como PDF",
+        printChart: "Imprimir"
+    },
+    exporting: {
+        menuItemDefinitions: {},
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS', 'downloadPDF', 'separator', 'printChart']
+            }
+        }
+    },
+    title: {
+        text: 'Cargos de cuadro'
+    },
+    xAxis: {
+        categories: [
+            'Directivo Superior',
+            'Directivo Intermedio',
+            'Ejecutivo'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+});
+
 let graficoPie = Highcharts.chart('container-pie', {
     chart: {
         plotBackgroundColor: null,
@@ -107,6 +157,23 @@ const gragicoColumnAjax = () => {
     })
 };
 
+const gragicoCargoCuadroAjax = () => {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'action': 'getGraficoCargoCuadro'},
+        dataType: 'json',
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            graficoCargoCuadro.addSeries(data);
+            return false
+        }
+        messageError(data.error)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ':' + errorThrown)
+    })
+};
+
 const gragicoPieAjax = () => {
     $.ajax({
         url: window.location.pathname,
@@ -125,5 +192,7 @@ const gragicoPieAjax = () => {
 };
 
 gragicoColumnAjax();
+
+gragicoCargoCuadroAjax();
 
 gragicoPieAjax()

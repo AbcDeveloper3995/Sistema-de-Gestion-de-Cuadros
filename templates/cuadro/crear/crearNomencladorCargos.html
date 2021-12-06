@@ -1,0 +1,47 @@
+{% extends 'comun/crear.html' %}
+{% load static %}
+
+{% block encabezadoForm %}
+    {% if action == 'crear' %}
+    <i class="ik ik-user-plus"> {{ titulo }}</i>
+    {% else %}
+        <i class="ik ik-edit "> {{ titulo }}</i>
+    {% endif %}
+{% endblock %}
+
+{% block formulario %}
+    <form method="post" name="nomencladorCargosForm">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.codigo.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-bold"></i></label></span>
+                        {{ form.codigo }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <h4 class="sub-title">{{ form.descripcion.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-bold"></i></label></span>
+                        {{ form.descripcion }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-save "></i> Aceptar</button>
+        <a href="{% url 'cuadro:listarNomencladorCargos' %}" class="btn btn-secondary mr-2"><i
+                class="fa fa-arrow-alt-circle-left "></i>Cancelar</a>
+    </form>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/form.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'comun/listar.html' %}
+
+{% block encabezadoTabla %}
+    <i class="fa fa-table"></i> <strong>NOMENCLADORES DE CARGOS</strong>
+{% endblock %}
+{% block table %}
+    <table class="table table-hover table-striped table-bordered" id="tblNomencladorCargos">
+        <thead>
+        <tr>
+            <th>Acciones</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for nomenclador in nomencladorCargos %}
+            <tr>
+                <td>
+                    <a class="miTippy Acciones" href="{% url 'cuadro:modificarNomencladorCargos' nomenclador.pk %}"
+                       type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
+                    <a class="miTippy Acciones" href="#" type="button" data-id="{{ especialidad.id }}"
+                       name="especialidadCuadro"
+                       title="Eliminar"><i class="fa fa-trash"></i></a>
+                </td>
+                <td>{{ nomenclador.codigo }}</td>
+                <td>{{ nomenclador.descripcion }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block buttons %}
+    <a href="{% url 'cuadro:crearNomencladorCargos' %}" type="button" class="btn btn-primary buttonCrear"><i
+            class="fa fa-plus"></i>Nueva Nomenclador</a>
+    <form method="post" name="formImportarNomencladorCargos" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="importar">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" name="datosNomencladorCargos" accept=".xls,.xlsx">
+                </div>
+                <div class="input-group-append">
+                    <button type="submit" class="input-group-text"
+                            style="border-radius: 5px" id="datosNomencladorCargos" disabled><i class="fa fa-upload ">
+                        Cargar</i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

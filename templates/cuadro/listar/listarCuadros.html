@@ -68,7 +68,7 @@
                        type="button" title="Modificar"><i class="fa fa-edit"></i></a>
                     <a class="miTippy Acciones" href="#" data-id="{{ cuadro.id }}" name="eliminarCuadro"
                        type="button" title="Eliminar"><i class="fa fa-trash"></i></a></td>
-                <td class="text-center">{{ cuadro.fk_cargo.nombre }}</td>
+                <td class="text-center">{{ cuadro.fk_cargo.fk_clasificador_cargo_cuadro.descripcion }}</td>
                 <td class="text-center">{{ cuadro.fk_cargo.nivel_subordinacion }}</td>
                 {% if cuadro.fk_cargo.provincia == None %}
                     <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
@@ -104,9 +104,9 @@
                     <td class="text-center">{{ cuadro.militancia }}</td>
                 {% endif %}
                 {% if cuadro.estado == True %}
-                    <td><span class="badge badge-success">Activo</span></td>
+                    <td><span class="badge badge-success" title="ACTIVO">1</span></td>
                 {% else %}
-                    <td><span class="badge badge-danger">Inactivo</span></td>
+                    <td><span class="badge badge-danger" title="INACTIVO">0</span></td>
                 {% endif %}
             </tr>
         {% endfor %}

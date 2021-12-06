@@ -29,7 +29,7 @@
                        type="button" title="Modificar"><i class="fa fa-edit"></i></a>
                     <a class="miTippy Acciones" href="#" type="button" data-id="{{ cargo.id }}" name="eliminarCargo"
                        title="Eliminar"><i class="fa fa-trash"></i></a></td>
-                <td>{{ cargo.nombre }}</td>
+                <td>{{ cargo.fk_clasificador_cargo_cuadro.descripcion }}</td>
                 <td>{{ cargo.nivel_subordinacion }}</td>
                 {% if cargo.provincia.descripcion == None %}
                     <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>

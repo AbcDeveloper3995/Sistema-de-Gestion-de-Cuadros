@@ -1,5 +1,7 @@
 import datetime
 
+from tablib import Dataset
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
@@ -134,7 +136,7 @@ class listarCargoView(LoginRequiredMixin, ListView):
     model = Cargo
 
     def get_queryset(self):
-        return Cargo.objects.all()
+        return Cargo.objects.all().order_by('fk_clasificador_cargo_cuadro__codigo')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -156,7 +158,6 @@ class crearCargoView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             messages.success(self.request, 'Cargo creado correctamente.')
             form.save()
-            disabledCargoComoVacante()
         else:
             messages.error(self.request, form.errors)
         return redirect('cuadro:listarCargo')
@@ -270,7 +271,7 @@ class isVacanteView(LoginRequiredMixin, TemplateView):
 
 
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
-'''Si un cargo es desactivado, el cuadro que este ocupando dicho cargo se desactiva automaticamente'''
+'''Si un cargo es desactivado deja de ser vacante y ademas el cuadro que este ocupando dicho cargo se desactiva automaticamente'''
 class desactivarCargoView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -280,7 +281,7 @@ class desactivarCargoView(LoginRequiredMixin, TemplateView):
             query = get_object_or_404(Cargo, id=idCargo)
             cuadro = Cuadro.objects.get(fk_cargo__id=idCargo)
             if query and cuadro:
-                messages.success(self.request, 'El cargo ' + query.nombre + ' y el cuadro ' + cuadro.getFullName() + ' pasaron a ser inactivos.')
+                messages.success(self.request, 'El cargo ' + query.fk_clasificador_cargo_cuadro.descripcion + ' y el cuadro ' + cuadro.getFullName() + ' pasaron a ser inactivos.')
                 query.estado = False
                 query.vacante = False
                 cuadro.estado = False
@@ -292,6 +293,31 @@ class desactivarCargoView(LoginRequiredMixin, TemplateView):
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
+
+
+# PROCEDIMIENTO PARA DESACTIVAR CARGO.
+'''Si un cargo es activado, pasa ha estar vacante tambien'''
+class activarCargoView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        idCargo = request.GET['id']
+        try:
+            query = get_object_or_404(Cargo, id=idCargo)
+            if query:
+                messages.success(self.request, 'El cargo ' + query.fk_clasificador_cargo_cuadro.descripcion + ' se activo correctamente.')
+                query.estado = True
+                query.vacante = True
+                query.save()
+            else:
+                data['error'] = 'Ha ocurrido un error.'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+
+
+
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
 '''Si un cuadro es desactivado, el cargo que este ocupando pasa a ser vacante'''
 class desactivarCuadroView(LoginRequiredMixin, TemplateView):
@@ -301,7 +327,8 @@ class desactivarCuadroView(LoginRequiredMixin, TemplateView):
         idCuadro = request.GET['id']
         try:
             query = get_object_or_404(Cuadro, id=idCuadro)
-            if query and enableCargoComoVacante(query):
+            if query:
+                enableCargoComoVacante(query)
                 messages.success(self.request, 'El cuadro ' + query.getFullName() + ' quedo inactivo.')
                 query.estado = False
                 query.save()
@@ -312,7 +339,7 @@ class desactivarCuadroView(LoginRequiredMixin, TemplateView):
         return JsonResponse(data, safe=False)
 
 
-# PROCEDIMIENTO PARA OBTENER LAS COLUMNAS DE UNA SECCION.
+# PROCEDIMIENTO PARA OBTENER LOS MUNICIPIOS DE UNA PROVINCIA.
 class getMunicipiosView(LoginRequiredMixin, TemplateView):
 
     @method_decorator(csrf_exempt)
@@ -327,7 +354,78 @@ class getMunicipiosView(LoginRequiredMixin, TemplateView):
             if action == 'getMunicipios':
                 data = [{'id':'', 'text':'------'}]
                 for i in clasificadorDPA.objects.filter(codigo__startswith=codigoProvincia).exclude(codigo__exact=codigoProvincia):
-                    data.append({'id':i.id, 'text':i.descripcion})
+                    data.append({'id':i.id, 'text':i.getCodigoDescricion()})
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+
+# PROCEDIMIENTO PARA LISTAR NOMENCLADOR DE CARGOS.
+class listarNomencladorCargosView(LoginRequiredMixin, ListView):
+    template_name = 'cuadro/listar/listarNomencladorCargos.html'
+    model = ClasificadorCargoCuadro
+
+    def get_queryset(self):
+        return ClasificadorCargoCuadro.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['nomencladorCargos'] = self.get_queryset()
+        context['titulo'] = 'Nomencladdor de Cargos'
+        context['tituloPestaña'] = 'SGPC | Cuadros'
+        return context
+
+
+# PROCEDIMIENTO PARA CREAR NOMENCLADOR DE CARGOS.
+class crearNomencladorCargosView(LoginRequiredMixin, CreateView):
+    template_name = 'cuadro/crear/crearNomencladorCargos.html'
+    model = ClasificadorCargoCuadro
+    form_class = nomencladorCargosForm
+    success_url = reverse_lazy('cuadro:listarNomencladorCargos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Creacion de un Nomenclador de Cargos'
+        context['tituloPestaña'] = 'SGPC | Cuadros'
+        return context
+
+
+# PROCEDIMIENTO PARA IMPORTAR  LOS NOMENCLADORES DE CARGOS
+class importarNomencladorCargosView(LoginRequiredMixin, TemplateView):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        file = request.FILES['datosNomencladorCargos']
+        dataset = Dataset()
+        try:
+            if not file.name.endswith('xlsx'):
+                data['error'] = 'El formato del documento no es valido.'
+            else:
+                naeImportado = dataset.load(file.read(), format='xlsx')
+                for i in naeImportado:
+                    nae = ClasificadorCargoCuadro(
+                        i[0], i[0], i[1]
+                    )
+                    nae.save()
+                data['exito'] = 'Los Nomencladores de cargos se han importado correctamente.'
+        except Exception as e:
+            data['error'] = 'Ha ocurrido un error fatal al importar. Contacte con el administrador'
+        return JsonResponse(data, safe=False)
+
+
+# PROCEDIMIENTO PARA MODIFICAR NOMENCLADOR CARGO.
+class modificarNomencladorCargosView(LoginRequiredMixin, UpdateView):
+    model = ClasificadorCargoCuadro
+    form_class = nomencladorCargosForm
+    template_name = 'cuadro/crear/crearNomencladorCargos.html'
+    success_url = reverse_lazy('cuadro:listarNomencladorCargos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Edicion de un Nomenclador'
+        context['tituloPestaña'] = 'SGPC | Cuadros'
+        return context

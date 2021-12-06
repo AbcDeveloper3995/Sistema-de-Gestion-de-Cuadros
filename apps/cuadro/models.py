@@ -43,11 +43,30 @@ class clasificadorDPA(models.Model):
         verbose_name_plural = 'Clasificador_DPA'
         ordering = ['codigo']
 
+    def getCodigoDescricion(self):
+        return '{0}--{1}'.format(str(self.codigo), self.descripcion)
+
+    def __str__(self):
+        return '{0}--{1}'.format(str(self.codigo), self.descripcion)
+
+class ClasificadorCargoCuadro(models.Model):
+    codigo = models.CharField(verbose_name='Codigo', max_length=3, unique=True,  blank=False, null=False)
+    descripcion = models.CharField(verbose_name='Descripcion', max_length=200, blank=True, null=True)
+
+    class Meta:
+        db_table = 'Clasificador_Cargo_Cuadro'
+        verbose_name = 'Clasificador_Cargo_Cuadro'
+        verbose_name_plural = 'Clasificador_Cargos_Cuadros'
+        ordering = ['codigo']
+
+    def getCodigoDescricion(self):
+        return '{0}--{1}'.format(str(self.codigo), self.descripcion)
+
     def __str__(self):
         return '{0}--{1}'.format(str(self.codigo), self.descripcion)
 
 class Cargo(models.Model):
-    nombre = models.CharField(verbose_name='Nombre del cargo', max_length=255, blank=False, null=False)
+    fk_clasificador_cargo_cuadro = models.ForeignKey(ClasificadorCargoCuadro, verbose_name='Nombre del Cargo', blank=True, null=True, on_delete=models.CASCADE)
     nivel_subordinacion = models.CharField(verbose_name='Nivel de subordinacion', max_length=50, choices=CHOICE_NIVEL_SUBORDINACION)
     provincia = models.ForeignKey(clasificadorDPA, verbose_name='Provincia', blank=True, null=True, related_name='provincia', on_delete=models.CASCADE)
     municipio = models.ForeignKey(clasificadorDPA, verbose_name='Municipio', blank=True, null=True, related_name='municipio', on_delete=models.CASCADE)
@@ -65,11 +84,11 @@ class Cargo(models.Model):
 
     def __str__(self):
         if self.nivel_subordinacion == 'OC':
-            return '{0}--{1}'.format(str(self.nombre), 'OFICINA CENTRAL')
+            return '{0}--{1}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), 'OFICINA CENTRAL')
         elif self.provincia != None and self.municipio == None:
-            return '{0}--{1}'.format(str(self.nombre), self.provincia.descripcion)
+            return '{0}--{1}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), self.provincia.descripcion)
         else:
-            return '{0}--{1}--{2}'.format(str(self.nombre), self.provincia.descripcion, self.municipio.descripcion)
+            return '{0}--{1}--{2}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), self.provincia.descripcion, self.municipio.descripcion)
 
 class Especialidad(models.Model):
     nombre = models.CharField(verbose_name='Nombre de la especialidad', max_length=255, unique=True, blank=False, null=False)
@@ -88,7 +107,7 @@ class Especialidad(models.Model):
         return str(self.nombre)
 
 class Cuadro(models.Model):
-    fk_cargo = models.OneToOneField(Cargo, verbose_name='Cargo', blank=True, null=True, on_delete=models.CASCADE)
+    fk_cargo = models.ForeignKey(Cargo, verbose_name='Cargo', blank=True, null=True, on_delete=models.CASCADE)
     fk_especialidad = models.ForeignKey(Especialidad, verbose_name='Especialidad', blank=True, null=True, on_delete=models.CASCADE)
     categoria = models.CharField(verbose_name='Categoria', max_length=200, choices=CHOICE_CATEGORIA)
     nombre = models.CharField(verbose_name='Nombre', max_length=255, blank=False, null=False)
