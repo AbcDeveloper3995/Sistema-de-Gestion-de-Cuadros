@@ -243,6 +243,41 @@ $('form[name="cargoForm"]').bootstrapValidator({
 });
 
 
+$('form[name="nomencladorCargosForm"]').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+        valid: 'fa fa-check-circle',
+        invalid: 'fa fa-times-circle',
+        validating: 'fa fa-user'
+    },
+    fields: {
+        codigo: {
+            message: 'El codigo no es valido',
+            validators: {
+                notEmpty: {
+                    message: 'El codigo es requerido'
+                },
+                regexp: {
+                    regexp: /^[0-9]+$/,
+                    message: 'Solo se admiten digitos.'
+                }
+
+            }
+        },
+        descripcion: {
+            message: 'El nombre no es valido',
+            validators: {
+                notEmpty: {
+                    message: 'El campo descripcion es requerido'
+                },
+
+            }
+        },
+
+    }
+});
+
+
 //-------VALIDACION DE DEPENDENCIA DEL CAMPO EDAD SEGUN EL AÑO DEL CARNET
 campoCarnet.keyup(function () {
     let edad = 0

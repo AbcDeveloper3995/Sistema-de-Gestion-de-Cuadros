@@ -1,3 +1,5 @@
+import SGPC.settings as setting
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -8,10 +10,10 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView
 
-import SGPC.settings as setting
-from apps.cuadro.models import Cuadro
 from apps.usuario.forms import usuarioForm, usuarioProfileForm
 from apps.usuario.models import Usuario
+from apps.utils import cantidadPorGenero, cantidadPorCategoria, porcentajeSegunMilitancia, cantidadPorColor, \
+    cantidadPorEdad
 
 
 class Login(LoginView):
@@ -40,25 +42,39 @@ class homeView(LoginRequiredMixin, TemplateView):
         data = {}
         try:
             action = request.POST['action']
-            if action == 'getGraficoColumn':
+            if action == 'cantidadPorGenero':
                 data = {
                     'name':'Cantidad',
                     'showInLegend': False,
                     'colorByPoint':True,
-                    'data':self.getGraficoColumn(),
+                    'data': cantidadPorGenero(self.request.user),
                 }
-            elif action == 'getGraficoCargoCuadro':
+            elif action == 'cantidaPorCategoria':
                 data = {
                     'name':'Cantidad',
                     'showInLegend': False,
                     'colorByPoint':True,
-                    'data':self.getGraficoCargoCuadro(),
+                    'data': cantidadPorCategoria(self.request.user),
                 }
-            elif action == 'getGraficoPie':
+            elif action == 'porcentajeSegunMilitancia':
                 data = {
                     'name': 'Porcentaje',
                     'colorByPoint': True,
-                    'data': self.getGraficoPie()
+                    'data': porcentajeSegunMilitancia(self.request.user),
+                }
+            elif action == 'cantidaPorColor':
+                data = {
+                    'name':'Cantidad',
+                    'showInLegend': False,
+                    'colorByPoint':True,
+                    'data': cantidadPorColor(self.request.user),
+                }
+            elif action == 'cantidaPorEdad':
+                data = {
+                    'name':'Cantidad',
+                    'showInLegend': False,
+                    'colorByPoint':True,
+                    'data': cantidadPorEdad(self.request.user),
                 }
             else:
                 data['error'] = 'Ha ocurrido un error'
@@ -66,47 +82,11 @@ class homeView(LoginRequiredMixin, TemplateView):
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
-    def getGraficoColumn(self):
-        data = []
-        try:
-            cantMasculinos = Cuadro.objects.filter(sexo='M').count()
-            cantFemeninos = Cuadro.objects.filter(sexo='F').count()
-            data.append(cantMasculinos)
-            data.append(cantFemeninos)
-        except:
-            pass
-        return data
-
-    def getGraficoCargoCuadro(self):
-        data = []
-        try:
-            cantDirectivoSuerior = Cuadro.objects.filter(categoria__exact='DS').count()
-            cantDirectivoIntermedio = Cuadro.objects.filter(categoria__exact='DI').count()
-            cantEjecutivo = Cuadro.objects.filter(categoria__exact='E').count()
-            data.append(cantDirectivoSuerior)
-            data.append(cantDirectivoIntermedio)
-            data.append(cantEjecutivo)
-        except:
-            pass
-        return data
-
-    def getGraficoPie(self):
-        data = []
-        try:
-            cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC').count()
-            cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC').count()
-            cantNoMilitantes = Cuadro.objects.filter(militancia=None).count()
-            data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC},
-                    {'name': 'No militantes', 'y': cantNoMilitantes}]
-        except:
-            pass
-        return data
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tituloPestaña'] = 'SGPC | Inicio'
         return context
-
 
 # PROCEDIMIENTO PARA LISTAR USUARIOS.
 class listarUsuariosView(LoginRequiredMixin, ListView):
@@ -185,7 +165,6 @@ class eliminarUsuarioView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
-
 
 # PROCEDIMIENTO PARA QUE UN USUARIO MODIFIQUE SU PERFIL.
 class updateUsuarioProfileView(LoginRequiredMixin, UpdateView):

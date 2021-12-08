@@ -176,6 +176,7 @@ class modificarCargoView(LoginRequiredMixin, UpdateView):
     template_name = 'cuadro/crear/crearCargo.html'
     success_url = reverse_lazy('cuadro:listarCargo')
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Edicion de grupo de Cargo'
@@ -190,7 +191,7 @@ class eliminarCargoView(LoginRequiredMixin, TemplateView):
         data = {}
         try:
             query = get_object_or_404(Cargo, id=request.GET['id'])
-            messages.success(self.request, 'El cargo de ' + query.nombre + ' se ha eliminado correctamente.')
+            messages.success(self.request, 'El cargo de ' + query.fk_clasificador_cargo_cuadro.descripcion + ' se ha eliminado correctamente.')
             query.delete()
         except Exception as e:
             data['error'] = str(e)
@@ -294,7 +295,6 @@ class desactivarCargoView(LoginRequiredMixin, TemplateView):
         return JsonResponse(data, safe=False)
 
 
-
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
 '''Si un cargo es activado, pasa ha estar vacante tambien'''
 class activarCargoView(LoginRequiredMixin, TemplateView):
@@ -314,8 +314,6 @@ class activarCargoView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
-
-
 
 
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
@@ -390,6 +388,20 @@ class crearNomencladorCargosView(LoginRequiredMixin, CreateView):
         return context
 
 
+# PROCEDIMIENTO PARA MODIFICAR NOMENCLADOR CARGO.
+class modificarNomencladorCargosView(LoginRequiredMixin, UpdateView):
+    model = ClasificadorCargoCuadro
+    form_class = nomencladorCargosForm
+    template_name = 'cuadro/crear/crearNomencladorCargos.html'
+    success_url = reverse_lazy('cuadro:listarNomencladorCargos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Edicion de un Nomenclador'
+        context['tituloPestaña'] = 'SGPC | Cuadros'
+        return context
+
+
 # PROCEDIMIENTO PARA IMPORTAR  LOS NOMENCLADORES DE CARGOS
 class importarNomencladorCargosView(LoginRequiredMixin, TemplateView):
 
@@ -415,17 +427,3 @@ class importarNomencladorCargosView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = 'Ha ocurrido un error fatal al importar. Contacte con el administrador'
         return JsonResponse(data, safe=False)
-
-
-# PROCEDIMIENTO PARA MODIFICAR NOMENCLADOR CARGO.
-class modificarNomencladorCargosView(LoginRequiredMixin, UpdateView):
-    model = ClasificadorCargoCuadro
-    form_class = nomencladorCargosForm
-    template_name = 'cuadro/crear/crearNomencladorCargos.html'
-    success_url = reverse_lazy('cuadro:listarNomencladorCargos')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['titulo'] = 'Edicion de un Nomenclador'
-        context['tituloPestaña'] = 'SGPC | Cuadros'
-        return context

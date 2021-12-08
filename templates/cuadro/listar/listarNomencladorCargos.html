@@ -24,7 +24,6 @@
                 </td>
                 <td>{{ nomenclador.codigo }}</td>
                 <td>{{ nomenclador.descripcion }}</td>
-
             </tr>
         {% endfor %}
         </tbody>
@@ -34,19 +33,32 @@
 {% block buttons %}
     <a href="{% url 'cuadro:crearNomencladorCargos' %}" type="button" class="btn btn-primary buttonCrear"><i
             class="fa fa-plus"></i>Nueva Nomenclador</a>
-    <form method="post" name="formImportarNomencladorCargos" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="importar">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" name="datosNomencladorCargos" accept=".xls,.xlsx">
+    <button type="button" class="btn btn-primary buttonCrear" id="importarNomencladorCargoCuadro"><i
+            class="fa fa-file-upload"></i>Importar</button>
+    <div class="col-6 hidden" id="componenteNomencladorCargoCuadro">
+        <div class="alert alert-dismissible fade show" role="alert">
+            <span class="badge badge-primary mb-0  text-uppercase text-center ">Filtro por rango de Edad</span>
+            <hr>
+            <form method="post" name="formImportarNomencladorCargos" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="importar">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="datosNomencladorCargos" accept=".xls,.xlsx">
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text"
+                                    style="border-radius: 5px" id="datosNomencladorCargos" disabled><i
+                                    class="fa fa-upload ">
+                                Cargar</i></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group-append">
-                    <button type="submit" class="input-group-text"
-                            style="border-radius: 5px" id="datosNomencladorCargos" disabled><i class="fa fa-upload ">
-                        Cargar</i></button>
-                </div>
-            </div>
+            </form>
+            <button type="button" class="close cerrarFiltro" data-dismiss="alert" aria-label="Close">
+                <i class="ik ik-x"></i>
+            </button>
+            <br>
         </div>
-    </form>
+    </div>
 {% endblock %}

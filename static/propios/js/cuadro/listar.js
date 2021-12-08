@@ -90,6 +90,10 @@ $('#actionCuadroFilter').on('click', function () {
     $('#componenteRangoEdad').removeClass('hidden');
 });
 
+$('#importarNomencladorCargoCuadro').on('click', function () {
+    $('#componenteNomencladorCargoCuadro').removeClass('hidden');
+});
+
 rangoEdad.on('change', function () {
     $('#min').val(rangoEdad.data().from);
     $('#max').val(rangoEdad.data().to);
@@ -182,6 +186,6 @@ const importar = (formulario, url) => {
     })
 };
 
-                                 //-----------PARA ENTIDAD-----------//
+                                 //-----------PARA NOMENCLADOR CARGOS CUADRO-----------//
 let formImportarCI = $('form[name="formImportarNomencladorCargos"]');
 importar(formImportarCI,'/cuadro/importarNomencladorCargos/');

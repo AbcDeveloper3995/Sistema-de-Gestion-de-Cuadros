@@ -1,4 +1,4 @@
-let graficoColumn = Highcharts.chart('container', {
+let graficoCantidadPorGenero = Highcharts.chart('graficoCantidadPorGenero', {
     chart: {
         type: 'column'
     },
@@ -47,7 +47,7 @@ let graficoColumn = Highcharts.chart('container', {
     },
 });
 
-let graficoCargoCuadro = Highcharts.chart('graficoCargoCuadro', {
+let graficoCantidadPorCategoria = Highcharts.chart('graficoCantidaPorCategoria', {
     chart: {
         type: 'column'
     },
@@ -65,7 +65,7 @@ let graficoCargoCuadro = Highcharts.chart('graficoCargoCuadro', {
         }
     },
     title: {
-        text: 'Cargos de cuadro'
+        text: 'Cargos cubiertos por categoria'
     },
     xAxis: {
         categories: [
@@ -97,7 +97,7 @@ let graficoCargoCuadro = Highcharts.chart('graficoCargoCuadro', {
     },
 });
 
-let graficoPie = Highcharts.chart('container-pie', {
+let graficoPorcentajeSegunMilitancia = Highcharts.chart('graficoPorcentajeSegunMilitancia', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -140,15 +140,117 @@ let graficoPie = Highcharts.chart('container-pie', {
     },
 });
 
-const gragicoColumnAjax = () => {
+let graficoCantidadPorColor = Highcharts.chart('graficoCantidaPorColor', {
+    chart: {
+        type: 'column'
+    },
+    lang: {
+        downloadXLS: "Eportar como Excel",
+        downloadPDF: "Exportar como PDF",
+        printChart: "Imprimir"
+    },
+    exporting: {
+        menuItemDefinitions: {},
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS', 'downloadPDF', 'separator', 'printChart']
+            }
+        }
+    },
+    title: {
+        text: 'Cantidad de cuadros segun color de piel'
+    },
+    xAxis: {
+        categories: [
+            'Blancos',
+            'Mestizos',
+            'Negros'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+});
+
+let graficoCantidadPorEdad = Highcharts.chart('graficoCantidadPorEdad', {
+    chart: {
+        type: 'column'
+    },
+    lang: {
+        downloadXLS: "Eportar como Excel",
+        downloadPDF: "Exportar como PDF",
+        printChart: "Imprimir"
+    },
+    exporting: {
+        menuItemDefinitions: {},
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS', 'downloadPDF', 'separator', 'printChart']
+            }
+        }
+    },
+    title: {
+        text: 'Cantidad de cuadros por edad'
+    },
+    xAxis: {
+        categories: [
+            'Menos de 40 años',
+            'De 41 a 50 años',
+            'De 51 a 60 años',
+            'De 61 a 70 años',
+            'Mas de 70 años'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+});
+
+const graficoCantidadPorGeneroAjax = () => {
     $.ajax({
         url: window.location.pathname,
         type: 'POST',
-        data: {'action': 'getGraficoColumn'},
+        data: {'action': 'cantidadPorGenero'},
         dataType: 'json',
     }).done(function (data) {
         if (!data.hasOwnProperty('error')) {
-            graficoColumn.addSeries(data);
+            graficoCantidadPorGenero.addSeries(data);
             return false
         }
         messageError(data.error)
@@ -157,15 +259,15 @@ const gragicoColumnAjax = () => {
     })
 };
 
-const gragicoCargoCuadroAjax = () => {
+const graficoCantidadPorCategoriaAjax = () => {
     $.ajax({
         url: window.location.pathname,
         type: 'POST',
-        data: {'action': 'getGraficoCargoCuadro'},
+        data: {'action': 'cantidaPorCategoria'},
         dataType: 'json',
     }).done(function (data) {
         if (!data.hasOwnProperty('error')) {
-            graficoCargoCuadro.addSeries(data);
+            graficoCantidadPorCategoria.addSeries(data);
             return false
         }
         messageError(data.error)
@@ -174,15 +276,15 @@ const gragicoCargoCuadroAjax = () => {
     })
 };
 
-const gragicoPieAjax = () => {
+const graficoPorcentajeSegunMilitanciaAjax = () => {
     $.ajax({
         url: window.location.pathname,
         type: 'POST',
-        data: {'action': 'getGraficoPie'},
+        data: {'action': 'porcentajeSegunMilitancia'},
         dataType: 'json',
     }).done(function (data) {
         if (!data.hasOwnProperty('error')) {
-            graficoPie.addSeries(data);
+            graficoPorcentajeSegunMilitancia.addSeries(data);
             return false
         }
         messageError(data.error)
@@ -191,8 +293,46 @@ const gragicoPieAjax = () => {
     })
 };
 
-gragicoColumnAjax();
+const graficoCantidadPorColorAjax = () => {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'action': 'cantidaPorColor'},
+        dataType: 'json',
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            graficoCantidadPorColor.addSeries(data);
+            return false
+        }
+        messageError(data.error)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ':' + errorThrown)
+    })
+};
 
-gragicoCargoCuadroAjax();
+const graficoCantidadPorEdadAjax = () => {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'action': 'cantidaPorEdad'},
+        dataType: 'json',
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            graficoCantidadPorEdad.addSeries(data);
+            return false
+        }
+        messageError(data.error)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ':' + errorThrown)
+    })
+};
 
-gragicoPieAjax()
+graficoCantidadPorGeneroAjax();
+
+graficoCantidadPorCategoriaAjax();
+
+graficoPorcentajeSegunMilitanciaAjax()
+
+graficoCantidadPorColorAjax()
+
+graficoCantidadPorEdadAjax()
