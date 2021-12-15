@@ -24,23 +24,32 @@ class listarCuadroView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         query = getCuadros(self.request.user)
-        hora = datetime.datetime.today().hour
-        minutos = datetime.datetime.today().minute
-        if int(hora) == 8 and int(minutos) == 30:
-            self.actualizarEdad(query)
-        else:
-            print('No es la hora fijada para la actualizacion de la edad')
+        self.actualizarEdad(query)
         return query
 
     def actualizarEdad(self, listadoCuadros):
-        diaActual = datetime.datetime.today().day
-        mesActual = datetime.datetime.today().month
+        anoActual = datetime.datetime.today().year
+        fragmentoAmoActual = str(anoActual)[2:4]
         for i in listadoCuadros:
             diaCI = str(i.ci)[4:6]
             mesCI = str(i.ci)[2:4]
-            if int(diaCI) == int(diaActual) and int(mesCI) == int(mesActual):
-                i.edad += 1
-                i.save()
+            anoCI = str(i.ci)[0:2]
+            if int(anoCI) > int(fragmentoAmoActual):
+                anoCI = str('19' + anoCI)
+                self.calcularEdad(diaCI, mesCI, anoCI, i)
+            else:
+                anoCI = int('20' + anoCI)
+                self.calcularEdad(diaCI, mesCI, anoCI, i)
+
+    def calcularEdad(self, dia, mes, ano, cuadro):
+        fechaNacimiento = str(dia + '/' + mes + '/' + ano)
+        fechaNacimiento = datetime.datetime.strptime(fechaNacimiento, "%d/%m/%Y").date()
+        fechaActual = datetime.datetime.today().date()
+        if fechaNacimiento <= fechaActual:
+            day = fechaActual - fechaNacimiento
+            edad = day.days // 365
+            cuadro.edad = edad
+            cuadro.save()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -88,7 +97,7 @@ class modificarCuadroView(LoginRequiredMixin, UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super(modificarCuadroView, self).get_form_kwargs()
-        kwargs.update({'request':self.request})
+        kwargs.update({'request': self.request})
         return kwargs
 
     def get_context_data(self, **kwargs):
@@ -176,6 +185,9 @@ class modificarCargoView(LoginRequiredMixin, UpdateView):
     template_name = 'cuadro/crear/crearCargo.html'
     success_url = reverse_lazy('cuadro:listarCargo')
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -191,7 +203,8 @@ class eliminarCargoView(LoginRequiredMixin, TemplateView):
         data = {}
         try:
             query = get_object_or_404(Cargo, id=request.GET['id'])
-            messages.success(self.request, 'El cargo de ' + query.fk_clasificador_cargo_cuadro.descripcion + ' se ha eliminado correctamente.')
+            messages.success(self.request,
+                             'El cargo de ' + query.fk_clasificador_cargo_cuadro.descripcion + ' se ha eliminado correctamente.')
             query.delete()
         except Exception as e:
             data['error'] = str(e)
@@ -256,6 +269,7 @@ class eliminarEspecialidadView(LoginRequiredMixin, TemplateView):
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
 
+
 # PROCEDIMIENTO PARA ELIMINAR ESPECIALIDAD.
 class isVacanteView(LoginRequiredMixin, TemplateView):
 
@@ -273,6 +287,8 @@ class isVacanteView(LoginRequiredMixin, TemplateView):
 
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
 '''Si un cargo es desactivado deja de ser vacante y ademas el cuadro que este ocupando dicho cargo se desactiva automaticamente'''
+
+
 class desactivarCargoView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -282,7 +298,8 @@ class desactivarCargoView(LoginRequiredMixin, TemplateView):
             query = get_object_or_404(Cargo, id=idCargo)
             cuadro = Cuadro.objects.get(fk_cargo__id=idCargo)
             if query and cuadro:
-                messages.success(self.request, 'El cargo ' + query.fk_clasificador_cargo_cuadro.descripcion + ' y el cuadro ' + cuadro.getFullName() + ' pasaron a ser inactivos.')
+                messages.success(self.request,
+                                 'El cargo ' + query.fk_clasificador_cargo_cuadro.descripcion + ' y el cuadro ' + cuadro.getFullName() + ' pasaron a ser inactivos.')
                 query.estado = False
                 query.vacante = False
                 cuadro.estado = False
@@ -297,6 +314,8 @@ class desactivarCargoView(LoginRequiredMixin, TemplateView):
 
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
 '''Si un cargo es activado, pasa ha estar vacante tambien'''
+
+
 class activarCargoView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -305,7 +324,8 @@ class activarCargoView(LoginRequiredMixin, TemplateView):
         try:
             query = get_object_or_404(Cargo, id=idCargo)
             if query:
-                messages.success(self.request, 'El cargo ' + query.fk_clasificador_cargo_cuadro.descripcion + ' se activo correctamente.')
+                messages.success(self.request,
+                                 'El cargo ' + query.fk_clasificador_cargo_cuadro.descripcion + ' se activo correctamente.')
                 query.estado = True
                 query.vacante = True
                 query.save()
@@ -318,6 +338,8 @@ class activarCargoView(LoginRequiredMixin, TemplateView):
 
 # PROCEDIMIENTO PARA DESACTIVAR CARGO.
 '''Si un cuadro es desactivado, el cargo que este ocupando pasa a ser vacante'''
+
+
 class desactivarCuadroView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -350,9 +372,10 @@ class getMunicipiosView(LoginRequiredMixin, TemplateView):
         action = request.POST['action']
         try:
             if action == 'getMunicipios':
-                data = [{'id':'', 'text':'------'}]
-                for i in clasificadorDPA.objects.filter(codigo__startswith=codigoProvincia).exclude(codigo__exact=codigoProvincia):
-                    data.append({'id':i.id, 'text':i.getCodigoDescricion()})
+                data = [{'id': '', 'text': '------'}]
+                for i in clasificadorDPA.objects.filter(codigo__startswith=codigoProvincia).exclude(
+                        codigo__exact=codigoProvincia):
+                    data.append({'id': i.id, 'text': i.getCodigoDescricion()})
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

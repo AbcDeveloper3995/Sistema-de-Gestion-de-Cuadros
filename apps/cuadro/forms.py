@@ -6,6 +6,7 @@ from apps.usuario.models import Usuario
 class cargoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        instance = getattr(self, 'instance', None)
         self.fields['provincia'].queryset = clasificadorDPA.objects.filter(codigo__range=(21, 40))
         self.fields['municipio'].queryset = clasificadorDPA.objects.exclude(codigo__range=(21, 40))
 
@@ -22,23 +23,24 @@ class cargoForm(ModelForm):
         }
 
     def clean(self):
-        cleaned = super().clean()
-        nombre = cleaned['fk_clasificador_cargo_cuadro']
-        nivelSubordinacion = cleaned['nivel_subordinacion']
-        provincia = cleaned['provincia']
-        municipio = cleaned['municipio']
-        if nivelSubordinacion == 'OC' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre).exists():
-            self._errors['error'] = self._errors.get('error', self.error_class())
-            self._errors['error'].append('El cargo a registrar ya existe a ese nivel.')
-            return cleaned
-        elif nivelSubordinacion == 'P' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre, provincia=provincia).exists():
-            self._errors['error'] = self._errors.get('error', self.error_class())
-            self._errors['error'].append('En la provincia ya existe ese cargo.')
-            return cleaned
-        elif nivelSubordinacion == 'M' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre, provincia=provincia, municipio=municipio).exists():
-            self._errors['error'] = self._errors.get('error', self.error_class())
-            self._errors['error'].append('Ya existe ese cargo en el municipio.')
-            return cleaned
+        if not self.instance.pk:
+            cleaned = super().clean()
+            nombre = cleaned['fk_clasificador_cargo_cuadro']
+            nivelSubordinacion = cleaned['nivel_subordinacion']
+            provincia = cleaned['provincia']
+            municipio = cleaned['municipio']
+            if nivelSubordinacion == 'OC' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre).exists():
+                self._errors['error'] = self._errors.get('error', self.error_class())
+                self._errors['error'].append('El cargo a registrar ya existe a ese nivel.')
+                return cleaned
+            elif nivelSubordinacion == 'P' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre, provincia=provincia).exists():
+                self._errors['error'] = self._errors.get('error', self.error_class())
+                self._errors['error'].append('En la provincia ya existe ese cargo.')
+                return cleaned
+            elif nivelSubordinacion == 'M' and Cargo.objects.filter(fk_clasificador_cargo_cuadro=nombre, provincia=provincia, municipio=municipio).exists():
+                self._errors['error'] = self._errors.get('error', self.error_class())
+                self._errors['error'].append('Ya existe ese cargo en el municipio.')
+                return cleaned
 
 
 class especialidadForm(ModelForm):
@@ -90,6 +92,8 @@ class cuadroForm(ModelForm):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(estado=True)
         elif self.request.user.has_perm('usuario.oficinaCentral'):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(nivel_subordinacion__exact='OC', estado=True)
+        elif self.request.user.has_perm('usuario.uas'):
+            self.fields['fk_cargo'].queryset = Cargo.objects.filter(nivel_subordinacion__exact='UAS', estado=True)
         elif self.request.user.has_perm('usuario.21'):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(provincia__codigo__exact=21, estado=True)
         elif self.request.user.has_perm('usuario.22'):

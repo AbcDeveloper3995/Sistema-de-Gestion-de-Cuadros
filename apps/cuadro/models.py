@@ -29,6 +29,7 @@ CHOICE_COLOR = (
 CHOICE_NIVEL_SUBORDINACION = (
     ('', '--------'),
     ('OC', 'Oficina Central'),
+    ('UAS', 'Unidad de Aseguramiento y Servicios'),
     ('P', 'Provincial'),
     ('M', 'Municipal')
 )
@@ -85,6 +86,8 @@ class Cargo(models.Model):
     def __str__(self):
         if self.nivel_subordinacion == 'OC':
             return '{0}--{1}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), 'OFICINA CENTRAL')
+        elif self.nivel_subordinacion == 'UAS':
+            return '{0}--{1}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), 'Unidad de Aseguramiento y Servicios')
         elif self.provincia != None and self.municipio == None:
             return '{0}--{1}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), self.provincia.descripcion)
         else:

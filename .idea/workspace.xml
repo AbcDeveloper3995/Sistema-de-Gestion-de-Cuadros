@@ -3,14 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7636f653-3601-4b08-9ca0-e102424fc2a5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cuadro/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cuadro/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/cuadro/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cuadro/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/usuario/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/usuario/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/propios/js/cuadro/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/js/cuadro/form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/propios/js/global/graficos.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/propios/js/global/graficos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comun/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cuadro/listar/listarNomencladorCargos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cuadro/listar/listarNomencladorCargos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/comun/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/comun/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comun/menu.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,38 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/cuadro/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="193" column="106" selection-start-line="193" selection-start-column="106" selection-end-line="193" selection-end-column="106" />
-              <folding>
-                <element signature="e#703#1782#0" />
-                <element signature="e#846#1179#0" />
-                <element signature="e#1235#1562#0" />
-                <element signature="e#1374#1562#0" />
-                <element signature="e#1526#1562#0" />
-                <element signature="e#1614#1782#0" />
-                <element signature="e#1880#2810#0" />
-                <element signature="e#2070#2196#0" />
-                <element signature="e#2252#2555#0" />
-                <element signature="e#2315#2440#0" />
-                <element signature="e#2607#2810#0" />
-                <element signature="e#2916#3453#0" />
-                <element signature="e#3106#3235#0" />
-                <element signature="e#3287#3453#0" />
-                <element signature="e#3560#3988#0" />
-                <element signature="e#3609#3988#0" />
-                <element signature="e#3644#3876#0" />
-                <element signature="e#4108#4603#0" />
-                <element signature="e#4157#4603#0" />
-                <element signature="e#4192#4491#0" />
-                <element signature="e#4340#4392#0" />
-                <element signature="e#4699#5146#0" />
-                <element signature="e#4804#4879#0" />
-                <element signature="e#4931#5146#0" />
-                <element signature="e#5756#5923#0" />
-              </folding>
+            <state relative-caret-position="417">
+              <caret line="51" column="25" lean-forward="true" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -65,111 +38,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="137" selection-start-line="137" selection-end-line="137" />
+            <state relative-caret-position="238">
+              <caret line="242" column="105" selection-start-line="242" selection-start-column="105" selection-end-line="242" selection-end-column="105" />
               <folding>
                 <element signature="e#83#287#0" />
                 <element signature="e#96#254#0" />
                 <element signature="e#329#538#0" />
                 <element signature="e#342#505#0" />
                 <element signature="e#436#505#0" />
-                <element signature="e#646#3968#0" />
-                <element signature="e#740#848#0" />
-                <element signature="e#895#1043#0" />
-                <element signature="e#1090#1238#0" />
-                <element signature="e#1285#1433#0" />
-                <element signature="e#1480#1628#0" />
-                <element signature="e#1675#1823#0" />
-                <element signature="e#1870#2018#0" />
-                <element signature="e#2065#2213#0" />
-                <element signature="e#2260#2408#0" />
-                <element signature="e#2455#2603#0" />
-                <element signature="e#2650#2798#0" />
-                <element signature="e#2845#2993#0" />
-                <element signature="e#3040#3188#0" />
-                <element signature="e#3235#3383#0" />
-                <element signature="e#3430#3578#0" />
-                <element signature="e#3625#3773#0" />
-                <element signature="e#3820#3968#0" />
-                <element signature="e#4188#6027#0" />
-                <element signature="e#4280#4571#0" />
-                <element signature="e#4315#4518#0" />
-                <element signature="e#4713#5064#0" />
-                <element signature="e#4740#5023#0" />
-                <element signature="e#5197#7291#0" />
-                <element signature="e#5289#5757#0" />
-                <element signature="e#5324#5704#0" />
-                <element signature="e#5905#6471#0" />
-                <element signature="e#5932#6430#0" />
-                <element signature="e#6607#8568#0" />
-                <element signature="e#6699#7164#0" />
-                <element signature="e#6734#7111#0" />
-                <element signature="e#7322#7892#0" />
-                <element signature="e#7349#7851#0" />
-                <element signature="e#8017#9876#0" />
-                <element signature="e#8119#8587#0" />
-                <element signature="e#8154#8534#0" />
-                <element signature="e#8735#9301#0" />
-                <element signature="e#8762#9260#0" />
-                <element signature="e#9245#11384#0" />
-                <element signature="e#9424#9877#0" />
-                <element signature="e#9459#9968#0" />
-                <element signature="e#10143#10709#0" />
-                <element signature="e#10170#10668#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/comun/home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="81" column="38" lean-forward="true" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/propios/js/global/graficos.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="192" column="72" selection-start-line="192" selection-start-column="72" selection-end-line="192" selection-end-column="72" />
-              <folding>
-                <element signature="e#61#1197#0" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
-                <element signature="e#1273#2438#0" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
-                <element signature="e#2515#3514#0" />
-                <element signature="e#3646#4808#0" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
-                <element signature="e#4882#6119#0" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
-                <element signature="e#3561#4017#0" />
-                <element signature="e#4065#4525#0" />
-                <element signature="e#4579#5051#0" />
-                <element signature="e#7663#8123#0" />
-                <element signature="e#8171#8631#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/usuario/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="76" column="41" lean-forward="true" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#646#4162#0" />
+                <element signature="e#4382#6175#0" />
+                <element signature="e#6228#6579#0" />
+                <element signature="e#7125#10033#0" />
+                <element signature="e#6805#7273#0" />
+                <element signature="e#7735#8577#0" />
+                <element signature="e#8785#9351#0" />
+                <element signature="e#12249#12819#0" />
+                <element signature="e#13984#16880#0" />
+                <element signature="e#13037#13424#0" />
+                <element signature="e#14513#15488#0" />
+                <element signature="e#14868#15353#0" />
+                <element signature="e#17062#20423#0" />
+                <element signature="e#15569#16237#0" />
+                <element signature="e#17872#19047#0" />
+                <element signature="e#17664#18506#0" />
               </folding>
             </state>
           </provider>
@@ -222,7 +114,6 @@
         <option value="$PROJECT_DIR$/templates/usuario/crear.html" />
         <option value="$PROJECT_DIR$/templates/usuario/listar.html" />
         <option value="$PROJECT_DIR$/apps/cuadro/templatetags/filters.py" />
-        <option value="$PROJECT_DIR$/templates/comun/header.html" />
         <option value="$PROJECT_DIR$/apps/usuario/forms.py" />
         <option value="$PROJECT_DIR$/static/propios/js/global/utils.js" />
         <option value="$PROJECT_DIR$/templates/cuadro/listar/listarEspecialidad.html" />
@@ -238,20 +129,21 @@
         <option value="$PROJECT_DIR$/SGPC/settings.py" />
         <option value="$PROJECT_DIR$/templates/cuadro/crear/crearNomencladorCargos.html" />
         <option value="$PROJECT_DIR$/apps/cuadro/urls.py" />
-        <option value="$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html" />
         <option value="$PROJECT_DIR$/templates/cuadro/crear/crearCargo.html" />
-        <option value="$PROJECT_DIR$/apps/cuadro/models.py" />
         <option value="$PROJECT_DIR$/templates/cuadro/crear/crearCuadros.html" />
-        <option value="$PROJECT_DIR$/templates/comun/menu.html" />
-        <option value="$PROJECT_DIR$/static/propios/js/cuadro/form.js" />
-        <option value="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" />
         <option value="$PROJECT_DIR$/templates/cuadro/listar/listarNomencladorCargos.html" />
-        <option value="$PROJECT_DIR$/apps/cuadro/views.py" />
-        <option value="$PROJECT_DIR$/apps/cuadro/forms.py" />
         <option value="$PROJECT_DIR$/apps/usuario/views.py" />
         <option value="$PROJECT_DIR$/static/propios/js/global/graficos.js" />
-        <option value="$PROJECT_DIR$/apps/utils.py" />
         <option value="$PROJECT_DIR$/templates/comun/home.html" />
+        <option value="$PROJECT_DIR$/static/propios/js/cuadro/listar.js" />
+        <option value="$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html" />
+        <option value="$PROJECT_DIR$/static/propios/js/cuadro/form.js" />
+        <option value="$PROJECT_DIR$/apps/cuadro/forms.py" />
+        <option value="$PROJECT_DIR$/apps/cuadro/models.py" />
+        <option value="$PROJECT_DIR$/apps/utils.py" />
+        <option value="$PROJECT_DIR$/templates/comun/header.html" />
+        <option value="$PROJECT_DIR$/templates/comun/menu.html" />
+        <option value="$PROJECT_DIR$/apps/cuadro/views.py" />
       </list>
     </option>
   </component>
@@ -284,12 +176,6 @@
               <item name="SGPC" type="b2602c69:ProjectViewProjectNode" />
               <item name="SGPC" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SGPC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SGPC" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="comun" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -413,7 +299,10 @@
       <workItem from="1638498826290" duration="9040000" />
       <workItem from="1638539633509" duration="1805000" />
       <workItem from="1638807793983" duration="7913000" />
-      <workItem from="1638984131914" duration="5758000" />
+      <workItem from="1638984131914" duration="7360000" />
+      <workItem from="1639068893475" duration="5123000" />
+      <workItem from="1639150012525" duration="5809000" />
+      <workItem from="1639567120704" duration="2450000" />
     </task>
     <task id="LOCAL-00001" summary="Se implemento el CRUD para Cuadros, Cargo y Especialidad; asi como las respectivas template de listar y crear.">
       <created>1636671502728</created>
@@ -478,11 +367,18 @@
       <option name="project" value="LOCAL" />
       <updated>1638809244824</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Se implementaron los graficos correspondientes para cada salida, modificandose asi el archivo (grafico.js, utils.py y el post de la class homeView en la views de la app usuario)">
+      <created>1638990174650</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1638990174650</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="270570000" />
+    <option name="totallyTimeSpent" value="285554000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -495,15 +391,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4991453" visible="true" weight="0.18078668" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991453" visible="true" weight="0.18910742" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50085473" side_tool="true" weight="0.17019667" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" weight="0.34529915" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" weight="0.35726497" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.62905985" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32991454" />
@@ -574,10 +469,10 @@
     <MESSAGE value="Se asignaron los permisos correspondientes a cada grupo creado; Se implemento la logica para obtener los cuadros segun los permisos del un usuario; Se implemento la logica para mostrar los cargos segun los permisos de un usuario al momento de crear un cuadro y se desarrollo la validacion para que cada cargo sea unico." />
     <MESSAGE value="Se implemento la logica para el desactivado de un cargo, asi como para el desactivado de un cuadro; ademas se desarrollo el select anidado para provincia y municipio." />
     <MESSAGE value="Se desarrollo todo lo relacionado al nomencladorCargoCuadro (CRUD, templates, form, validaciones del form, importacion)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se desarrollo todo lo relacionado al nomencladorCargoCuadro (CRUD, templates, form, validaciones del form, importacion)" />
+    <MESSAGE value="Se implementaron los graficos correspondientes para cada salida, modificandose asi el archivo (grafico.js, utils.py y el post de la class homeView en la views de la app usuario)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se implementaron los graficos correspondientes para cada salida, modificandose asi el archivo (grafico.js, utils.py y el post de la class homeView en la views de la app usuario)" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/usuario/migrations/0001_initial.py" />
     <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/validaciones.js" />
     <entry file="file://$PROJECT_DIR$/static/plugins/highcharts-8.1.2/highcharts.src.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -676,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="17" column="99" selection-start-line="17" selection-start-column="99" selection-end-line="17" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/usuario/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-125">
@@ -710,13 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/listar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/usuario/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -730,20 +611,6 @@
           <caret line="23" column="49" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
           <folding>
             <element signature="e#628#660#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/propios/js/global/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#30#457#0" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="e#489#918#0" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="e#975#2252#0" />
           </folding>
         </state>
       </provider>
@@ -812,41 +679,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cuadro/crear/crearEspecialidad.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="42" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/cuadro/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="90" column="91" selection-start-line="90" selection-start-column="91" selection-end-line="90" selection-end-column="91" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="45" column="137" selection-start-line="45" selection-start-column="137" selection-end-line="45" selection-end-column="137" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/cuadro/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -871,37 +707,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="254" column="31" selection-start-line="254" selection-start-column="31" selection-end-line="254" selection-end-column="31" />
-          <folding>
-            <element signature="e#5897#6485#0" />
-            <element signature="e#6590#7229#0" />
-            <element signature="e#7338#8003#0" />
-            <element signature="e#8181#8653#0" />
-            <element signature="e#8819#9589#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCuadros.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-187">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="32" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/listar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
-          <folding>
-            <element signature="e#242#752#0" />
-            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
-            <element signature="e#5549#5642#0" />
-            <element signature="e#5790#6569#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -912,56 +721,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/cuadro/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="28" column="40" lean-forward="true" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/propios/js/usuario/form.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
           <folding>
             <element signature="e#151#3664#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/cuadro/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="193" column="106" selection-start-line="193" selection-start-column="106" selection-end-line="193" selection-end-column="106" />
-          <folding>
-            <element signature="e#703#1782#0" />
-            <element signature="e#846#1179#0" />
-            <element signature="e#1235#1562#0" />
-            <element signature="e#1374#1562#0" />
-            <element signature="e#1526#1562#0" />
-            <element signature="e#1614#1782#0" />
-            <element signature="e#1880#2810#0" />
-            <element signature="e#2070#2196#0" />
-            <element signature="e#2252#2555#0" />
-            <element signature="e#2315#2440#0" />
-            <element signature="e#2607#2810#0" />
-            <element signature="e#2916#3453#0" />
-            <element signature="e#3106#3235#0" />
-            <element signature="e#3287#3453#0" />
-            <element signature="e#3560#3988#0" />
-            <element signature="e#3609#3988#0" />
-            <element signature="e#3644#3876#0" />
-            <element signature="e#4108#4603#0" />
-            <element signature="e#4157#4603#0" />
-            <element signature="e#4192#4491#0" />
-            <element signature="e#4340#4392#0" />
-            <element signature="e#4699#5146#0" />
-            <element signature="e#4804#4879#0" />
-            <element signature="e#4931#5146#0" />
-            <element signature="e#5756#5923#0" />
           </folding>
         </state>
       </provider>
@@ -1007,67 +772,142 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="81" column="38" lean-forward="true" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Entornos virtuales/Django3.0/Lib/site-packages/django/views/generic/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/propios/js/global/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="65" selection-end-column="22" />
+          <folding>
+            <element signature="e#30#457#0" />
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+            <element signature="e#489#918#0" />
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/cuadro/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/listar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="28" column="33" lean-forward="true" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/listar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/propios/js/cuadro/form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="307" column="48" selection-start-line="307" selection-start-column="48" selection-end-line="307" selection-end-column="48" />
+          <folding>
+            <element signature="e#5897#6485#0" />
+            <element signature="e#6590#7229#0" />
+            <element signature="e#7293#8086#0" />
+            <element signature="e#8195#8860#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/cuadro/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="89" column="125" selection-start-line="89" selection-start-column="125" selection-end-line="89" selection-end-column="125" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cuadro/listar/listarCargos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="97" selection-start-line="27" selection-start-column="97" selection-end-line="27" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/comun/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        <state relative-caret-position="238">
+          <caret line="242" column="105" selection-start-line="242" selection-start-column="105" selection-end-line="242" selection-end-column="105" />
           <folding>
             <element signature="e#83#287#0" />
             <element signature="e#96#254#0" />
             <element signature="e#329#538#0" />
             <element signature="e#342#505#0" />
             <element signature="e#436#505#0" />
-            <element signature="e#646#3968#0" />
-            <element signature="e#740#848#0" />
-            <element signature="e#895#1043#0" />
-            <element signature="e#1090#1238#0" />
-            <element signature="e#1285#1433#0" />
-            <element signature="e#1480#1628#0" />
-            <element signature="e#1675#1823#0" />
-            <element signature="e#1870#2018#0" />
-            <element signature="e#2065#2213#0" />
-            <element signature="e#2260#2408#0" />
-            <element signature="e#2455#2603#0" />
-            <element signature="e#2650#2798#0" />
-            <element signature="e#2845#2993#0" />
-            <element signature="e#3040#3188#0" />
-            <element signature="e#3235#3383#0" />
-            <element signature="e#3430#3578#0" />
-            <element signature="e#3625#3773#0" />
-            <element signature="e#3820#3968#0" />
-            <element signature="e#4188#6027#0" />
-            <element signature="e#4280#4571#0" />
-            <element signature="e#4315#4518#0" />
-            <element signature="e#4713#5064#0" />
-            <element signature="e#4740#5023#0" />
-            <element signature="e#5197#7291#0" />
-            <element signature="e#5289#5757#0" />
-            <element signature="e#5324#5704#0" />
-            <element signature="e#5905#6471#0" />
-            <element signature="e#5932#6430#0" />
-            <element signature="e#6607#8568#0" />
-            <element signature="e#6699#7164#0" />
-            <element signature="e#6734#7111#0" />
-            <element signature="e#7322#7892#0" />
-            <element signature="e#7349#7851#0" />
-            <element signature="e#8017#9876#0" />
-            <element signature="e#8119#8587#0" />
-            <element signature="e#8154#8534#0" />
-            <element signature="e#8735#9301#0" />
-            <element signature="e#8762#9260#0" />
-            <element signature="e#9245#11384#0" />
-            <element signature="e#9424#9877#0" />
-            <element signature="e#9459#9968#0" />
-            <element signature="e#10143#10709#0" />
-            <element signature="e#10170#10668#0" />
+            <element signature="e#646#4162#0" />
+            <element signature="e#4382#6175#0" />
+            <element signature="e#6228#6579#0" />
+            <element signature="e#7125#10033#0" />
+            <element signature="e#6805#7273#0" />
+            <element signature="e#7735#8577#0" />
+            <element signature="e#8785#9351#0" />
+            <element signature="e#12249#12819#0" />
+            <element signature="e#13984#16880#0" />
+            <element signature="e#13037#13424#0" />
+            <element signature="e#14513#15488#0" />
+            <element signature="e#14868#15353#0" />
+            <element signature="e#17062#20423#0" />
+            <element signature="e#15569#16237#0" />
+            <element signature="e#17872#19047#0" />
+            <element signature="e#17664#18506#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comun/home.html">
+    <entry file="file://$PROJECT_DIR$/apps/cuadro/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="81" column="38" lean-forward="true" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
+        <state relative-caret-position="123">
+          <caret line="95" column="99" selection-start-line="95" selection-start-column="99" selection-end-line="95" selection-end-column="99" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/cuadro/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="51" column="25" lean-forward="true" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
         </state>
       </provider>
     </entry>

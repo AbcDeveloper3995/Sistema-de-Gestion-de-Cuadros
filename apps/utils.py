@@ -21,10 +21,14 @@ def enableCargoComoVacante(cuadro):
     except:
         return False
 
+
 # FUNCION PARA OBTENER LOS CUADROS TENIENDO EN CUENTA LOS PERMISOS DE USUARIOS.
 def getCuadros(user):
     if user.has_perm('usuario.administrador') or user.has_perm('usuario.oficinaCentral'):
         query = Cuadro.objects.all().order_by('fk_cargo__fk_clasificador_cargo_cuadro__codigo')
+        return query
+    elif user.has_perm('usuario.uas'):
+        query = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS').order_by('fk_cargo__fk_clasificador_cargo_cuadro__codigo')
         return query
     elif user.has_perm('usuario.21'):
         query = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=21).order_by('fk_cargo__fk_clasificador_cargo_cuadro__codigo')
@@ -91,6 +95,16 @@ def cantidadPorGenero(user):
         except:
             pass
         return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cantMasculinos = Cuadro.objects.filter(sexo='M', fk_cargo__nivel_subordinacion='UAS').count()
+            cantFemeninos = Cuadro.objects.filter(sexo='F', fk_cargo__nivel_subordinacion='UAS').count()
+            data.append(cantMasculinos)
+            data.append(cantFemeninos)
+        except:
+            pass
+        return data
     elif user.has_perm('usuario.21'):
         return getQuerysetDeCantidadPorGenero(21)
     elif user.has_perm('usuario.22'):
@@ -144,6 +158,18 @@ def cantidadPorCategoria(user):
             cantDirectivoSuerior = Cuadro.objects.filter(categoria__exact='DS').count()
             cantDirectivoIntermedio = Cuadro.objects.filter(categoria__exact='DI').count()
             cantEjecutivo = Cuadro.objects.filter(categoria__exact='E').count()
+            data.append(cantDirectivoSuerior)
+            data.append(cantDirectivoIntermedio)
+            data.append(cantEjecutivo)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cantDirectivoSuerior = Cuadro.objects.filter(categoria__exact='DS', fk_cargo__nivel_subordinacion='UAS').count()
+            cantDirectivoIntermedio = Cuadro.objects.filter(categoria__exact='DI', fk_cargo__nivel_subordinacion='UAS').count()
+            cantEjecutivo = Cuadro.objects.filter(categoria__exact='E', fk_cargo__nivel_subordinacion='UAS').count()
             data.append(cantDirectivoSuerior)
             data.append(cantDirectivoIntermedio)
             data.append(cantEjecutivo)
@@ -209,6 +235,17 @@ def porcentajeSegunMilitancia(user):
         except:
             pass
         return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC', fk_cargo__nivel_subordinacion='UAS').count()
+            cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC', fk_cargo__nivel_subordinacion='UAS').count()
+            cantNoMilitantes = Cuadro.objects.filter(militancia=None, fk_cargo__nivel_subordinacion='UAS').count()
+            data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC},
+                    {'name': 'No militantes', 'y': cantNoMilitantes}]
+        except:
+            pass
+        return data
     elif user.has_perm('usuario.21'):
         return getQuerysetDePorcentajeSegunMilitancia(21)
     elif user.has_perm('usuario.22'):
@@ -262,6 +299,18 @@ def cantidadPorColor(user):
             cantBlancos = Cuadro.objects.filter(color='B').count()
             cantMestizos = Cuadro.objects.filter(color='M').count()
             cantNegros = Cuadro.objects.filter(color='N').count()
+            data.append(cantBlancos)
+            data.append(cantMestizos)
+            data.append(cantNegros)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cantBlancos = Cuadro.objects.filter(color='B', fk_cargo__nivel_subordinacion='UAS').count()
+            cantMestizos = Cuadro.objects.filter(color='M', fk_cargo__nivel_subordinacion='UAS').count()
+            cantNegros = Cuadro.objects.filter(color='N', fk_cargo__nivel_subordinacion='UAS').count()
             data.append(cantBlancos)
             data.append(cantMestizos)
             data.append(cantNegros)
@@ -325,6 +374,22 @@ def cantidadPorEdad(user):
             cuadrosDe51A60 = Cuadro.objects.filter(edad__range=(51, 60)).count()
             cuadrosDe61A70 = Cuadro.objects.filter(edad__range=(61, 70)).count()
             cuadrosMayorA70 = Cuadro.objects.filter(edad__gte=70).count()
+            data.append(cuadrosMenorA40)
+            data.append(cuadrosDe41A50)
+            data.append(cuadrosDe51A60)
+            data.append(cuadrosDe61A70)
+            data.append(cuadrosMayorA70)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cuadrosMenorA40 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', edad__lte=40).count()
+            cuadrosDe41A50 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', edad__range=(41, 50)).count()
+            cuadrosDe51A60 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', edad__range=(51, 60)).count()
+            cuadrosDe61A70 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', edad__range=(61, 70)).count()
+            cuadrosMayorA70 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', edad__gte=70).count()
             data.append(cuadrosMenorA40)
             data.append(cuadrosDe41A50)
             data.append(cuadrosDe51A60)

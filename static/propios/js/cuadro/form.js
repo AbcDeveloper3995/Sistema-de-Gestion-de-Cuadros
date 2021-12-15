@@ -305,6 +305,10 @@ campoNivelSubordinacion.on('change', function () {
         selectpProvincia.prop('disabled', true);
         selectpMunicipio.prop('disabled', true);
     }
+    if (campoNivelSubordinacion[0].value == 'UAS') {
+        selectpProvincia.prop('disabled', true);
+        selectpMunicipio.prop('disabled', true);
+    }
     if (campoNivelSubordinacion[0].value == 'P') {
         selectpProvincia.prop('disabled', false);
         selectpMunicipio.prop('disabled', true);

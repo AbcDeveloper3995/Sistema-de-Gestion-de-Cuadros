@@ -3,7 +3,7 @@ $('#tblCargos').dataTable({});
 $('#tblEspecialidad').dataTable({});
 
 let tblCuadro = $('#tblCuadro').DataTable({
-    ordering : false,
+    ordering: false,
     dom: "Bfrtip",
     buttons: {
         dom: {
@@ -147,14 +147,14 @@ desactivarCuadro.on('click', function () {
 //---------------------------------PROCEDIMIENTO PARA MANDAR A REALIZAR LAS IMPORTACIONES--------------------------------//
 
 
-                               //--------ALGUNAS VALIDACIONES----------//
+//--------ALGUNAS VALIDACIONES----------//
 const habilitarImportacion = (campo, boton) => {
     campo.on('change', function () {
-    boton.prop('disabled', this.files.length==0);
-})
+        boton.prop('disabled', this.files.length == 0);
+    })
 };
 
-habilitarImportacion($('input[name="datosNomencladorCargos"]'),$('button[id="datosNomencladorCargos"]'));
+habilitarImportacion($('input[name="datosNomencladorCargos"]'), $('button[id="datosNomencladorCargos"]'));
 
 const importar = (formulario, url) => {
 
@@ -186,6 +186,6 @@ const importar = (formulario, url) => {
     })
 };
 
-                                 //-----------PARA NOMENCLADOR CARGOS CUADRO-----------//
+//-----------PARA NOMENCLADOR CARGOS CUADRO-----------//
 let formImportarCI = $('form[name="formImportarNomencladorCargos"]');
-importar(formImportarCI,'/cuadro/importarNomencladorCargos/');
+importar(formImportarCI, '/cuadro/importarNomencladorCargos/');
