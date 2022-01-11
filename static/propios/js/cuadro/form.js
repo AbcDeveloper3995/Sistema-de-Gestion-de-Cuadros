@@ -13,6 +13,7 @@ let submitCuadroForm = $('#submitCuadroForm');
 let cargo = $('#fk_cargo');
 let selectpProvincia = $('select[id="campoProvincia"]');
 let selectpMunicipio = $('select[id="campoMunicipio"]');
+let fecha = $('.date');
 
 //----------------------------------------------VALIDACIONES-------------------------------------------------------------//
 
@@ -36,7 +37,14 @@ cargo.on('change', function () {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert(textStatus + ': ' + errorThrown);
     })
-})
+});
+
+fecha.datetimepicker({
+    format: 'DD/MM/YYYY',
+    date: moment().format("YYYY-MM-DD"),
+    locale: 'es',
+    maxDate: moment().format("YYYY-MM-DD"),
+});
 
 $('form[name="cuadroForm"]').bootstrapValidator({
     message: 'This value is not valid',
@@ -276,7 +284,6 @@ $('form[name="nomencladorCargosForm"]').bootstrapValidator({
 
     }
 });
-
 
 //-------VALIDACION DE DEPENDENCIA DEL CAMPO EDAD SEGUN EL AÑO DEL CARNET
 campoCarnet.keyup(function () {

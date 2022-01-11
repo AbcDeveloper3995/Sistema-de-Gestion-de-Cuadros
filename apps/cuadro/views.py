@@ -450,3 +450,75 @@ class importarNomencladorCargosView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = 'Ha ocurrido un error fatal al importar. Contacte con el administrador'
         return JsonResponse(data, safe=False)
+
+
+# PROCEDIMIENTO PARA LISTAR MOVIMIENTOS.
+class listarMovimientosView(LoginRequiredMixin, ListView):
+    template_name = 'cuadro/listar/listarMovimientos.html'
+    model = Movimiento
+
+    def get_queryset(self):
+        return Movimiento.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movimientos'] = self.get_queryset()
+        context['titulo'] = 'Listado de Movimientos'
+        context['tituloPestaña'] = 'SGPC | Movimientos'
+        return context
+
+
+# PROCEDIMIENTO PARA CREAR MOVIMIENTOS.
+class crearMovimientosView(LoginRequiredMixin, CreateView):
+    template_name = 'cuadro/crear/crearMovimientos.html'
+    model = Movimiento
+    form_class = movimientoForm
+    success_url = reverse_lazy('cuadro:listarMovimientos')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            messages.success(self.request, 'Movimiento creado correctamente.')
+            form.save()
+        else:
+            messages.error(self.request, form.errors)
+        return redirect('cuadro:listarMovimientos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Creacion de Movimientos'
+        context['tituloPestaña'] = 'SGPC | Movimientos'
+        return context
+
+
+# PROCEDIMIENTO PARA MODIFICAR MOVIMIENTOS.
+class modificarMovimientosView(LoginRequiredMixin, UpdateView):
+    model = Movimiento
+    form_class = movimientoForm
+    template_name = 'cuadro/crear/crearMovimientos.html'
+    success_url = reverse_lazy('cuadro:listarMovimientos')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Edicion de Movimientos'
+        context['tituloPestaña'] = 'SGPC | Movimientos'
+        return context
+
+
+# PROCEDIMIENTO PARA ELIMINAR MOVIMIENTOS.
+class eliminarMovimientosView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            query = get_object_or_404(Movimiento, id=request.GET['id'])
+            messages.success(self.request,
+                             'El movimiento se ha eliminado correctamente')
+            query.delete()
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)

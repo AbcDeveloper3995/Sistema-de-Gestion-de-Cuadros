@@ -18,6 +18,7 @@ class cargoForm(ModelForm):
             'nivel_subordinacion': Select(attrs={'class': 'form-control select2', 'id':'campoNivelSubordinacion'}),
             'provincia': Select(attrs={'class': 'form-control select2', 'id':'campoProvincia'}),
             'municipio': Select(attrs={'class': 'form-control select2', 'id':'campoMunicipio'}),
+            'observaciones': Textarea(attrs={'class': 'form-control', 'id':'campoObservacionesCargo'}),
             'vacante': CheckboxInput(attrs={'class':'border-checkbox', 'type': 'checkbox', 'id':'vacante'}),
             'estado': CheckboxInput(attrs={'class':'border-checkbox', 'type': 'checkbox', 'id':'estadoCargo'})
         }
@@ -56,6 +57,7 @@ class especialidadForm(ModelForm):
             'estado': CheckboxInput(attrs={'class': 'border-checkbox', 'type': 'checkbox', 'id':'estadoEspecialidad'})
         }
 
+
 class cuadroForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
@@ -71,7 +73,10 @@ class cuadroForm(ModelForm):
         widgets = {
             'fk_cargo': Select(attrs={'class': 'form-control select2', 'id':'fk_cargo'}),
             'fk_especialidad': Select(attrs={'class': 'form-control select2', 'id': 'fk_especialidad'}),
+            'fk_movimiento': Select(attrs={'class': 'form-control select2', 'id': 'fk_movimiento'}),
             'categoria': Select(attrs={'class': 'form-control select2'}),
+            'escolaridad': Select(attrs={'class': 'form-control select2'}),
+            'categoria_cientifica': Select(attrs={'class': 'form-control select2'}),
             'nombre': TextInput(attrs={'class':'form-control','placeholder':'Ingrese un nombre'}),
             'apellidos': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese apellidos'}),
             'ci': NumberInput(attrs={'class':'form-control','id':'campoCI','placeholder':'Ingrese carnet de identidad'}),
@@ -82,16 +87,22 @@ class cuadroForm(ModelForm):
             'militancia': Select(attrs={'class': 'form-control select2'}),
             'sexo': Select(attrs={'class': 'form-control select2'}),
             'color': Select(attrs={'class': 'form-control select2'}),
+            'modalidad_promocion': SelectMultiple(attrs={'class': 'form-control select2'}),
+            'modalidad_sustitucion': Select(attrs={'class': 'form-control select2'}),
             'edad': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'campoEdad', 'readonly':True,}),
+            'fecha_alta': DateInput(attrs={'class': 'form-control datetimepicker-input date','data-target':"#fecha_alta",
+                                                                       'data-toggle':"datetimepicker", 'id': 'fecha_alta', 'placeholder':"Seleccione una fecha"}),
+            'fecha_baja': DateInput(attrs={'class': 'form-control datetimepicker-input date','data-target':"#fecha_baja",
+                                                                       'data-toggle':"datetimepicker", 'id': 'fecha_baja','placeholder':"Seleccione una fecha"}),
+            'tiempo_en_cargo': TextInput(attrs={'class': 'form-control', 'id': 'campoTiempo', 'readonly':True,}),
+            'observaciones': Textarea(attrs={'class': 'form-control', 'id': 'campoObservacionesCuadro'}),
             'estado': CheckboxInput(attrs={'class': 'border-checkbox', 'type': 'checkbox', 'id': 'estadoCuadro'})
 
         }
 
     def showCargoSegunUsuario(self):
-        if self.request.user.has_perm('usuario.administrador'):
+        if self.request.user.has_perm('usuario.administrador') or self.request.user.has_perm('usuario.oficinaCentral'):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(estado=True)
-        elif self.request.user.has_perm('usuario.oficinaCentral'):
-            self.fields['fk_cargo'].queryset = Cargo.objects.filter(nivel_subordinacion__exact='OC', estado=True)
         elif self.request.user.has_perm('usuario.uas'):
             self.fields['fk_cargo'].queryset = Cargo.objects.filter(nivel_subordinacion__exact='UAS', estado=True)
         elif self.request.user.has_perm('usuario.21'):
@@ -137,5 +148,18 @@ class nomencladorCargosForm(ModelForm):
         fields = '__all__'
         widgets = {
             'codigo': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un codigo'}),
+            'descripcion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese una descripcion'}),
+        }
+
+
+class movimientoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = Movimiento
+        fields = '__all__'
+        widgets = {
+            'codigo': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un codigo'}),
             'descripcion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese una descripcion'}),
         }

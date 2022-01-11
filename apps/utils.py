@@ -85,11 +85,21 @@ def getCuadros(user):
 
 # FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CARGOS POR GENERO
 def cantidadPorGenero(user):
-    if user.has_perm('usuario.administrador') or user.has_perm('usuario.oficinaCentral'):
+    if user.has_perm('usuario.administrador'):
         data = []
         try:
             cantMasculinos = Cuadro.objects.filter(sexo='M').count()
             cantFemeninos = Cuadro.objects.filter(sexo='F').count()
+            data.append(cantMasculinos)
+            data.append(cantFemeninos)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cantMasculinos = Cuadro.objects.filter(sexo='M', fk_cargo__nivel_subordinacion='OC').count()
+            cantFemeninos = Cuadro.objects.filter(sexo='F', fk_cargo__nivel_subordinacion='OC').count()
             data.append(cantMasculinos)
             data.append(cantFemeninos)
         except:
@@ -152,12 +162,24 @@ def getQuerysetDeCantidadPorGenero(codigoDPA):
 
 # FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CARGOS POR CATEGORIA
 def cantidadPorCategoria(user):
-    if user.has_perm('usuario.administrador') or user.has_perm('usuario.oficinaCentral'):
+    if user.has_perm('usuario.administrador'):
         data = []
         try:
             cantDirectivoSuerior = Cuadro.objects.filter(categoria__exact='DS').count()
             cantDirectivoIntermedio = Cuadro.objects.filter(categoria__exact='DI').count()
             cantEjecutivo = Cuadro.objects.filter(categoria__exact='E').count()
+            data.append(cantDirectivoSuerior)
+            data.append(cantDirectivoIntermedio)
+            data.append(cantEjecutivo)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cantDirectivoSuerior = Cuadro.objects.filter(categoria__exact='DS', fk_cargo__nivel_subordinacion='OC').count()
+            cantDirectivoIntermedio = Cuadro.objects.filter(categoria__exact='DI', fk_cargo__nivel_subordinacion='OC').count()
+            cantEjecutivo = Cuadro.objects.filter(categoria__exact='E', fk_cargo__nivel_subordinacion='OC').count()
             data.append(cantDirectivoSuerior)
             data.append(cantDirectivoIntermedio)
             data.append(cantEjecutivo)
@@ -225,13 +247,24 @@ def getQuerysetDeCantidadPorCategoria(codigoDPA):
 
 # FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE PORCENTAJE SEGUN LA MILITANCIA
 def porcentajeSegunMilitancia(user):
-    if user.has_perm('usuario.administrador') or user.has_perm('usuario.oficinaCentral'):
+    if user.has_perm('usuario.administrador'):
         data = []
         try:
             cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC').count()
             cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC').count()
             cantNoMilitantes = Cuadro.objects.filter(militancia=None).count()
             data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC}, {'name': 'No militantes', 'y': cantNoMilitantes}]
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC', fk_cargo__nivel_subordinacion='OC').count()
+            cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC', fk_cargo__nivel_subordinacion='OC').count()
+            cantNoMilitantes = Cuadro.objects.filter(militancia=None, fk_cargo__nivel_subordinacion='OC').count()
+            data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC},
+                    {'name': 'No militantes', 'y': cantNoMilitantes}]
         except:
             pass
         return data
@@ -293,12 +326,24 @@ def getQuerysetDePorcentajeSegunMilitancia(codigoDPA):
 
 # FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CARGOS POR COLOR
 def cantidadPorColor(user):
-    if user.has_perm('usuario.administrador') or user.has_perm('usuario.oficinaCentral'):
+    if user.has_perm('usuario.administrador'):
         data = []
         try:
             cantBlancos = Cuadro.objects.filter(color='B').count()
             cantMestizos = Cuadro.objects.filter(color='M').count()
             cantNegros = Cuadro.objects.filter(color='N').count()
+            data.append(cantBlancos)
+            data.append(cantMestizos)
+            data.append(cantNegros)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cantBlancos = Cuadro.objects.filter(color='B', fk_cargo__nivel_subordinacion='OC').count()
+            cantMestizos = Cuadro.objects.filter(color='M', fk_cargo__nivel_subordinacion='OC').count()
+            cantNegros = Cuadro.objects.filter(color='N', fk_cargo__nivel_subordinacion='OC').count()
             data.append(cantBlancos)
             data.append(cantMestizos)
             data.append(cantNegros)
@@ -366,7 +411,7 @@ def getQuerysetDeCantidadPorColor(codigoDPA):
 
 # FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CARGOS POR EDAD
 def cantidadPorEdad(user):
-    if user.has_perm('usuario.administrador') or user.has_perm('usuario.oficinaCentral'):
+    if user.has_perm('usuario.administrador'):
         data = []
         try:
             cuadrosMenorA40 = Cuadro.objects.filter(edad__lte=40).count()
@@ -374,6 +419,22 @@ def cantidadPorEdad(user):
             cuadrosDe51A60 = Cuadro.objects.filter(edad__range=(51, 60)).count()
             cuadrosDe61A70 = Cuadro.objects.filter(edad__range=(61, 70)).count()
             cuadrosMayorA70 = Cuadro.objects.filter(edad__gte=70).count()
+            data.append(cuadrosMenorA40)
+            data.append(cuadrosDe41A50)
+            data.append(cuadrosDe51A60)
+            data.append(cuadrosDe61A70)
+            data.append(cuadrosMayorA70)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cuadrosMenorA40 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', edad__lte=40).count()
+            cuadrosDe41A50 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', edad__range=(41, 50)).count()
+            cuadrosDe51A60 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', edad__range=(51, 60)).count()
+            cuadrosDe61A70 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', edad__range=(61, 70)).count()
+            cuadrosMayorA70 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', edad__gte=70).count()
             data.append(cuadrosMenorA40)
             data.append(cuadrosDe41A50)
             data.append(cuadrosDe51A60)

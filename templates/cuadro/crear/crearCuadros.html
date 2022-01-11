@@ -14,7 +14,7 @@
         {% csrf_token %}
         {% if action == 'crear' %}
             <div class="row">
-                <div class="col-12">
+                <div class="col-4">
                     <h4 class="sub-title">{{ form.fk_cargo.label }}</h4>
                     <div class="form-group">
                         <div class="input-group input-group-primary">
@@ -24,35 +24,52 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-4">
+                    <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
+                    <div class="form-group">
+                        <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-bar-chart-line"></i></label></span>
+                            {{ form.fk_especialidad }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h4 class="sub-title">{{ form.categoria.label }}</h4>
+                    <div class="form-group">
+                        <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-cloud"></i></label></span>
+                            {{ form.categoria }}
+                        </div>
+                    </div>
+                </div>
             </div>
         {% else %}
             {{ form.fk_cargo }}
-        {% endif %}
-        <div class="row">
-            <div class="col-6">
-                <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
-                <div class="form-group">
-
-                    <div class="input-group input-group-primary">
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="sub-title">{{ form.fk_especialidad.label }}</h4>
+                    <div class="form-group">
+                        <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-bar-chart-line"></i></label></span>
-                        {{ form.fk_especialidad }}
+                            {{ form.fk_especialidad }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <h4 class="sub-title">{{ form.categoria.label }}</h4>
-                <div class="form-group">
-                    <div class="input-group input-group-primary">
+                <div class="col-6">
+                    <h4 class="sub-title">{{ form.categoria.label }}</h4>
+                    <div class="form-group">
+                        <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-cloud"></i></label></span>
-                        {{ form.categoria }}
+                            {{ form.categoria }}
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <br>
+        {% endif %}
         <div class="row">
             <div class="col-4">
                 <h4 class="sub-title">{{ form.nombre.label }}</h4>
@@ -86,6 +103,29 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <h4 class="sub-title">{{ form.escolaridad.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-aperture"></i></label></span>
+                        {{ form.escolaridad }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <h4 class="sub-title">{{ form.categoria_cientifica.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-anchor"></i></label></span>
+                        {{ form.categoria_cientifica }}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -146,7 +186,6 @@
                         {{ form.color }}
                     </div>
                 </div>
-
             </div>
             <div class="col-4">
                 <h4 class="sub-title">{{ form.edad.label }}</h4>
@@ -157,7 +196,80 @@
                         {{ form.edad }}
                     </div>
                 </div>
-
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-4">
+                <h4 class="sub-title">Movimiento</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-film"></i></label></span>
+                        {{ form.fk_movimiento }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.modalidad_promocion.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-film"></i></label></span>
+                        {{ form.modalidad_promocion }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h4 class="sub-title">{{ form.modalidad_sustitucion.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-film"></i></label></span>
+                        {{ form.modalidad_sustitucion }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+                <h4 class="sub-title">Fecha Alta</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-code"></i></label></span>
+                        {{ form.fecha_alta }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="sub-title">Fecha Baja</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-film"></i></label></span>
+                        {{ form.fecha_baja }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <h4 class="sub-title">{{ form.tiempo_en_cargo.label }}</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-droplet"></i></label></span>
+                        {{ form.tiempo_en_cargo }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                 <h4 class="sub-title">Observaciones</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        {{ form.observaciones }}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group">

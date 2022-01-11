@@ -1,0 +1,36 @@
+{% extends 'comun/listar.html' %}
+
+{% block encabezadoTabla %}
+    <i class="fa fa-table"></i> <strong>MOVIMIENTOS DE CUADRO</strong>
+{% endblock %}
+{% block table %}
+    <table class="table table-hover table-striped table-bordered" id="tblMovimientos">
+        <thead>
+        <tr>
+            <th>Acciones</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for movimiento in movimientos %}
+            <tr>
+                <td>
+                    <a class="miTippy Acciones" href="{% url 'cuadro:modificarMovimientos' movimiento.pk %}"
+                       type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
+                    <a class="miTippy Acciones" href="#" type="button" data-id="{{ movimiento.id }}"
+                       name="eliminarMovimiento"
+                       title="Eliminar"><i class="fa fa-trash"></i></a>
+                </td>
+                <td>{{ movimiento.codigo }}</td>
+                <td>{{ movimiento.descripcion }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block buttons %}
+    <a href="{% url 'cuadro:crearMovimientos' %}" type="button" class="btn btn-primary buttonCrear"><i
+            class="fa fa-plus"></i>Nuevo Movimiento</a>
+{% endblock %}

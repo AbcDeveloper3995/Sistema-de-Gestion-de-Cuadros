@@ -39,6 +39,9 @@
                     {% endif %}
                     {% if perms.usuario.administrador %}
                         <div class="nav-item">
+                            <a href="{% url 'cuadro:listarMovimientos' %}"><i class="ik ik-codepen"></i><span>Movimientos</span></a>
+                        </div>
+                        <div class="nav-item">
                             <a href="{% url 'usuario:listarUsuario' %}"><i class="ik ik-users"></i><span>Usuarios</span>
                                 <span class="badge badge-primary">{{ request.user|totalUsuarios }}</span></a>
                         </div>

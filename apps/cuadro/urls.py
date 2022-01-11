@@ -34,4 +34,10 @@ urlpatterns = [
     path('modificarNomencladorCargos/<int:pk>/', modificarNomencladorCargosView.as_view(), name='modificarNomencladorCargos'),
     # path('eliminarEspecialidad/<int:pk>/', eliminarEspecialidadView.as_view(), name='eliminarEspecialidad'),
     path('importarNomencladorCargos/', importarNomencladorCargosView.as_view(), name='importarNomencladorCargos'),
+
+    # MOVIMIENTO
+    path('listarMovimientos', listarMovimientosView.as_view(), name='listarMovimientos'),
+    path('crearMovimientos/', crearMovimientosView.as_view(), name='crearMovimientos'),
+    path('modificarMovimientos/<int:pk>/', modificarMovimientosView.as_view(), name='modificarMovimientos'),
+    path('eliminarMovimientos/<int:pk>/', eliminarMovimientosView.as_view(), name='eliminarMovimientos'),
 ]

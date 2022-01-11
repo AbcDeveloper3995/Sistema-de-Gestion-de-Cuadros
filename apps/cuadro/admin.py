@@ -23,8 +23,17 @@ class clasificador_Cargo_Cuadro_Admin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('codigo', 'descripcion')
     resource_class = clasificador_Cargo_Cuadro_Resource
 
+class cuadro_Resource(resources.ModelResource):
+    class Meta:
+        model = Cuadro
+
+class cuadro_Admin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields = ['ci']
+    list_display = ('nombre', 'ci', 'fecha_alta')
+    resource_class = cuadro_Resource
+
 admin.site.register(Cargo)
 admin.site.register(clasificadorDPA, clasificador_DPA_Admin)
 admin.site.register(Especialidad)
-admin.site.register(Cuadro)
+admin.site.register(Cuadro, cuadro_Admin)
 admin.site.register(ClasificadorCargoCuadro, clasificador_Cargo_Cuadro_Admin)

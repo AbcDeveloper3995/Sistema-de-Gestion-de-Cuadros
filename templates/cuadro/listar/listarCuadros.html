@@ -39,6 +39,8 @@
             <th rowspan="">Provincia</th>
             <th rowspan="">Municipio</th>
             <th rowspan="">Categoria</th>
+            <th rowspan="">Escolaridad</th>
+            <th rowspan="">Categoria Cientifica</th>
             <th rowspan="">CI</th>
             <th rowspan="">Nombre</th>
             <th rowspan="">Apellidos</th>
@@ -49,6 +51,13 @@
             <th rowspan="">Años de exeriencia(RAMA)</th>
             <th rowspan="">Color</th>
             <th rowspan="">Militancia</th>
+            <th rowspan="">Movimiento</th>
+            <th rowspan="">Modalidad promocion</th>
+            <th rowspan="">Modalidad sustitucion</th>
+            <th rowspan="">Fecha alta</th>
+            <th rowspan="">Fecha baja</th>
+            <th rowspan="">Tiempo en el cargo</th>
+            <th rowspan="">Observaciones</th>
             <th rowspan="">Estado</th>
         </tr>
         </thead>
@@ -60,14 +69,17 @@
                     {% if cuadro.estado == True %}
                         <a class="miTippy Acciones" href="#" name="desactivarCuadro" data-id="{{ cuadro.pk }}"
                            type="button" title="Desactivar Cuadro"><i class="fa fa-exclamation-triangle ml-15"></i></a>
-                    {% else %}
-                        <a class="miTippy Acciones" href="#" name="activarCuadro" data-id="{{ cuadro.pk }}"
-                           type="button" title="Activar Cuadro"><i class="fa fa-check-circle ml-15"></i></a>
-                    {% endif %}
-                    <a class="miTippy Acciones" href="{% url 'cuadro:modificarCuadro' cuadro.pk %}"
+                        <a class="miTippy Acciones" href="{% url 'cuadro:modificarCuadro' cuadro.pk %}"
                        type="button" title="Modificar"><i class="fa fa-edit"></i></a>
                     <a class="miTippy Acciones" href="#" data-id="{{ cuadro.id }}" name="eliminarCuadro"
-                       type="button" title="Eliminar"><i class="fa fa-trash"></i></a></td>
+                       type="button" title="Eliminar"><i class="fa fa-trash"></i></a>
+                    {% else %}
+                        <a class="miTippy Acciones" href="{% url 'cuadro:modificarCuadro' cuadro.pk %}"
+                       type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
+                    <a class="miTippy Acciones" href="#" data-id="{{ cuadro.id }}" name="eliminarCuadro"
+                       type="button" title="Eliminar"><i class="fa fa-trash"></i></a>
+                    {% endif %}
+                    </td>
                 <td class="text-center">{{ cuadro.fk_cargo.fk_clasificador_cargo_cuadro.descripcion }}</td>
                 <td class="text-center">{{ cuadro.fk_cargo.nivel_subordinacion }}</td>
                 {% if cuadro.fk_cargo.provincia == None %}
@@ -81,6 +93,12 @@
                     <td class="text-center">{{ cuadro.fk_cargo.municipio.descripcion }}</td>
                 {% endif %}
                 <td class="text-center">{{ cuadro.categoria }}</td>
+                <td class="text-center">{{ cuadro.escolaridad }}</td>
+                {% if cuadro.categoria_cientifica == None %}
+                    <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>
+                {% else %}
+                    <td class="">{{ cuadro.categoria_cientifica }}</td>
+                {% endif %}
                 <td class="text-center">{{ cuadro.ci }}</td>
                 <td class="text-center">{{ cuadro.nombre }}</td>
                 <td class="text-center">{{ cuadro.apellidos }}</td>
@@ -102,6 +120,25 @@
                     <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
                 {% else %}
                     <td class="text-center">{{ cuadro.militancia }}</td>
+                {% endif %}
+                <td>{{ cuadro.fk_movimiento.descripcion }}</td>
+                {% if cuadro.fk_movimiento.codigo == 1 %}
+                    <td class="text-center">{{ cuadro.modalidad_promocion }}</td>
+                {% else %}
+                    <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
+                {% endif %}
+                {% if cuadro.fk_movimiento.codigo == 10 %}
+                    <td class="text-center">{{ cuadro.modalidad_sustitucion }}</td>
+                {% else %}
+                    <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
+                {% endif %}
+                <td>{{ cuadro.fecha_alta }}</td>
+                <td>{{ cuadro.fecha_baja }}</td>
+                <td>{{ cuadro.tiempo_en_cargo }}</td>
+                {% if cuadro.observaciones == None %}
+                    <td><a href="#" type="button"><span class="badge badge-primary">Sin observaciones</span> </a></td>
+                {% else %}
+                    <td><a href="#" type="button"><span class="badge badge-primary">{{ cuadro.observaciones }}</span> </a></td>
                 {% endif %}
                 {% if cuadro.estado == True %}
                     <td><span class="badge badge-success" title="ACTIVO">1</span></td>

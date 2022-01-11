@@ -28,6 +28,7 @@ let rangoEdad = $('#rangoEdad');
 let eliminarCuadro = $('a[name="eliminarCuadro"]');
 let eliminarCargo = $('a[name="eliminarCargo"]');
 let eliminarEspecialidad = $('a[name="eliminarEspecialidad"]');
+let eliminarMovimiento = $('a[name="eliminarMovimiento"]');
 let eliminarTodos = $('a[name="eliminarTodos"]');
 let desactivarCargo = $('a[name="desactivarCargo"]');
 let activarCargo = $('a[name="activarCargo"]');
@@ -36,16 +37,17 @@ let desactivarCuadro = $('a[name="desactivarCuadro"]');
 
 //------------------------------------PROCEDIMIENTO PARA ELIMINACIONES---------------------------------------------//
 //---CUADRO
+//---CUADRO
 eliminarCuadro.on('click', function () {
     let idCuadro = $(this).data('id');
     let url = 'http://127.0.0.1:8000/cuadro/eliminarCuadro/' + idCuadro;
-    notificacion('Notificacion', 'Estas seguro de deseas eliminar este cuadro ?', url, idCuadro)
+    notificacion('Notificacion', 'Estas seguro de deseas eliminar este cuadro?', url, idCuadro)
 });
 //---CARGO
 eliminarCargo.on('click', function () {
     let idCargo = $(this).data('id');
     let url = 'http://127.0.0.1:8000/cuadro/eliminarCargo/' + idCargo;
-    notificacion('Notificacion', 'Estas seguro de deseas eliminar este cargo ?', url, idCargo)
+    notificacion('Notificacion', 'Estas seguro de deseas eliminar este cargo?', url, idCargo)
 });
 //---ESPECIALIDAD
 eliminarEspecialidad.on('click', function () {
@@ -53,6 +55,13 @@ eliminarEspecialidad.on('click', function () {
     let url = 'http://127.0.0.1:8000/cuadro/eliminarEspecialidad/' + idEspecialidad;
     notificacion('Notificacion', 'Estas seguro de deseas eliminar esta especialidad ?', url, idEspecialidad)
 });
+//---MOVIMIENTO
+eliminarMovimiento.on('click', function () {
+let idMovimiento = $(this).data('id');
+    let url = 'http://127.0.0.1:8000/cuadro/eliminarMovimientos/' + idMovimiento;
+    notificacion('Notificacion', 'Estas seguro de deseas eliminar este movimiento?', url, idMovimiento)
+});
+
 //------------------------------------PROCEDIMIENTO PARA EL REALIZADO DE FILTRADO AVANZADO----------------------------------//
 rangoEdad.ionRangeSlider({
     min: 18,
@@ -103,7 +112,7 @@ $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
         var min = parseInt($('#min').val(), 10);
         var max = parseInt($('#max').val(), 10);
-        var age = parseFloat(data[10]) || 0;
+        var age = parseFloat(data[12]) || 0;
 
         if ((isNaN(min) && isNaN(max)) ||
             (isNaN(min) && age <= max) ||

@@ -10,6 +10,7 @@
             <th>Nivel de Subordinacion</th>
             <th>Provincia</th>
             <th>Municipio</th>
+            <th>Observaciones</th>
             <th>Vacante</th>
             <th>Activo</th>
         </tr>
@@ -40,6 +41,11 @@
                     <td><a href="#" type="button"><i class="fa fa-times-circle" style="color: red"></i></a></td>
                 {% else %}
                     <td class="">{{ cargo.municipio.descripcion }}</td>
+                {% endif %}
+                {% if cargo.observaciones == None %}
+                    <td><a href="#" type="button"><span class="badge badge-primary">Sin observaciones</span> </a></td>
+                {% else %}
+                    <td><a href="#" type="button"><span class="badge badge-primary">{{ cargo.observaciones }}</span> </a></td>
                 {% endif %}
                 {% if cargo.vacante == True %}
                     <td><a href="#" type="button"><i class="fa fa-check-circle" style="color: #01ff70"></i></a></td>

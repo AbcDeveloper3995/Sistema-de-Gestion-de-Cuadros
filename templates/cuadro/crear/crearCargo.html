@@ -13,13 +13,21 @@
     <form method="post" name="cargoForm" id="cargoForm">
         {% csrf_token %}
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-6">
                  <h4 class="sub-title">Nombre</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-fast-forward"></i></label></span>
                         {{ form.fk_clasificador_cargo_cuadro }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                 <h4 class="sub-title">Observaciones</h4>
+                <div class="form-group">
+                    <div class="input-group input-group-primary">
+                        {{ form.observaciones }}
                     </div>
                 </div>
             </div>
