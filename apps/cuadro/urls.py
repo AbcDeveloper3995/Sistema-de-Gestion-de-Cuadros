@@ -13,6 +13,7 @@ urlpatterns = [
     path('isVacante/', isVacanteView.as_view(), name='isVacante'),
     path('desactivarCuadro/<int:pk>/', desactivarCuadroView.as_view(), name='desactivarCuadro'),
     path('getMunicipios/', getMunicipiosView.as_view(), name='getMunicipios'),
+    path('isActivo/', isActivoView.as_view(), name='isActivo'),
 
     # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),

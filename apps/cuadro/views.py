@@ -522,3 +522,16 @@ class eliminarMovimientosView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA VERIFICAR SI EL CUADRO A CREAR NO ESTE ACTIVO CON OTRO CARGO.
+class isActivoView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            query = get_object_or_404(Cuadro, ci=request.GET['ci'])
+            if query and query.estado == True:
+                data['message'] = 'Este cuadro esta activo en otro cargo.'
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)

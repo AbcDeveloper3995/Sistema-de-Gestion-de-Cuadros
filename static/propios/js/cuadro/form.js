@@ -8,7 +8,9 @@ $('.select2').select2({
 
 let campoNivelSubordinacion = $('select[id="campoNivelSubordinacion"]');
 let campoEdad = $('#campoEdad');
+let campoNombreCuadro = $('#campoNombreCuadro');
 let campoCarnet = $('#campoCI');
+let campoMilitancia = $('#campoMilitancia');
 let submitCuadroForm = $('#submitCuadroForm');
 let cargo = $('#fk_cargo');
 let selectpProvincia = $('select[id="campoProvincia"]');
@@ -286,24 +288,36 @@ $('form[name="nomencladorCargosForm"]').bootstrapValidator({
 });
 
 //-------VALIDACION DE DEPENDENCIA DEL CAMPO EDAD SEGUN EL AÑO DEL CARNET
-campoCarnet.keyup(function () {
+
+const calculoEdad = (fragmentoInicialAno, anoCarnet, mesCarnet, diaCarnet) => {
     let edad = 0
+    fechaNacimiento = fragmentoInicialAno + anoCarnet + '-' + mesCarnet + '-' + diaCarnet;
+    fechaNacimiento = moment(fechaNacimiento);
+    fechaActual = moment();
+    edad = fechaActual.diff(fechaNacimiento, 'years');
+    campoEdad[0].value = edad;
+};
+campoCarnet.keyup(function () {
     let anoCarnetLength = $(this).val().split('');
     let fragmentoAnoActual = new Date().getFullYear().toString().slice(0, 2);
-    let anoCarnet = $(this).val();
-    let anoActual = new Date().getFullYear().toString();
-    if (anoCarnetLength.length === 2) {
+    let anoCarnet = $(this).val().toString().slice(0, 2);
+    let mesCarnet = $(this).val().toString().slice(2, 4);
+    let diaCarnet = $(this).val().toString().slice(4, 6);
+    if (anoCarnetLength.length === 6) {
+        if (campoEdad[0].value > 35) {
+            let options = '<option value="">--------</option>';
+            options += '<option value="PCC">PCC</option>';
+            campoMilitancia.html(options)
+        }
         if (parseInt(anoCarnet) > parseInt(fragmentoAnoActual)) {
-            anoCarnet = parseInt('19' + anoCarnet);
-            edad = parseInt(anoActual) - anoCarnet;
-            campoEdad[0].value = edad
+            calculoEdad('19', anoCarnet, mesCarnet, diaCarnet)
 
         } else {
-            anoCarnet = parseInt('20' + anoCarnet);
-            edad = parseInt(anoActual) - anoCarnet;
-            campoEdad[0].value = edad
+            calculoEdad('20', anoCarnet, mesCarnet, diaCarnet)
         }
     }
+
+
 });
 
 //---VALIDACION DE DEPENDENCIA DE LOS CAMPOS PROVINCIA Y MUNICIPIO SEGUN LO SELECCIONADO EN EL CAMPPO NIVEL DE SUBORDINACION
@@ -324,6 +338,27 @@ campoNivelSubordinacion.on('change', function () {
         selectpProvincia.prop('disabled', false);
         selectpMunicipio.prop('disabled', false);
     }
+})
+
+//---VALIDACION PARA VERIFICAR QUE EL CUADRO A CREAR NO ESTE ACTIVO EN OTRO CARGO
+campoNombreCuadro.on('click', function () {
+    let ci = campoCarnet[0].value;
+     $.ajax({
+        url: '/cuadro/isActivo/',
+        type: 'GET',
+        data: {'ci': ci},
+        dataType: 'json'
+    }).done(function (response) {
+         if (!response.hasOwnProperty('error')) {
+             submitCuadroForm.prop('disabled', true);
+             messageError(response.message);
+             return false;
+         } else {
+             submitCuadroForm.prop('disabled', false)
+         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ': ' + errorThrown);
+    })
 })
 
 //---------------------------PROCEDIMIENTO PARA SELECT ENCADENADOS (PROVINCIA-MUNICIPIO)----------------------------//
