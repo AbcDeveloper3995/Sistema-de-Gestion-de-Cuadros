@@ -72,6 +72,7 @@ class crearCuadroView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
+        print(request.POST)
         if form.is_valid():
             messages.success(self.request, 'Cuadro creado correctamente.')
             form.save()
@@ -531,7 +532,19 @@ class isActivoView(LoginRequiredMixin, TemplateView):
         try:
             query = get_object_or_404(Cuadro, ci=request.GET['ci'])
             if query and query.estado == True:
-                data['message'] = 'Este cuadro esta activo en otro cargo.'
+                data['activo'] = True
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA OBTERNER UNA MOVIMIENTO.
+class obtenerMovimientoView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            query = get_object_or_404(Movimiento, id=request.GET['id'])
+            data['codigo'] = query.codigo
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

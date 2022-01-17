@@ -252,17 +252,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2">
-                <h4 class="sub-title">{{ form.tiempo_en_cargo.label }}</h4>
-                <div class="form-group">
-                    <div class="input-group input-group-primary">
-                        <span class="input-group-prepend"><label class="input-group-text"><i
-                                class="ik ik-droplet"></i></label></span>
-                        {{ form.tiempo_en_cargo }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
+            <div class="col-6">
                  <h4 class="sub-title">Observaciones</h4>
                 <div class="form-group">
                     <div class="input-group input-group-primary">
@@ -276,6 +266,12 @@
                 <div class="border-checkbox-group border-checkbox-group-primary">
                     {{ form.estado }}
                     <label class="border-checkbox-label text-uppercase" for="estadoCuadro"><strong>Activo</strong></label>
+                </div>
+            </div>
+            <div class="border-checkbox-section">
+                <div class="border-checkbox-group border-checkbox-group-primary">
+                    <input class="border-checkbox" type="checkbox" id="botonFechaBaja" >
+                    <label class="border-checkbox-label text-uppercase" for="botonFechaBaja" title="Habilitar solo de ser necesario."><strong>Habilitar Fecha de Baja</strong></label>
                 </div>
             </div>
         </div>

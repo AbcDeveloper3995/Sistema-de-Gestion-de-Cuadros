@@ -39,7 +39,6 @@ CHOICE_ESCOLARIDAD = (
     ('9noGrado', '9no Grado'),
     ('12moGrado', '12mo Grado'),
     ('Tec.Med.', 'Tecnico Medio'),
-    ('Tec.Med.Sup.', 'Tecnico Medio Superior'),
     ('Universitario', 'Universitario')
 )
 
@@ -50,14 +49,14 @@ CHOICE_CATEGORIA_CIENTIFICA = (
 )
 
 CHOICE_MODALIDAD_PROMOCION = (
-    (11, 'Que procede de la reserva'),
-    (12, 'Mujeres promovidas en el periodo'),
-    (13, 'Negros y mulatos promovidos en el periodo')
+    ('11', 'Que procede de la reserva'),
+    ('12', 'Mujeres promovidas en el periodo'),
+    ('13', 'Negros y mulatos promovidos en el periodo')
 )
 
 CHOICE_MODALIDAD_SUSTITUCION = (
-    (101, 'Ubicado en otro cargo de inferior jerarquia y diferente categoria ocupacional'),
-    (102, 'Cese de su relacion de trabajo')
+    ('101', 'Ubicado en otro cargo de inferior jerarquia y diferente categoria ocupacional'),
+    ('102', 'Cese de su relacion de trabajo')
 )
 
 class clasificadorDPA(models.Model):
@@ -168,8 +167,8 @@ class Cuadro(models.Model):
     modalidad_sustitucion = models.CharField(verbose_name='Modalidad del movimiento por Sustitucion', max_length=100, blank=True, null=True, choices=CHOICE_MODALIDAD_SUSTITUCION)
     edad = models.PositiveIntegerField(verbose_name='Edad')
     fecha_alta = models.DateField(verbose_name='Fecha de Alta')
-    fecha_baja = models.DateField(verbose_name='Fecha de Baja')
-    tiempo_en_cargo = models.CharField(verbose_name='Tiempo en el cargo', blank=True, null=True, max_length=50)
+    fecha_baja = models.DateField(verbose_name='Fecha de Baja', blank=True, null=True)
+    tiempo_en_cargo = models.CharField(verbose_name='Tiempo en el cargo(años)', blank=True, null=True, max_length=50)
     observaciones = models.CharField(verbose_name='Observaciones', max_length=255, blank=True, null=True)
     estado = models.BooleanField(default=True)
 

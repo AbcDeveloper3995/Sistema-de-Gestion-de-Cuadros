@@ -14,6 +14,7 @@ urlpatterns = [
     path('desactivarCuadro/<int:pk>/', desactivarCuadroView.as_view(), name='desactivarCuadro'),
     path('getMunicipios/', getMunicipiosView.as_view(), name='getMunicipios'),
     path('isActivo/', isActivoView.as_view(), name='isActivo'),
+    path('obtenerMovimiento/', obtenerMovimientoView.as_view(), name='obtenerMovimiento'),
 
     # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),

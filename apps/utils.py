@@ -160,7 +160,7 @@ def getQuerysetDeCantidadPorGenero(codigoDPA):
     return data
 
 
-# FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CARGOS POR CATEGORIA
+# FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CUADROS POR CATEGORIA
 def cantidadPorCategoria(user):
     if user.has_perm('usuario.administrador'):
         data = []
@@ -245,15 +245,17 @@ def getQuerysetDeCantidadPorCategoria(codigoDPA):
     return data
 
 
-# FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE PORCENTAJE SEGUN LA MILITANCIA
-def porcentajeSegunMilitancia(user):
+# FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CUADROS SEGUN LA MILITANCIA
+def cantidadSegunMilitancia(user):
     if user.has_perm('usuario.administrador'):
         data = []
         try:
             cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC').count()
             cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC').count()
             cantNoMilitantes = Cuadro.objects.filter(militancia=None).count()
-            data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC}, {'name': 'No militantes', 'y': cantNoMilitantes}]
+            data.append(cantMilitantesPCC)
+            data.append(cantMilitantesUJC)
+            data.append(cantNoMilitantes)
         except:
             pass
         return data
@@ -263,8 +265,9 @@ def porcentajeSegunMilitancia(user):
             cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC', fk_cargo__nivel_subordinacion='OC').count()
             cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC', fk_cargo__nivel_subordinacion='OC').count()
             cantNoMilitantes = Cuadro.objects.filter(militancia=None, fk_cargo__nivel_subordinacion='OC').count()
-            data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC},
-                    {'name': 'No militantes', 'y': cantNoMilitantes}]
+            data.append(cantMilitantesPCC)
+            data.append(cantMilitantesUJC)
+            data.append(cantNoMilitantes)
         except:
             pass
         return data
@@ -274,8 +277,9 @@ def porcentajeSegunMilitancia(user):
             cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC', fk_cargo__nivel_subordinacion='UAS').count()
             cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC', fk_cargo__nivel_subordinacion='UAS').count()
             cantNoMilitantes = Cuadro.objects.filter(militancia=None, fk_cargo__nivel_subordinacion='UAS').count()
-            data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC},
-                    {'name': 'No militantes', 'y': cantNoMilitantes}]
+            data.append(cantMilitantesPCC)
+            data.append(cantMilitantesUJC)
+            data.append(cantNoMilitantes)
         except:
             pass
         return data
@@ -318,7 +322,9 @@ def getQuerysetDePorcentajeSegunMilitancia(codigoDPA):
         cantMilitantesPCC = Cuadro.objects.filter(militancia='PCC', fk_cargo__provincia__codigo__exact=codigoDPA).count()
         cantMilitantesUJC = Cuadro.objects.filter(militancia='UJC', fk_cargo__provincia__codigo__exact=codigoDPA).count()
         cantNoMilitantes = Cuadro.objects.filter(militancia=None, fk_cargo__provincia__codigo__exact=codigoDPA).count()
-        data = [{'name': 'PCC', 'y': cantMilitantesPCC}, {'name': 'UJC', 'y': cantMilitantesUJC},{'name': 'No militantes', 'y': cantNoMilitantes}]
+        data.append(cantMilitantesPCC)
+        data.append(cantMilitantesUJC)
+        data.append(cantNoMilitantes)
     except:
         pass
     return data
@@ -505,6 +511,199 @@ def getQuerysetDeCantidadPorEdad(codigoDPA):
         data.append(cuadrosDe51A60)
         data.append(cuadrosDe61A70)
         data.append(cuadrosMayorA70)
+    except:
+        pass
+    return data
+
+# FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CUADROS POR TIEMPO
+def cantidadPorTiempo(user):
+    if user.has_perm('usuario.administrador'):
+        data = []
+        try:
+            cuadrosMenorA1 = Cuadro.objects.filter(tiempo_en_cargo__lt=1).count()
+            cuadrosDe1A2 = Cuadro.objects.filter(tiempo_en_cargo__range=(1, 2)).count()
+            cuadrosDe3A5 = Cuadro.objects.filter(tiempo_en_cargo__range=(3, 5)).count()
+            cuadrosDe6A10 = Cuadro.objects.filter(tiempo_en_cargo__range=(6, 10)).count()
+            cuadrosMayorA10 = Cuadro.objects.filter(tiempo_en_cargo__gt=10).count()
+            data.append(cuadrosMenorA1)
+            data.append(cuadrosDe1A2)
+            data.append(cuadrosDe3A5)
+            data.append(cuadrosDe6A10)
+            data.append(cuadrosMayorA10)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cuadrosMenorA1 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', tiempo_en_cargo__lt=1).count()
+            cuadrosDe1A2 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', tiempo_en_cargo__range=(1, 2)).count()
+            cuadrosDe3A5 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', tiempo_en_cargo__range=(3, 5)).count()
+            cuadrosDe6A10 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', tiempo_en_cargo__range=(6, 10)).count()
+            cuadrosMayorA10 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', tiempo_en_cargo__gt=10).count()
+            data.append(cuadrosMenorA1)
+            data.append(cuadrosDe1A2)
+            data.append(cuadrosDe3A5)
+            data.append(cuadrosDe6A10)
+            data.append(cuadrosMayorA10)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cuadrosMenorA1 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', tiempo_en_cargo__lt=1).count()
+            cuadrosDe1A2 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', tiempo_en_cargo__range=(1, 2)).count()
+            cuadrosDe3A5 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', tiempo_en_cargo__range=(3, 5)).count()
+            cuadrosDe6A10 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', tiempo_en_cargo__range=(6, 10)).count()
+            cuadrosMayorA10 = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', tiempo_en_cargo__gt=10).count()
+            data.append(cuadrosMenorA1)
+            data.append(cuadrosDe1A2)
+            data.append(cuadrosDe3A5)
+            data.append(cuadrosDe6A10)
+            data.append(cuadrosMayorA10)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.21'):
+        return getQuerysetDeCantidadPorTiempo(21)
+    elif user.has_perm('usuario.22'):
+        return getQuerysetDeCantidadPorTiempo(22)
+    elif user.has_perm('usuario.23'):
+        return getQuerysetDeCantidadPorTiempo(23)
+    elif user.has_perm('usuario.24'):
+        return getQuerysetDeCantidadPorTiempo(24)
+    elif user.has_perm('usuario.25'):
+        return getQuerysetDeCantidadPorTiempo(25)
+    elif user.has_perm('usuario.26'):
+        return getQuerysetDeCantidadPorTiempo(26)
+    elif user.has_perm('usuario.27'):
+        return getQuerysetDeCantidadPorTiempo(27)
+    elif user.has_perm('usuario.28'):
+        return getQuerysetDeCantidadPorTiempo(28)
+    elif user.has_perm('usuario.29'):
+        return getQuerysetDeCantidadPorTiempo(29)
+    elif user.has_perm('usuario.30'):
+        return getQuerysetDeCantidadPorTiempo(30)
+    elif user.has_perm('usuario.31'):
+        return getQuerysetDeCantidadPorTiempo(31)
+    elif user.has_perm('usuario.32'):
+        return getQuerysetDeCantidadPorTiempo(32)
+    elif user.has_perm('usuario.33'):
+        return getQuerysetDeCantidadPorTiempo(33)
+    elif user.has_perm('usuario.34'):
+        return getQuerysetDeCantidadPorTiempo(34)
+    elif user.has_perm('usuario.35'):
+        return getQuerysetDeCantidadPorTiempo(35)
+    elif user.has_perm('usuario.40'):
+        return getQuerysetDeCantidadPorTiempo(40)
+
+def getQuerysetDeCantidadPorTiempo(codigoDPA):
+    data = []
+    try:
+        cuadrosMenorA1 = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, tiempo_en_cargo__lt=1).count()
+        cuadrosDe1A2 = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, tiempo_en_cargo__range=(1, 2)).count()
+        cuadrosDe3A5 = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, tiempo_en_cargo__range=(3, 5)).count()
+        cuadrosDe6A10 = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, tiempo_en_cargo__range=(6, 10)).count()
+        cuadrosMayorA10 = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, tiempo_en_cargo__gt=10).count()
+        data.append(cuadrosMenorA1)
+        data.append(cuadrosDe1A2)
+        data.append(cuadrosDe3A5)
+        data.append(cuadrosDe6A10)
+        data.append(cuadrosMayorA10)
+    except:
+        pass
+    return data
+
+
+# FUNCIONES PARA OBTENER LA DATA A MOSTRAR EN EL GRAFICO DE CANTIDAD DE CUADROS POR ESCOLARIDAD
+def cantidadPorEscolaridad(user):
+    if user.has_perm('usuario.administrador'):
+        data = []
+        try:
+            cant9no = Cuadro.objects.filter(escolaridad__exact='9noGrado').count()
+            cant12mo = Cuadro.objects.filter(escolaridad__exact='12moGrado').count()
+            cantTecnicoMedio = Cuadro.objects.filter(escolaridad__exact='Tec.Med.').count()
+            cantUniversitarios = Cuadro.objects.filter(escolaridad__exact='Universitario').count()
+            data.append(cant9no)
+            data.append(cant12mo)
+            data.append(cantTecnicoMedio)
+            data.append(cantUniversitarios)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.oficinaCentral'):
+        data = []
+        try:
+            cant9no = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', escolaridad__exact='9noGrado').count()
+            cant12mo = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', escolaridad__exact='12moGrado').count()
+            cantTecnicoMedio = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', escolaridad__exact='Tec.Med.').count()
+            cantUniversitarios = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='OC', escolaridad__exact='Universitario').count()
+            data.append(cant9no)
+            data.append(cant12mo)
+            data.append(cantTecnicoMedio)
+            data.append(cantUniversitarios)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.uas'):
+        data = []
+        try:
+            cant9no = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', escolaridad__exact='9noGrado').count()
+            cant12mo = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', escolaridad__exact='12moGrado').count()
+            cantTecnicoMedio = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', escolaridad__exact='Tec.Med.').count()
+            cantUniversitarios = Cuadro.objects.filter(fk_cargo__nivel_subordinacion='UAS', escolaridad__exact='Universitario').count()
+            data.append(cant9no)
+            data.append(cant12mo)
+            data.append(cantTecnicoMedio)
+            data.append(cantUniversitarios)
+        except:
+            pass
+        return data
+    elif user.has_perm('usuario.21'):
+        return getQuerysetDeCantidadPorEscolaridad(21)
+    elif user.has_perm('usuario.22'):
+        return getQuerysetDeCantidadPorEscolaridad(22)
+    elif user.has_perm('usuario.23'):
+        return getQuerysetDeCantidadPorEscolaridad(23)
+    elif user.has_perm('usuario.24'):
+        return getQuerysetDeCantidadPorEscolaridad(24)
+    elif user.has_perm('usuario.25'):
+        return getQuerysetDeCantidadPorEscolaridad(25)
+    elif user.has_perm('usuario.26'):
+        return getQuerysetDeCantidadPorEscolaridad(26)
+    elif user.has_perm('usuario.27'):
+        return getQuerysetDeCantidadPorEscolaridad(27)
+    elif user.has_perm('usuario.28'):
+        return getQuerysetDeCantidadPorEscolaridad(28)
+    elif user.has_perm('usuario.29'):
+        return getQuerysetDeCantidadPorEscolaridad(29)
+    elif user.has_perm('usuario.30'):
+        return getQuerysetDeCantidadPorEscolaridad(30)
+    elif user.has_perm('usuario.31'):
+        return getQuerysetDeCantidadPorEscolaridad(31)
+    elif user.has_perm('usuario.32'):
+        return getQuerysetDeCantidadPorEscolaridad(32)
+    elif user.has_perm('usuario.33'):
+        return getQuerysetDeCantidadPorEscolaridad(33)
+    elif user.has_perm('usuario.34'):
+        return getQuerysetDeCantidadPorEscolaridad(34)
+    elif user.has_perm('usuario.35'):
+        return getQuerysetDeCantidadPorEscolaridad(35)
+    elif user.has_perm('usuario.40'):
+        return getQuerysetDeCantidadPorEscolaridad(40)
+
+def getQuerysetDeCantidadPorEscolaridad(codigoDPA):
+    data = []
+    try:
+        cant9no = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, escolaridad__exact='9noGrado').count()
+        cant12mo = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, escolaridad__exact='12moGrado').count()
+        cantTecnicoMedio = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, escolaridad__exact='Tec.Med.').count()
+        cantUniversitarios = Cuadro.objects.filter(fk_cargo__provincia__codigo__exact=codigoDPA, escolaridad__exact='Universitario').count()
+        data.append(cant9no)
+        data.append(cant12mo)
+        data.append(cantTecnicoMedio)
+        data.append(cantUniversitarios)
     except:
         pass
     return data

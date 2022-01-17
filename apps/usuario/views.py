@@ -12,8 +12,8 @@ from django.views.generic import TemplateView, ListView, CreateView, UpdateView
 
 from apps.usuario.forms import usuarioForm, usuarioProfileForm
 from apps.usuario.models import Usuario
-from apps.utils import cantidadPorGenero, cantidadPorCategoria, porcentajeSegunMilitancia, cantidadPorColor, \
-    cantidadPorEdad
+from apps.utils import cantidadPorGenero, cantidadPorCategoria, cantidadSegunMilitancia, cantidadPorColor, \
+    cantidadPorEdad, cantidadPorEscolaridad, cantidadPorTiempo
 
 
 class Login(LoginView):
@@ -56,11 +56,12 @@ class homeView(LoginRequiredMixin, TemplateView):
                     'colorByPoint':True,
                     'data': cantidadPorCategoria(self.request.user),
                 }
-            elif action == 'porcentajeSegunMilitancia':
+            elif action == 'cantidadSegunMilitancia':
                 data = {
-                    'name': 'Porcentaje',
+                    'name': 'Cantidad',
+                    'showInLegend': False,
                     'colorByPoint': True,
-                    'data': porcentajeSegunMilitancia(self.request.user),
+                    'data': cantidadSegunMilitancia(self.request.user),
                 }
             elif action == 'cantidaPorColor':
                 data = {
@@ -75,6 +76,20 @@ class homeView(LoginRequiredMixin, TemplateView):
                     'showInLegend': False,
                     'colorByPoint':True,
                     'data': cantidadPorEdad(self.request.user),
+                }
+            elif action == 'cantidaPorEscolaridad':
+                data = {
+                    'name':'Cantidad',
+                    'showInLegend': False,
+                    'colorByPoint':True,
+                    'data': cantidadPorEscolaridad(self.request.user),
+                }
+            elif action == 'cantidaPorTiempo':
+                data = {
+                    'name':'Cantidad',
+                    'showInLegend': False,
+                    'colorByPoint':True,
+                    'data': cantidadPorTiempo(self.request.user),
                 }
             else:
                 data['error'] = 'Ha ocurrido un error'

@@ -97,12 +97,9 @@ let graficoCantidadPorCategoria = Highcharts.chart('graficoCantidaPorCategoria',
     },
 });
 
-let graficoPorcentajeSegunMilitancia = Highcharts.chart('graficoPorcentajeSegunMilitancia', {
+let graficoCantidadSegunMilitancia = Highcharts.chart('graficoCantidadSegunMilitancia', {
     chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
+        type: 'column'
     },
     lang: {
         downloadXLS: "Eportar como Excel",
@@ -118,24 +115,34 @@ let graficoPorcentajeSegunMilitancia = Highcharts.chart('graficoPorcentajeSegunM
         }
     },
     title: {
-        text: 'Porcentaje de cuadros segun la militancia'
+        text: 'Cantidad de cuadros segun la militancia'
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
     },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
+    xAxis: {
+        categories: [
+            'Militantes PCC',
+            'Militantes UJC',
+            'No militantes'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
         }
     },
     plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
         }
     },
 });
@@ -242,6 +249,109 @@ let graficoCantidadPorEdad = Highcharts.chart('graficoCantidadPorEdad', {
     },
 });
 
+let graficoCantidadPorEscolaridad = Highcharts.chart('graficoCantidadPorEscolaridad', {
+    chart: {
+        type: 'column'
+    },
+    lang: {
+        downloadXLS: "Eportar como Excel",
+        downloadPDF: "Exportar como PDF",
+        printChart: "Imprimir"
+    },
+    exporting: {
+        menuItemDefinitions: {},
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS', 'downloadPDF', 'separator', 'printChart']
+            }
+        }
+    },
+    title: {
+        text: 'Cantidad de cuadros segun la escolaridad'
+    },
+    xAxis: {
+        categories: [
+            '9no Grado',
+            '12mo Grado',
+            'Tecnico Medio',
+            'Universitario'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+});
+
+let graficoCantidadPorTiempo = Highcharts.chart('graficoCantidadPorTiempo', {
+    chart: {
+        type: 'column'
+    },
+    lang: {
+        downloadXLS: "Eportar como Excel",
+        downloadPDF: "Exportar como PDF",
+        printChart: "Imprimir"
+    },
+    exporting: {
+        menuItemDefinitions: {},
+        buttons: {
+            contextButton: {
+                menuItems: ['downloadXLS', 'downloadPDF', 'separator', 'printChart']
+            }
+        }
+    },
+    title: {
+        text: 'Cantidad de cuadros por Tiempo'
+    },
+    xAxis: {
+        categories: [
+            'Menos de 1 año',
+            'De 1 a 2 años',
+            'De 3 a 5 años',
+            'De 6 a 10 años',
+            'Mas de 10 años'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+});
+
 const graficoCantidadPorGeneroAjax = () => {
     $.ajax({
         url: window.location.pathname,
@@ -276,15 +386,15 @@ const graficoCantidadPorCategoriaAjax = () => {
     })
 };
 
-const graficoPorcentajeSegunMilitanciaAjax = () => {
+const graficoCantidadSegunMilitanciaAjax = () => {
     $.ajax({
         url: window.location.pathname,
         type: 'POST',
-        data: {'action': 'porcentajeSegunMilitancia'},
+        data: {'action': 'cantidadSegunMilitancia'},
         dataType: 'json',
     }).done(function (data) {
         if (!data.hasOwnProperty('error')) {
-            graficoPorcentajeSegunMilitancia.addSeries(data);
+            graficoCantidadSegunMilitancia.addSeries(data);
             return false
         }
         messageError(data.error)
@@ -327,12 +437,50 @@ const graficoCantidadPorEdadAjax = () => {
     })
 };
 
+const graficoCantidadPorEscolaridadAjax = () => {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'action': 'cantidaPorEscolaridad'},
+        dataType: 'json',
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            graficoCantidadPorEscolaridad.addSeries(data);
+            return false
+        }
+        messageError(data.error)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ':' + errorThrown)
+    })
+};
+
+const graficoCantidadPorTiempoAjax = () => {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'action': 'cantidaPorTiempo'},
+        dataType: 'json',
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            graficoCantidadPorTiempo.addSeries(data);
+            return false
+        }
+        messageError(data.error)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ':' + errorThrown)
+    })
+};
+
 graficoCantidadPorGeneroAjax();
 
 graficoCantidadPorCategoriaAjax();
 
-graficoPorcentajeSegunMilitanciaAjax()
+graficoCantidadSegunMilitanciaAjax()
 
 graficoCantidadPorColorAjax()
 
 graficoCantidadPorEdadAjax()
+
+graficoCantidadPorEscolaridadAjax()
+
+graficoCantidadPorTiempoAjax()

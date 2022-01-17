@@ -133,8 +133,12 @@
                     <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
                 {% endif %}
                 <td>{{ cuadro.fecha_alta }}</td>
-                <td>{{ cuadro.fecha_baja }}</td>
-                <td>{{ cuadro.tiempo_en_cargo }}</td>
+                 {% if cuadro.fecha_baja == None %}
+                    <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
+                {% else %}
+                    <td class="text-center">{{ cuadro.fecha_baja }}</td>
+                {% endif %}
+                <td>{{ cuadro|tiempoEnCargo }}</td>
                 {% if cuadro.observaciones == None %}
                     <td><a href="#" type="button"><span class="badge badge-primary">Sin observaciones</span> </a></td>
                 {% else %}
