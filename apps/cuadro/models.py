@@ -34,14 +34,6 @@ CHOICE_NIVEL_SUBORDINACION = (
     ('M', 'Municipal')
 )
 
-CHOICE_ESCOLARIDAD = (
-    ('', '--------'),
-    ('9noGrado', '9no Grado'),
-    ('12moGrado', '12mo Grado'),
-    ('Tec.Med.', 'Tecnico Medio'),
-    ('Universitario', 'Universitario')
-)
-
 CHOICE_CATEGORIA_CIENTIFICA = (
     ('', '--------'),
     ('Dr.Cs', 'Doctor en Ciencias'),
@@ -83,6 +75,19 @@ class Movimiento(models.Model):
         db_table = 'Movimiento'
         verbose_name = 'Movimiento'
         verbose_name_plural = 'Movimientos'
+        ordering = ['codigo']
+
+    def __str__(self):
+        return '{0}--{1}'.format(str(self.codigo), self.descripcion)
+
+class ModalidadPromocion(models.Model):
+    codigo = models.IntegerField(verbose_name='Codigo', unique=True,  blank=False, null=False)
+    descripcion = models.CharField(verbose_name='Descripcion', max_length=200, blank=True, null=True)
+
+    class Meta:
+        db_table = 'Modalidad Promocion'
+        verbose_name = 'Modalidad Promocion'
+        verbose_name_plural = 'Modalidad Promocion'
         ordering = ['codigo']
 
     def __str__(self):
@@ -133,8 +138,9 @@ class Cargo(models.Model):
             return '{0}--{1}--{2}'.format(str(self.fk_clasificador_cargo_cuadro.descripcion), self.provincia.descripcion, self.municipio.descripcion)
 
 class Especialidad(models.Model):
-    nombre = models.CharField(verbose_name='Nombre de la especialidad', max_length=255, unique=True, blank=False, null=False)
-    estado = models.BooleanField(default=True)
+    codigo = models.CharField(verbose_name='Codigo', max_length=6, unique=True,  blank=True, null=True)
+    descripcion = models.CharField(verbose_name='Descripcion', max_length=150, blank=True, null=True)
+    nivel = models.CharField(verbose_name='Nivel Escolar', max_length=100, blank=True, null=True)
 
     class Meta:
         db_table = 'Especialidad'
@@ -146,14 +152,15 @@ class Especialidad(models.Model):
         return item
 
     def __str__(self):
-        return str(self.nombre)
+        return '{0}--{1}'.format(str(self.codigo), self.descripcion)
+
 
 class Cuadro(models.Model):
     fk_cargo = models.ForeignKey(Cargo, verbose_name='Cargo', blank=True, null=True, on_delete=models.CASCADE)
     fk_especialidad = models.ForeignKey(Especialidad, verbose_name='Especialidad', blank=True, null=True, on_delete=models.CASCADE)
     fk_movimiento = models.ForeignKey(Movimiento, verbose_name='Movimiento', blank=True, null=True, on_delete=models.CASCADE)
     categoria = models.CharField(verbose_name='Categoria', max_length=50, blank=True, null=True, choices=CHOICE_CATEGORIA)
-    escolaridad = models.CharField(verbose_name='Escolaridad', max_length=20, blank=True, null=True, choices=CHOICE_ESCOLARIDAD)
+    escolaridad = models.CharField(verbose_name='Escolaridad', max_length=20, blank=True, null=True)
     categoria_cientifica = models.CharField(verbose_name='Categoria Cientifica', max_length=20, blank=True, null=True, choices=CHOICE_CATEGORIA_CIENTIFICA)
     nombre = models.CharField(verbose_name='Nombre', max_length=255, blank=False, null=False)
     apellidos = models.CharField(verbose_name='Apellidos', max_length=255, blank=False, null=False)
@@ -163,7 +170,7 @@ class Cuadro(models.Model):
     militancia = models.CharField(verbose_name='Militancia', max_length=50, blank=True, null=True, choices=CHOICE_MILITANCIA)
     sexo = models.CharField(verbose_name='Sexo', max_length=50, blank=True, null=True, choices=CHOICE_SEXO)
     color = models.CharField(verbose_name='Color', max_length=50, blank=True, null=True, choices=CHOICE_COLOR)
-    modalidad_promocion = models.CharField(verbose_name='Modalidad del movimiento por Promocion', max_length=100, blank=True, null=True, choices=CHOICE_MODALIDAD_PROMOCION)
+    modalidad_promocion = models.ManyToManyField(ModalidadPromocion, verbose_name='Modalidad del movimiento por Promocion',blank=True, null=True)
     modalidad_sustitucion = models.CharField(verbose_name='Modalidad del movimiento por Sustitucion', max_length=100, blank=True, null=True, choices=CHOICE_MODALIDAD_SUSTITUCION)
     edad = models.PositiveIntegerField(verbose_name='Edad')
     fecha_alta = models.DateField(verbose_name='Fecha de Alta')

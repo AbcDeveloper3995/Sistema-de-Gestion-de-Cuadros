@@ -63,7 +63,7 @@ class cuadroForm(ModelForm):
         self.request = kwargs.pop("request")
         super().__init__(*args, **kwargs)
         self.showCargoSegunUsuario()
-        self.fields['fk_especialidad'].queryset = Especialidad.objects.filter(estado=True)
+        self.fields['fk_especialidad'].queryset = Especialidad.objects.all()
         if self.instance.pk and self.instance.fk_cargo:
             del self.fields['fk_cargo']
 
@@ -75,8 +75,8 @@ class cuadroForm(ModelForm):
             'fk_especialidad': Select(attrs={'class': 'form-control select2', 'id': 'fk_especialidad'}),
             'fk_movimiento': Select(attrs={'class': 'form-control select2', 'id': 'fk_movimiento'}),
             'categoria': Select(attrs={'class': 'form-control select2'}),
-            'escolaridad': Select(attrs={'class': 'form-control select2'}),
-            'categoria_cientifica': Select(attrs={'class': 'form-control select2'}),
+            'escolaridad': TextInput(attrs={'class': 'form-control', 'id':'campoEscolaridad', 'readonly':True}),
+            'categoria_cientifica': Select(attrs={'class': 'form-control select2', 'id':'campoCategoriaCientifica'}),
             'nombre': TextInput(attrs={'class':'form-control', 'id':'campoNombreCuadro','placeholder':'Ingrese un nombre'}),
             'apellidos': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese apellidos'}),
             'ci': NumberInput(attrs={'class':'form-control','id':'campoCI','placeholder':'Ingrese carnet de identidad'}),
@@ -90,9 +90,9 @@ class cuadroForm(ModelForm):
             'modalidad_promocion': SelectMultiple(attrs={'class': 'form-control select2', 'id':'modalidadPromocion', 'disabled':True}),
             'modalidad_sustitucion': Select(attrs={'class': 'form-control select2', 'id':'modalidadSustitucion', 'disabled':True}),
             'edad': NumberInput(attrs={'class': 'form-control styleInput', 'id': 'campoEdad', 'readonly':True,}),
-            'fecha_alta': DateInput(attrs={'class': 'form-control datetimepicker-input date','data-target':"#fecha_alta",
+            'fecha_alta': DateInput(attrs={'class': 'form-control datetimepicker-input ','data-target':"#fecha_alta",
                                                                        'data-toggle':"datetimepicker", 'id': 'fecha_alta', 'placeholder':"Seleccione una fecha"}),
-            'fecha_baja': DateInput(attrs={'class': 'form-control datetimepicker-input date','data-target':"#fecha_baja", 'disabled':True,
+            'fecha_baja': DateInput(attrs={'class': 'form-control datetimepicker-input','data-target':"#fecha_baja", 'disabled':True,
                                                                        'data-toggle':"datetimepicker", 'id': 'fecha_baja','placeholder':"Seleccione una fecha"}),
             'tiempo_en_cargo': TextInput(attrs={'class': 'form-control', 'id': 'campoTiempo', 'readonly':True,}),
             'observaciones': Textarea(attrs={'class': 'form-control', 'id': 'campoObservacionesCuadro'}),

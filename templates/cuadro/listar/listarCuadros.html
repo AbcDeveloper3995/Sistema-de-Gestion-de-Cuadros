@@ -123,7 +123,11 @@
                 {% endif %}
                 <td>{{ cuadro.fk_movimiento.descripcion }}</td>
                 {% if cuadro.fk_movimiento.codigo == 1 %}
-                    <td class="text-center">{{ cuadro.modalidad_promocion }}</td>
+                    <td class="text-center">
+                        {% for promocion in cuadro.modalidad_promocion.all %}
+                            <span class="badge badge-primary" style="margin-bottom: 2px">{{ promocion.descripcion }}</span>
+                        {% endfor %}
+                    </td>
                 {% else %}
                     <td><a href="#" type="button"><i class="ml-40 fa fa-times-circle" style="color: red"></i></a></td>
                 {% endif %}

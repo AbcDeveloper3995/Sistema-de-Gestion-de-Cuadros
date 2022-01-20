@@ -5,17 +5,19 @@ let campoEdad = $('#campoEdad');
 let campoNombreCuadro = $('#campoNombreCuadro');
 let campoCarnet = $('#campoCI');
 let movimiento = $('#fk_movimiento');
+let especialidad = $('#fk_especialidad');
+let categoriaCientifica = $('#campoCategoriaCientifica');
 let modalidadPromocion = $('#modalidadPromocion');
 let modalidadSustitucion = $('#modalidadSustitucion');
 let campoFechaAlta = $('#fecha_alta');
 let campoFechaBaja = $('#fecha_baja');
 let checkboxFechaBaja = $('#botonFechaBaja');
 let campoMilitancia = $('#campoMilitancia');
+let campoEscolaridad = $('#campoEscolaridad');
 let submitCuadroForm = $('#submitCuadroForm');
 let cargo = $('#fk_cargo');
 let selectpProvincia = $('select[id="campoProvincia"]');
 let selectpMunicipio = $('select[id="campoMunicipio"]');
-let fecha = $('.date');
 
 $('.select2').select2({
     theme: 'bootstrap4',
@@ -23,11 +25,11 @@ $('.select2').select2({
     placeholder: 'Seleccione una opcion'
 });
 
-fecha.datetimepicker({
-    format: 'DD/MM/YYYY',
-    date: moment().format("YYYY-MM-DD"),
+campoFechaAlta.datetimepicker({
+    format: 'YYYY-MM-DD',
+    date: moment(),
     locale: 'es',
-    maxDate: moment().format("YYYY-MM-DD"),
+    maxDate: moment(),
 });
 
 //-------------------------------------------------------VALIDACIONES----------------------------------------------------------------//
@@ -265,12 +267,53 @@ campoCarnet.keyup(function () {
 checkboxFechaBaja.on('click', function () {
     if (checkboxFechaBaja.is(':checked') == true) {
         campoFechaBaja.prop('disabled', false);
+        campoFechaBaja.datetimepicker({
+            format: 'DD/MM/YYYY',
+            date: moment(),
+            locale: 'es',
+            maxDate: moment(),
+            minDate: campoFechaAlta[0].value,
+        });
 
     } else {
         campoFechaBaja.prop('disabled', true);
     }
 });
 
+//-----VALIDACION DE ESCOLARIDAD Y CATEGORIA CIENTIFICA EN DEPENDECIA DE LA ESPECIALIDAD SELECCIONADA----//
+especialidad.on('change', function () {
+    let idEspecialidad = $(this).val();
+     $.ajax({
+        url: '/cuadro/obtenerEspecialidad/',
+        type: 'GET',
+        data: {'id': idEspecialidad},
+        dataType: 'json'
+    }).done(function (response) {
+         if (!response.hasOwnProperty('error') && response.codigo==='001') {
+             campoEscolaridad[0].value = '9no Grado';
+             categoriaCientifica.prop('disabled', true);
+             return false;
+         }
+         if (!response.hasOwnProperty('error') && response.codigo=='002') {
+             campoEscolaridad[0].value = 'Tecnico Medio';
+             categoriaCientifica.prop('disabled', true);
+             return false;
+         }
+         if(!response.hasOwnProperty('error') && response.codigo=='003'){
+             campoEscolaridad[0].value = '12mo Grado';
+             categoriaCientifica.prop('disabled', true);
+             return false;
+         } else {
+             campoEscolaridad[0].value = 'Universitario';
+             categoriaCientifica.prop('disabled', false);
+             return false;
+         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ': ' + errorThrown);
+    })
+});
+
+//----VALIDACION DE MODALIDAD DE MOVIMIENTO(PROMOCION O SUSTITUCION) SI EL MOVIMIENTO SELLECCIONADO ES ALGUNO DE ESTOS 2 ---//
 movimiento.on('change', function () {
     let idMovimiento = $(this).val();
      $.ajax({
@@ -293,7 +336,7 @@ movimiento.on('change', function () {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert(textStatus + ': ' + errorThrown);
     })
-})
+});
 
 
 //---------------------------------------------FORMULARIO DE ESPECIALIDAD-----------------------------------------------------//

@@ -14,7 +14,6 @@ urlpatterns = [
     path('desactivarCuadro/<int:pk>/', desactivarCuadroView.as_view(), name='desactivarCuadro'),
     path('getMunicipios/', getMunicipiosView.as_view(), name='getMunicipios'),
     path('isActivo/', isActivoView.as_view(), name='isActivo'),
-    path('obtenerMovimiento/', obtenerMovimientoView.as_view(), name='obtenerMovimiento'),
 
     # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),
@@ -29,6 +28,7 @@ urlpatterns = [
     path('crearEspecialidad/', crearEspecialidadView.as_view(), name='crearEspecialidad'),
     path('modificarEspecialidad/<int:pk>/', modificarEspecialidadView.as_view(), name='modificarEspecialidad'),
     path('eliminarEspecialidad/<int:pk>/', eliminarEspecialidadView.as_view(), name='eliminarEspecialidad'),
+    path('obtenerEspecialidad/', obtenerEspecialidadView.as_view(), name='obtenerEspecialidad'),
 
     # Nomenclador de Cargos
     path('listarNomencladorCargos', listarNomencladorCargosView.as_view(), name='listarNomencladorCargos'),
@@ -42,4 +42,5 @@ urlpatterns = [
     path('crearMovimientos/', crearMovimientosView.as_view(), name='crearMovimientos'),
     path('modificarMovimientos/<int:pk>/', modificarMovimientosView.as_view(), name='modificarMovimientos'),
     path('eliminarMovimientos/<int:pk>/', eliminarMovimientosView.as_view(), name='eliminarMovimientos'),
+    path('obtenerMovimiento/', obtenerMovimientoView.as_view(), name='obtenerMovimiento'),
 ]

@@ -72,7 +72,6 @@ class crearCuadroView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
-        print(request.POST)
         if form.is_valid():
             messages.success(self.request, 'Cuadro creado correctamente.')
             form.save()
@@ -548,3 +547,16 @@ class obtenerMovimientoView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA OBTERNER UNA ESPECIALIDAD.
+class obtenerEspecialidadView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            query = get_object_or_404(Especialidad, id=request.GET['id'])
+            data['codigo'] = query.codigo[0:3]
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
