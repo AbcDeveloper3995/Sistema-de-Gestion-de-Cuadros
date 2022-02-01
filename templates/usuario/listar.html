@@ -1,4 +1,5 @@
 {% extends 'comun/listar.html' %}
+{% load static %}
 
 {% block encabezadoTabla %}
     <i class="fa fa-table"></i> <strong>Listado de Usuarios</strong>
@@ -22,10 +23,9 @@
         {% for usuario in usuarios %}
             <tr>
                 <td>
-                    <a class="miTippy Acciones ml-15" href="{% url 'usuario:modificarUsuario'  usuario.pk %}"
+                    <a class="Acciones ml-15" href="{% url 'usuario:modificarUsuario'  usuario.pk %}"
                        type="button" title="Modificar"><i class="fa fa-edit"></i></a>
-                    <a class="miTippy Acciones" href="#"
-                       onclick="notificacionDelete('Notificacion', 'Estas seguro que desea eliminar este usuario.', 'http://127.0.0.1:8000/usuario/eliminarUsuario/'+{{ usuario.pk }},{{ usuario.pk }} )"
+                    <a class="Acciones" href="#" data-id="{{ usuario.id }}" name="eliminarUsuario"
                        type="button" title="Eliminar"><i class="fa fa-trash"></i></a></td>
                 <td>
                     <img src="{{ usuario.get_img }}" class="img-fluid d-block mx-auto" style="width: 50px; height: 50px">
@@ -57,4 +57,9 @@
 {% block buttons %}
     <a href="{% url 'usuario:crearUsuario' %}" type="button" class="btn btn-primary buttonCrear"><i
             class="ik ik-user-plus"></i>Nuevo Usuario</a>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/usuario/listar.js' %}"></script>
 {% endblock %}

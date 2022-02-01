@@ -217,7 +217,7 @@ class listarEspecialidadView(LoginRequiredMixin, ListView):
     model = Especialidad
 
     def get_queryset(self):
-        return Especialidad.objects.filter(estado=True)
+        return Especialidad.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -404,6 +404,15 @@ class crearNomencladorCargosView(LoginRequiredMixin, CreateView):
     form_class = nomencladorCargosForm
     success_url = reverse_lazy('cuadro:listarNomencladorCargos')
 
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            messages.success(self.request, 'Nomenclador creado correctamente.')
+            form.save()
+        else:
+            messages.error(self.request, form.errors)
+        return redirect('cuadro:listarNomencladorCargos')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Creacion de un Nomenclador de Cargos'
@@ -423,6 +432,19 @@ class modificarNomencladorCargosView(LoginRequiredMixin, UpdateView):
         context['titulo'] = 'Edicion de un Nomenclador'
         context['tituloPestaña'] = 'SGPC | Cuadros'
         return context
+
+# PROCEDIMIENTO PARA ELIMINAR NOMENCLADOR CARGO.
+class eliminarNomencladorCargosView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            query = get_object_or_404(ClasificadorCargoCuadro, id=request.GET['id'])
+            messages.success(self.request, 'El nomenclador se ha eliminado correctamente')
+            query.delete()
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
 
 
 # PROCEDIMIENTO PARA IMPORTAR  LOS NOMENCLADORES DE CARGOS
@@ -556,6 +578,20 @@ class obtenerEspecialidadView(LoginRequiredMixin, TemplateView):
         try:
             query = get_object_or_404(Especialidad, id=request.GET['id'])
             data['codigo'] = query.codigo[0:3]
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+# PROCEDIMIENTO PARA COPROBAR SI EXISTEN CARGOS VACANTES.
+class existenVacantesView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        try:
+            if request.GET['action'] == 'existenciaDeVacantes':
+                query = Cargo.objects.filter(vacante=True).count()
+                if query == 0:
+                    data['vacantes'] = False
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

@@ -14,6 +14,8 @@ let campoFechaBaja = $('#fecha_baja');
 let checkboxFechaBaja = $('#botonFechaBaja');
 let campoMilitancia = $('#campoMilitancia');
 let campoEscolaridad = $('#campoEscolaridad');
+let codigoEspecialidad = $('#codigoEspecialidad');
+let nivelEscolarEspecialidad = $('#nivelEscolarEspecialidad');
 let submitCuadroForm = $('#submitCuadroForm');
 let cargo = $('#fk_cargo');
 let selectpProvincia = $('select[id="campoProvincia"]');
@@ -350,7 +352,25 @@ $('form[name="especialidadForm"]').bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-        nombre: {
+        ci: {
+            message: 'El codigo no es valido',
+            validators: {
+                notEmpty: {
+                    message: 'El codigo es requerido.'
+                },
+                stringLength: {
+                    min: 6,
+                    max: 6,
+                    message: 'El codigo debe ser de 6 digitos'
+                },
+                regexp: {
+                    regexp: /^[0-9]+$/,
+                    message: 'Solo se admiten digitos.'
+                }
+
+            }
+        },
+        descripcion: {
             message: 'El nombre no es valido',
             validators: {
                 notEmpty: {
@@ -365,6 +385,24 @@ $('form[name="especialidadForm"]').bootstrapValidator({
         },
     }
 });
+
+//----------VALIDACION DE DEPENDENCIA DEL CAMPO NIVEL SEGUN EL CODIGO
+codigoEspecialidad.keyup(function () {
+    let fragmentoCodigo = $(this).val().toString().slice(0, 3);
+    if( fragmentoCodigo === '001'){
+        nivelEscolarEspecialidad[0].value = '9noGrado'
+    }
+    if( fragmentoCodigo === '002'){
+        nivelEscolarEspecialidad[0].value = 'Tec.Med.'
+    }
+    if( fragmentoCodigo === '003') {
+        nivelEscolarEspecialidad[0].value = '12moGrado'
+    }
+    if( fragmentoCodigo !== '001' && fragmentoCodigo !== '002' && fragmentoCodigo !== '003') {
+        nivelEscolarEspecialidad[0].value = 'Universitario'
+    }
+});
+
 
 
 //---------------------------------------------FORMULARIO DE CARGO-------------------------------------------------------------//

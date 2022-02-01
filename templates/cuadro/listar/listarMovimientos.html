@@ -1,4 +1,5 @@
 {% extends 'comun/listar.html' %}
+{% load static %}
 
 {% block encabezadoTabla %}
     <i class="fa fa-table"></i> <strong>MOVIMIENTOS DE CUADRO</strong>
@@ -33,4 +34,9 @@
 {% block buttons %}
     <a href="{% url 'cuadro:crearMovimientos' %}" type="button" class="btn btn-primary buttonCrear"><i
             class="fa fa-plus"></i>Nuevo Movimiento</a>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/listar.js' %}"></script>
 {% endblock %}

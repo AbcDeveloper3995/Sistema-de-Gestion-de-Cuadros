@@ -1,6 +1,8 @@
 //--------------------------------------------------------INICIALIZACIONES------------------------------------------------------//
 $('#tblCargos').dataTable({});
 $('#tblEspecialidad').dataTable({});
+$('#tblNomencladorCargos').dataTable({});
+
 
 let tblCuadro = $('#tblCuadro').DataTable({
     ordering: false,
@@ -8,7 +10,7 @@ let tblCuadro = $('#tblCuadro').DataTable({
     buttons: {
         dom: {
             button: {
-                className: 'btn btn-primary ml-15'
+                className: ' btn btn-primary ml-15'
             }
         },
         buttons: [
@@ -16,11 +18,26 @@ let tblCuadro = $('#tblCuadro').DataTable({
                 extend: "excel",
                 text: ' Exportar excel',
                 title: 'Reporte Cargos de Cuadro',
-                className: "btn btn-outline-primary",
+                className: "fa fa-file-excel",
                 excelStyles: {
                     template: "blue_medium",
                 },
             },
+            {
+                text: ' Nuevo cuadro',
+                className: "fa fa-plus nuevoCuadro",
+                excelStyles: {
+                    template: "blue_medium",
+                },
+            },
+            {
+                text: ' Eliminar todos',
+                className: "fa fa-minus-circle eliminartodos",
+                excelStyles: {
+                    template: "blue_medium",
+                },
+            },
+
         ]
     }
 });
@@ -29,20 +46,56 @@ let eliminarCuadro = $('a[name="eliminarCuadro"]');
 let eliminarCargo = $('a[name="eliminarCargo"]');
 let eliminarEspecialidad = $('a[name="eliminarEspecialidad"]');
 let eliminarMovimiento = $('a[name="eliminarMovimiento"]');
-let eliminarTodos = $('a[name="eliminarTodos"]');
+let eliminarNomencladorCargo = $('a[name="eliminarNomencladorCargo"]');
+let eliminarTodos = $('.eliminartodos');
+let nuevoCuadro = $('.nuevoCuadro');
 let desactivarCargo = $('a[name="desactivarCargo"]');
 let activarCargo = $('a[name="activarCargo"]');
 let desactivarCuadro = $('a[name="desactivarCuadro"]');
 
+//------------------------------------PROCEDIMIENTO PARA CREAR UN NUEVO CUADRO------------------------------------//
+nuevoCuadro.on('click', function () {
+    $.ajax({
+        url: '/cuadro/comprobarVacantes/',
+        type: 'GET',
+        data: {'action': 'existenciaDeVacantes'},
+        dataType: 'json',
+    }).done(function (response) {
+        if (response.hasOwnProperty('error')) {
+            toastr.error(response.error, 'Error', {
+                progressBar: true,
+                closeButton: true,
+                "timeOut": "5000",
+            });
+            return false
+        }
+        if (response.vacantes === false) {
+            toastr.error('No es posible crear un nuevo cuadro ya que no existen cargos vacantes', 'Error', {
+                progressBar: true,
+                closeButton: true,
+                "timeOut": "5000",
+            });
+        } else {
+            window.location.href = 'http://127.0.0.1:8000/cuadro/crearCuadro/'
+        }
 
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert(textStatus + ' : ' + errorThrown)
+    })
+});
 //------------------------------------PROCEDIMIENTO PARA ELIMINACIONES---------------------------------------------//
-//---CUADRO
 //---CUADRO
 eliminarCuadro.on('click', function () {
     let idCuadro = $(this).data('id');
     let url = 'http://127.0.0.1:8000/cuadro/eliminarCuadro/' + idCuadro;
     notificacion('Notificacion', 'Estas seguro de deseas eliminar este cuadro?', url, idCuadro)
 });
+//---TODOS LOS CUADROS
+eliminarTodos.on('click', function () {
+    let url = 'http://127.0.0.1:8000/cuadro/eliminarTodos/';
+    notificacion('Notificacion', 'Estas seguro que desea eliminar todos los cuadros?', url)
+});
+
 //---CARGO
 eliminarCargo.on('click', function () {
     let idCargo = $(this).data('id');
@@ -55,12 +108,21 @@ eliminarEspecialidad.on('click', function () {
     let url = 'http://127.0.0.1:8000/cuadro/eliminarEspecialidad/' + idEspecialidad;
     notificacion('Notificacion', 'Estas seguro de deseas eliminar esta especialidad ?', url, idEspecialidad)
 });
+
+//---NOMENCLADOR CARGOS
+eliminarNomencladorCargo.on('click', function () {
+    let idNomenclador = $(this).data('id');
+    let url = 'http://127.0.0.1:8000/cuadro/eliminarNomencladorCargos/' + idNomenclador;
+    notificacion('Notificacion', 'Estas seguro de deseas eliminar este nomenclador?', url, idNomenclador)
+});
+
 //---MOVIMIENTO
 eliminarMovimiento.on('click', function () {
-let idMovimiento = $(this).data('id');
+    let idMovimiento = $(this).data('id');
     let url = 'http://127.0.0.1:8000/cuadro/eliminarMovimientos/' + idMovimiento;
     notificacion('Notificacion', 'Estas seguro de deseas eliminar este movimiento?', url, idMovimiento)
 });
+
 
 //------------------------------------PROCEDIMIENTO PARA EL REALIZADO DE FILTRADO AVANZADO----------------------------------//
 rangoEdad.ionRangeSlider({
@@ -124,14 +186,9 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
-//--------------------------------------------PROCEDIMENTO PARA ELIMINAR TODOS---------------------------------------//
-eliminarTodos.on('click', function () {
-    let url = 'http://127.0.0.1:8000/cuadro/eliminarTodos/';
-    notificacion('Notificacion', 'Estas seguro de querer eliminar todos los cuadros ?', url)
-});
 
 
-//--------------------------------PROCEDIMIENTO PARA DESACTIVAR Y ACTIVAR UN CARGO-------------------------------------------//
+//--------------------------------PROCEDIMIENTO PARA DESACTIVAR Y ACTIVAR UN CARGO------------------------------------//
 desactivarCargo.on('click', function () {
     let idCargo = $(this).data('id');
     let url = 'http://127.0.0.1:8000/cuadro/desactivarCargo/' + idCargo;

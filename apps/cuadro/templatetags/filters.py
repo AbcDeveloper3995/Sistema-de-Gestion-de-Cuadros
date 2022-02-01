@@ -29,14 +29,6 @@ def totalCargo(user):
     return query
 
 
-# FILTRO PARA SABER SI EXISTEN CARGOS VACANTES.
-@register.filter(name='existenVacantes')
-def existenVacantes(user):
-    query = Cargo.objects.filter(vacante=True).count()
-    if query == 0:
-        return False
-    return True
-
 # FILTRO PARA OBTENER EL TOTAL DE USUARIOS.
 @register.filter(name='totalUsuarios')
 def totalUsuarios(user):

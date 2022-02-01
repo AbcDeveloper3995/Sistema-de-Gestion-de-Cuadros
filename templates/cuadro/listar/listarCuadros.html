@@ -1,5 +1,6 @@
 {% extends 'comun/listar.html' %}
 {% load filters %}
+{% load static %}
 
 {% block encabezadoTabla %}
     <i class="fa fa-table"></i> <strong>PLANTILLA DE CARGOS DE CUADRO</strong>
@@ -159,17 +160,8 @@
     </table>
 {% endblock %}
 
-{% block buttons %}
-    {% if request.user|existenVacantes == True %}
-        <a href="{% url 'cuadro:crearCuadro' %}" type="button" class="btn btn-primary buttonCrear"><i
-                class="fa fa-plus"></i>Nuevo Cuadro</a>
-    {% else %}
-        <button class="btn btn-primary disabled  buttonCrear" title="No existen cargos vacantes"><i
-                class="ik ik-slash"></i>Nuevo cuadro
-        </button>
-    {% endif %}
-    {% if perms.usuario.administrador  or perms.usuario.oficinaCentral %}
-        <a href="#" type="button" class="btn btn-primary buttonCrear" name="eliminarTodos"><i
-                class="fa fa-minus-circle"></i>Eliminar todos</a>
-    {% endif %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/listar.js' %}"></script>
 {% endblock %}

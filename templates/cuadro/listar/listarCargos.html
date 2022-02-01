@@ -1,4 +1,5 @@
 {% extends 'comun/listar.html' %}
+{% load static %}
 
 {% block encabezadoTabla %}<i class="fa fa-table"></i> <strong>LISTADO DE CARGOS</strong>{% endblock %}
 {% block table %}
@@ -71,4 +72,9 @@
 {% block buttons %}
     <a href="{% url 'cuadro:crearCargo' %}" type="button" class="btn btn-primary buttonCrear">
         <i class="fa fa-plus"></i>Nuevo Cargo</a>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/listar.js' %}"></script>
 {% endblock %}

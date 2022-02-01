@@ -52,9 +52,9 @@ class especialidadForm(ModelForm):
         model = Especialidad
         fields = '__all__'
         widgets = {
-            'nombre': TextInput(attrs={'class': 'form-control styleInput',
-                                       'placeholder': 'Ingrese el nombre de la especialidad'}),
-            'estado': CheckboxInput(attrs={'class': 'border-checkbox', 'type': 'checkbox', 'id':'estadoEspecialidad'})
+            'codigo': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un codigo','id':'codigoEspecialidad'}),
+            'descripcion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese una descripcion'}),
+            'nivel': TextInput(attrs={'class': 'form-control','readonly':True, 'placeholder': 'Ingrese nivel escolar','id':'nivelEscolarEspecialidad'}),
         }
 
 

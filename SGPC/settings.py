@@ -22,6 +22,7 @@ LOCAL_APPS = [
 ]
 
 THRID_APPS = [
+    'whitenoise.runserver_nostatic',
     'widget_tweaks',
     'import_export'
 ]
@@ -30,6 +31,7 @@ INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THRID_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

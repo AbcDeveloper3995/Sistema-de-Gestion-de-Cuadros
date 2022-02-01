@@ -3,7 +3,7 @@
 
 {% block encabezadoForm %}
     {% if action == 'crear' %}
-    <i class="ik ik-user-plus"> {{ titulo }}</i>
+        <i class="ik ik-user-plus"> {{ titulo }}</i>
     {% else %}
         <i class="ik ik-edit "> {{ titulo }}</i>
     {% endif %}
@@ -12,22 +12,36 @@
 {% block formulario %}
     <form method="post" name="especialidadForm">
         {% csrf_token %}
-        <h4 class="sub-title">{{ form.nombre.label }}</h4>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-4">
                 <div class="form-group">
+                    <h4 class="sub-title">{{ form.codigo.label }}</h4>
                     <div class="input-group input-group-primary">
                         <span class="input-group-prepend"><label class="input-group-text"><i
                                 class="ik ik-bold"></i></label></span>
-                        {{ form.nombre }}
+                        {{ form.codigo }}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="border-checkbox-section">
-            <div class="border-checkbox-group border-checkbox-group-primary">
-                {{ form.estado }}
-                <label class="border-checkbox-label text-uppercase" for="estadoCargo">Activo</label>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <h4 class="sub-title">Nombre</h4>
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-bold"></i></label></span>
+                        {{ form.descripcion }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <h4 class="sub-title">Nivel escolar</h4>
+                    <div class="input-group input-group-primary">
+                        <span class="input-group-prepend"><label class="input-group-text"><i
+                                class="ik ik-bold"></i></label></span>
+                        {{ form.nivel }}
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

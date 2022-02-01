@@ -14,6 +14,7 @@ urlpatterns = [
     path('desactivarCuadro/<int:pk>/', desactivarCuadroView.as_view(), name='desactivarCuadro'),
     path('getMunicipios/', getMunicipiosView.as_view(), name='getMunicipios'),
     path('isActivo/', isActivoView.as_view(), name='isActivo'),
+    path('comprobarVacantes/', existenVacantesView.as_view(), name='comprobarVacantes'),
 
     # CARGO
     path('listarCargo', listarCargoView.as_view(), name='listarCargo'),
@@ -34,7 +35,7 @@ urlpatterns = [
     path('listarNomencladorCargos', listarNomencladorCargosView.as_view(), name='listarNomencladorCargos'),
     path('crearNomencladorCargos/', crearNomencladorCargosView.as_view(), name='crearNomencladorCargos'),
     path('modificarNomencladorCargos/<int:pk>/', modificarNomencladorCargosView.as_view(), name='modificarNomencladorCargos'),
-    # path('eliminarEspecialidad/<int:pk>/', eliminarEspecialidadView.as_view(), name='eliminarEspecialidad'),
+    path('eliminarNomencladorCargos/<int:pk>/', eliminarNomencladorCargosView.as_view(), name='eliminarNomencladorCargos'),
     path('importarNomencladorCargos/', importarNomencladorCargosView.as_view(), name='importarNomencladorCargos'),
 
     # MOVIMIENTO

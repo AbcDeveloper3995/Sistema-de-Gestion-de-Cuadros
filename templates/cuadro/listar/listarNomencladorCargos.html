@@ -1,4 +1,5 @@
 {% extends 'comun/listar.html' %}
+{% load static %}
 
 {% block encabezadoTabla %}
     <i class="fa fa-table"></i> <strong>NOMENCLADORES DE CARGOS</strong>
@@ -16,10 +17,10 @@
         {% for nomenclador in nomencladorCargos %}
             <tr>
                 <td>
-                    <a class="miTippy Acciones" href="{% url 'cuadro:modificarNomencladorCargos' nomenclador.pk %}"
+                    <a class="Acciones" href="{% url 'cuadro:modificarNomencladorCargos' nomenclador.pk %}"
                        type="button" title="Modificar"><i class="fa fa-edit ml-15"></i></a>
-                    <a class="miTippy Acciones" href="#" type="button" data-id="{{ especialidad.id }}"
-                       name="especialidadCuadro"
+                    <a class="Acciones" href="#" type="button" data-id="{{ nomenclador.id }}"
+                       name="eliminarNomencladorCargo"
                        title="Eliminar"><i class="fa fa-trash"></i></a>
                 </td>
                 <td>{{ nomenclador.codigo }}</td>
@@ -61,4 +62,9 @@
             <br>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'propios/js/cuadro/listar.js' %}"></script>
 {% endblock %}
